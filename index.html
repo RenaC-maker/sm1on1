@@ -20,7 +20,7 @@
             transition: all 0.3s ease;
         }
         .main-title {
-            color: #1a237e; /* Dark blue from slides */
+            color: #a1283b; /* New Dark Red Tone */
         }
         .highlight-value {
             color: #c5a560; /* Gold accent */
@@ -44,7 +44,7 @@
             height: 24px;
             width: 24px;
             border-radius: 50%;
-            background: #1a237e;
+            background: #a1283b; /* New Dark Red Tone */
             cursor: pointer;
             margin-top: -8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -59,12 +59,12 @@
         }
         .timeline-item:last-child { border-left: 3px solid transparent; }
         .timeline-dot { position: absolute; left: -11px; top: 0; height: 20px; width: 20px; border-radius: 50%; background-color: #d1d5db; border: 3px solid #f0f2f5; transition: all 0.4s ease; }
-        .timeline-item.active { border-left-color: #1a237e; }
-        .timeline-item.active .timeline-dot { background-color: #1a237e; transform: scale(1.2); }
-        .timeline-item.active .timeline-content h3 { color: #1a237e; }
+        .timeline-item.active { border-left-color: #a1283b; } /* New Dark Red Tone */
+        .timeline-item.active .timeline-dot { background-color: #a1283b; transform: scale(1.2); } /* New Dark Red Tone */
+        .timeline-item.active .timeline-content h3 { color: #a1283b; } /* New Dark Red Tone */
         
         .btn-group label { border: 1px solid #d1d5db; padding: 10px 20px; cursor: pointer; transition: all 0.2s ease; font-weight: 500; }
-        .btn-group input[type="radio"]:checked + label { background-color: #1a237e; color: white; border-color: #1a237e; }
+        .btn-group input[type="radio"]:checked + label { background-color: #a1283b; color: white; border-color: #a1283b; } /* New Dark Red Tone */
         .btn-group input[type="radio"] { display: none; }
 
         .grade { display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; border-radius: 50%; font-weight: bold; color: white; }
@@ -92,8 +92,8 @@
 
         <!-- Section 2 & 3: Main Content Grid (Timeline & Stage) -->
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-            <div class="lg:col-span-2"><div class="card h-full"><h2 class="text-2xl font-bold main-title mb-6">Portfolio vs. Age Timeline</h2><div id="timeline"></div></div></div>
-            <div class="lg:col-span-3"><div id="focusCard" class="card sticky top-8"><div class="flex items-center mb-4"><span id="focusIcon" class="text-4xl mr-4 text-white bg-blue-900 p-3 rounded-lg"><i class="fas fa-rocket"></i></span><div><p class="text-sm text-gray-500">Your Current Focus (Age <span class="age-display">25-35</span>)</p><h2 id="focusTitle" class="text-3xl font-bold main-title">Stage 1: Foundation Building</h2></div></div><div class="bg-gray-50 p-6 rounded-lg"><h3 class="font-bold text-lg text-gray-800 mb-3">Key Milestones:</h3><p id="focusMilestones" class="text-gray-700 text-lg mb-4"></p><h3 class="font-bold text-lg text-gray-800 mb-3">Primary Actions:</h3><ul id="focusActions" class="space-y-2 list-disc list-inside text-gray-700"></ul></div></div></div>
+            <div class="lg:col-span-2"><div class="card h-full"><h2 class="text-2xl font-bold main-title mb-6">Immediate/Medium Goal - Portfolio vs Age Timeline</h2><div id="timeline"></div></div></div>
+            <div class="lg:col-span-3"><div id="focusCard" class="card sticky top-8"><div class="flex items-center mb-4"><span id="focusIcon" class="text-4xl mr-4 text-white bg-red-800 p-3 rounded-lg"><i class="fas fa-rocket"></i></span><div><p class="text-sm text-gray-500">Your Current Focus (Age <span class="age-display">25-35</span>)</p><h2 id="focusTitle" class="text-3xl font-bold main-title">Stage 1: Foundation Building</h2></div></div><div class="bg-gray-50 p-6 rounded-lg"><h3 class="font-bold text-lg text-gray-800 mb-3">Key Milestones:</h3><p id="focusMilestones" class="text-gray-700 text-lg mb-4"></p><h3 class="font-bold text-lg text-gray-800 mb-3">Primary Actions:</h3><ul id="focusActions" class="space-y-2 list-disc list-inside text-gray-700"></ul></div></div></div>
         </div>
         
         <!-- Section 4: Long Term Vision Section -->
@@ -101,10 +101,13 @@
              <h2 class="text-2xl font-bold main-title mb-4 text-center">Long-Term Vision: The "Sell 1, Free 3" Strategy</h2>
              <p class="text-center text-gray-600 mb-6">Select a portfolio target to see the required property plan.</p>
              <div id="portfolioSelector" class="flex flex-wrap justify-center gap-2 btn-group rounded-lg overflow-hidden mb-8">
-                <input type="radio" id="target1m" name="portfolioGoal" value="1"><label for="target1m" class="rounded-lg">RM 1M Portfolio</label>
-                <input type="radio" id="target3m" name="portfolioGoal" value="3" checked><label for="target3m" class="rounded-lg">RM 3M Portfolio</label>
-                <input type="radio" id="target6m" name="portfolioGoal" value="6"><label for="target6m" class="rounded-lg">RM 6M Portfolio</label>
-                <input type="radio" id="target10m" name="portfolioGoal" value="10"><label for="target10m" class="rounded-lg">RM 10M+ Portfolio</label>
+                <input type="radio" id="target1m" name="portfolioGoal" value="1"><label for="target1m" class="rounded-lg">RM 1M</label>
+                <input type="radio" id="target2m" name="portfolioGoal" value="2"><label for="target2m" class="rounded-lg">RM 2M</label>
+                <input type="radio" id="target3m" name="portfolioGoal" value="3" checked><label for="target3m" class="rounded-lg">RM 3M</label>
+                <input type="radio" id="target4m" name="portfolioGoal" value="4"><label for="target4m" class="rounded-lg">RM 4M</label>
+                <input type="radio" id="target5m" name="portfolioGoal" value="5"><label for="target5m" class="rounded-lg">RM 5M</label>
+                <input type="radio" id="target6m" name="portfolioGoal" value="6"><label for="target6m" class="rounded-lg">RM 6M</label>
+                <input type="radio" id="target10m" name="portfolioGoal" value="10"><label for="target10m" class="rounded-lg">RM 10M+</label>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                 <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Units to Buy (~500k)</p><p id="unitsToBuy" class="text-4xl highlight-value">6</p></div>
@@ -156,7 +159,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
                     <label for="loanEligibilitySlider" class="font-bold text-gray-700">Your Max Loan Eligibility (RM)</label>
-                    <input type="range" id="loanEligibilitySlider" min="200000" max="1200000" value="500000" step="50000" class="w-full mt-2">
+                    <input type="range" id="loanEligibilitySlider" min="200000" max="5000000" value="500000" step="100000" class="w-full mt-2">
                     <p class="text-center text-xl font-bold main-title mt-1">RM <span id="loanEligibilityValue">500,000</span></p>
                 </div>
                 <div class="text-center">
@@ -180,14 +183,23 @@
             { range: [46, 55], displayText: '45-55', stage: 3, title: 'Stage 3: Wealth Consolidation', icon: 'fa-shield-halved', milestones: 'Min <span class="highlight-value">6 mil</span> portfolio / passive income <span class="highlight-value">RM15k</span>', actions: ['Focus on rental yield','Retirement planning'] },
             { range: [56, 65], displayText: '55-65', stage: 4, title: 'Stage 4: Financial Freedom', icon: 'fa-trophy', milestones: 'Secure retirement fund / defensive assets / legacy planning', actions: ['Shift focus to defensive assets','Optimize for passive income streams','Implement legacy and estate planning'] }
         ];
-        const portfolioTargets = { 1: { unitsToBuy: 2, unitsToSell: 1, unitsOwned: 1, income: '~RM 5k' }, 3: { unitsToBuy: 6, unitsToSell: 2, unitsOwned: 4, income: '~RM 20k' }, 6: { unitsToBuy: 12, unitsToSell: 3, unitsOwned: 9, income: '~RM 45k' }, 10: { unitsToBuy: 20, unitsToSell: 5, unitsOwned: 15, income: '~RM 75k' } };
+        
+        const portfolioTargets = { 
+            1: { unitsToBuy: 2, unitsToSell: 1, unitsOwned: 1, income: '~RM 5k' },
+            2: { unitsToBuy: 4, unitsToSell: 1, unitsOwned: 3, income: '~RM 15k' },
+            3: { unitsToBuy: 6, unitsToSell: 2, unitsOwned: 4, income: '~RM 20k' },
+            4: { unitsToBuy: 8, unitsToSell: 2, unitsOwned: 6, income: '~RM 30k' },
+            5: { unitsToBuy: 10, unitsToSell: 3, unitsOwned: 7, income: '~RM 35k' },
+            6: { unitsToBuy: 12, unitsToSell: 3, unitsOwned: 9, income: '~RM 45k' },
+            10: { unitsToBuy: 20, unitsToSell: 5, unitsOwned: 15, income: '~RM 75k' } 
+        };
         
         const propertyData = [
             { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC' },
             { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, capitalGain: 12, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
             { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
             { name: 'TAYLOR', loanRange: [200000, 400000], cashflow90: -500, cashflow70: 1100, cashback90: 93000, cashback70: 14000, capitalGain: 17, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' },
-            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'C', status: 'UC' },
+            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
             { name: 'FERRA', loanRange: [400000, 600000], cashflow90: -1000, cashflow70: -150, cashback90: 193000, cashback70: 0, capitalGain: 29, gradeCapital: 'A', gradeCashflow: 'C', status: 'UC' },
             { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, capitalGain: 15, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
             { name: 'PINNA', loanRange: [400000, 600000], cashflow90: -550, cashflow70: -150, cashback90: 107000, cashback70: 12000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'C', status: 'UC' },
@@ -195,10 +207,11 @@
             { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 15000, cashback70: -87000, capitalGain: 32, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
             { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
             { name: 'AURELIA', loanRange: [400000, 600000], cashflow90: 800, cashflow70: 200, cashback90: 25000, cashback70: -100000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' },
-            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'B', gradeCashflow: 'C', status: 'UC' },
+            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'A', gradeCashflow: 'C', status: 'UC' },
             { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -80000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
+            { name: 'DIMM', loanRange: [600000, 900000], cashflow90: 250, cashflow70: 600, cashback90: 95000, cashback70: 5000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
             { name: 'MERIDIN', loanRange: [600000, 1000000], cashflow90: 200, cashflow70: 500, cashback90: 80000, cashback70: 10000, capitalGain: 18, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
-            { name: 'WEI ZIAA', loanRange: [800000, 1000000], cashflow90: 500, cashflow70: 1000, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'C', status: 'UC' },
+            { name: 'WEI ZIAA', loanRange: [800000, 1000000], cashflow90: 500, cashflow70: 1000, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
             { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' }
         ];
 
@@ -245,12 +258,12 @@
         function consultantRecommend() {
             const nationality = document.querySelector('input[name="nationality"]:checked').value;
             const loanEligibility = parseInt(consultantLoanEligibilitySlider.value);
-            let recommendation = { text: "No specific recommendation for this criteria.", properties: [] };
+            let recommendation = { text: "No specific recommendation for this criteria.", special: false, properties: [] };
 
-            if (nationality === 'singaporean') {
+            if (nationality === 'singaporean' || nationality === 'others') {
                 consultantLtvWrapper.style.display = 'none';
-                if (loanEligibility > 3000000) { recommendation = { text: "Recommended Pairing (LTV 80%):", properties: ['Abby', 'Riri', 'Meridin'], type: 'and' }; }
-                else if (loanEligibility > 2000000) { recommendation = { text: "Recommended Pairing (LTV 80%):", properties: ['Wei Ziaa', 'Meridin'], type: 'and' }; }
+                if (loanEligibility > 3000000) { recommendation = { text: "Recommended Pairing (LTV 80%):", properties: ['Wei Ziaa', 'Riri', 'Meridin'], type: 'and' }; }
+                else if (loanEligibility > 2000000) { recommendation = { text: "Recommended Choice (LTV 80%):", special: true, properties: ['Wei Ziaa', 'Dimm', 'Meridin'] }; }
                 else if (loanEligibility > 1000000) { recommendation = { text: "Recommended Choice (LTV 80%):", properties: ['Riri', 'Meridin', 'Wei Ziaa'], type: 'or' }; }
                 else { recommendation.text = "Increase loan eligibility for specific recommendations."; }
             } else if (nationality === 'malaysian') {
@@ -269,9 +282,6 @@
                      if (ltv === '70') { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Meridin'], type: 'or' }; }
                      else { recommendation.text = "No specific recommendation for 90% LTV at this eligibility. Consider 70% LTV or increasing loan eligibility."; }
                 }
-            } else { // Others
-                consultantLtvWrapper.style.display = 'none';
-                recommendation.text = "Recommendations for 'Others' category require custom consultation.";
             }
             displayConsultantRecommendation(recommendation);
         }
@@ -279,13 +289,30 @@
         function displayConsultantRecommendation(recommendation) {
             consultantRecommendationResult.innerHTML = '';
             let content = `<h4 class="text-lg font-semibold text-gray-800">${recommendation.text}</h4>`;
+            
+            const getPropSpan = (propName) => {
+                const propData = propertyData.find(p => p.name.toUpperCase() === propName.toUpperCase());
+                const color = propData ? 'text-red-700 font-bold' : 'text-gray-800 font-bold';
+                return `<span class="text-2xl ${color} p-2 bg-red-50 rounded-md">${propName}</span>`;
+            };
+
             if (recommendation.properties.length > 0) {
-                const propertyLinks = recommendation.properties.map(propName => {
-                    const propData = propertyData.find(p => p.name.toUpperCase() === propName.toUpperCase());
-                    const color = propData ? 'text-blue-700 font-bold' : 'text-gray-800 font-bold';
-                    return `<span class="text-2xl ${color} p-2 bg-blue-50 rounded-md">${propName}</span>`;
-                }).join(recommendation.type === 'and' ? `<span class="mx-2 sm:mx-4 text-gray-500 font-bold text-2xl">&</span>` : `<span class="mx-2 sm:mx-4 text-gray-500 font-bold text-xl">OR</span>`);
-                content += `<div class="mt-4 p-4 bg-gray-100 rounded-lg flex items-center justify-center flex-wrap gap-y-2">${propertyLinks}</div>`;
+                let propertyLinks;
+                if (recommendation.special) {
+                    // Handle the special case: Weizia or (Dimm and Meridin)
+                    propertyLinks = `
+                        ${getPropSpan(recommendation.properties[0])}
+                        <span class="mx-2 sm:mx-4 text-gray-500 font-bold text-xl">OR</span>
+                        <span class="flex items-center gap-2">
+                           (${getPropSpan(recommendation.properties[1])}
+                           <span class="text-gray-500 font-bold text-2xl">&</span>
+                           ${getPropSpan(recommendation.properties[2])})
+                        </span>
+                    `;
+                } else {
+                    propertyLinks = recommendation.properties.map(getPropSpan).join(recommendation.type === 'and' ? `<span class="mx-2 sm:mx-4 text-gray-500 font-bold text-2xl">&</span>` : `<span class="mx-2 sm:mx-4 text-gray-500 font-bold text-xl">OR</span>`);
+                }
+                content += `<div class="mt-4 p-4 bg-yellow-100 rounded-lg flex items-center justify-center flex-wrap gap-y-2">${propertyLinks}</div>`;
             }
             consultantRecommendationResult.innerHTML = content;
         }
