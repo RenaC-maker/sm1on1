@@ -109,11 +109,13 @@
                 <input type="radio" id="target6m" name="portfolioGoal" value="6"><label for="target6m" class="rounded-lg">RM 6M</label>
                 <input type="radio" id="target10m" name="portfolioGoal" value="10"><label for="target10m" class="rounded-lg">RM 10M+</label>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Units to Buy (~500k)</p><p id="unitsToBuy" class="text-4xl highlight-value">6</p></div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Units to Buy (~RM500k)</p><p id="unitsToBuy" class="text-4xl highlight-value">6</p></div>
                 <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Units to Sell (Yr 20)</p><p id="unitsToSell" class="text-4xl highlight-value">2</p></div>
                 <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Units Fully Owned</p><p id="unitsOwned" class="text-4xl highlight-value">4</p></div>
                 <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Est. Passive Income</p><p id="passiveIncome" class="text-4xl highlight-value">~RM 20k</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Total Property Value (Yr 20)</p><p id="propertyValue" class="text-4xl highlight-value">~RM 6M</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Net Worth (Yr 20)</p><p id="netWorth" class="text-4xl highlight-value">~RM 4.5M</p></div>
             </div>
         </div>
 
@@ -147,8 +149,29 @@
             </div>
 
             <!-- Recommendation Output -->
-            <div id="consultantRecommendationResult" class="mt-6 pt-6 border-t">
-                <!-- Recommendation will be injected here -->
+            <div id="consultantRecommendationResult" class="mt-6 pt-6 border-t"></div>
+            
+            <!-- Pairing Idea Spotlight -->
+            <div id="pairingSpotlight" class="hidden mt-6 pt-6 border-t border-dashed">
+                <h3 class="text-xl font-bold text-gray-800 text-center mb-4">What is a Pairing Strategy? (Example)</h3>
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <div>
+                            <h4 class="font-bold text-lg main-title">BUY 1 FREE 1 PROPERTY</h4>
+                            <p class="font-semibold text-gray-700">Pairing WEI ZIAA + SOYA A</p>
+                            <p class="mt-2 text-sm text-gray-600">This strategy uses the cashback from a high-cashback property (like WEI ZIAA) to cover the entry costs of a high-cashflow property (like SOYA A), effectively getting you the second property for "free".</p>
+                        </div>
+                        <div class="border-l pl-6">
+                             <h4 class="font-bold text-lg main-title">Buy SOYA A @ LTV70 For Free</h4>
+                             <p class="text-sm text-gray-600">Using WEI ZIAA Cashback</p>
+                             <ul class="text-sm space-y-1 mt-2">
+                                 <li><span class="font-semibold">Renovation Cost:</span> ~RM40,000</li>
+                             </ul>
+                             <p class="text-sm font-bold text-green-600 mt-2">+ Cashflow Positive ~RM800++</p>
+                        </div>
+                    </div>
+                    <p class="text-center mt-6 font-semibold text-gray-700">🎯 Talk to your SM for more pairing recommendation strategy</p>
+                </div>
             </div>
         </div>
 
@@ -172,6 +195,13 @@
             </div>
             <div class="mt-8"><h3 class="text-xl font-bold text-gray-800 mb-4">Recommended Properties:</h3><div id="propertyRecommendations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
         </div>
+        
+        <!-- Disclaimer Section -->
+        <div class="mt-8 text-center">
+            <p class="text-xs italic text-gray-500">
+                Disclaimer: Images, illustrations,details, features, figures and/or calculations above are provided by and/or derived from Developer’s representations and/or publicly representation or guarantee by FAR Capital Sdn Bhd the Developer, external factors or may not be applicable to the client’s profile. The above shall not constitute as a representation or guarantee by FAR Capital Sdn Bhd.
+            </p>
+        </div>
     </div>
 
     <script>
@@ -185,13 +215,13 @@
         ];
         
         const portfolioTargets = { 
-            1: { unitsToBuy: 2, unitsToSell: 1, unitsOwned: 1, income: '~RM 5k' },
-            2: { unitsToBuy: 4, unitsToSell: 1, unitsOwned: 3, income: '~RM 15k' },
-            3: { unitsToBuy: 6, unitsToSell: 2, unitsOwned: 4, income: '~RM 20k' },
-            4: { unitsToBuy: 8, unitsToSell: 2, unitsOwned: 6, income: '~RM 30k' },
-            5: { unitsToBuy: 10, unitsToSell: 3, unitsOwned: 7, income: '~RM 35k' },
-            6: { unitsToBuy: 12, unitsToSell: 3, unitsOwned: 9, income: '~RM 45k' },
-            10: { unitsToBuy: 20, unitsToSell: 5, unitsOwned: 15, income: '~RM 75k' } 
+            1: { unitsToBuy: 2, unitsToSell: 1, unitsOwned: 1, income: '~RM 5k', propertyValue: '~RM 2M', netWorth: '~RM 1.5M' },
+            2: { unitsToBuy: 4, unitsToSell: 1, unitsOwned: 3, income: '~RM 15k', propertyValue: '~RM 4M', netWorth: '~RM 3M' },
+            3: { unitsToBuy: 6, unitsToSell: 2, unitsOwned: 4, income: '~RM 20k', propertyValue: '~RM 6M', netWorth: '~RM 4.5M' },
+            4: { unitsToBuy: 8, unitsToSell: 2, unitsOwned: 6, income: '~RM 30k', propertyValue: '~RM 8M', netWorth: '~RM 6M' },
+            5: { unitsToBuy: 10, unitsToSell: 3, unitsOwned: 7, income: '~RM 35k', propertyValue: '~RM 10M', netWorth: '~RM 7.5M' },
+            6: { unitsToBuy: 12, unitsToSell: 3, unitsOwned: 9, income: '~RM 45k', propertyValue: '~RM 12M', netWorth: '~RM 9M' },
+            10: { unitsToBuy: 20, unitsToSell: 5, unitsOwned: 15, income: '~RM 75k', propertyValue: '~RM 20M', netWorth: '~RM 15M' } 
         };
         
         const propertyData = [
@@ -210,7 +240,7 @@
             { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'A', gradeCashflow: 'C', status: 'UC' },
             { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -80000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
             { name: 'DIMM', loanRange: [600000, 900000], cashflow90: 250, cashflow70: 600, cashback90: 95000, cashback70: 5000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'MERIDIN', loanRange: [600000, 1000000], cashflow90: 200, cashflow70: 500, cashback90: 80000, cashback70: 10000, capitalGain: 18, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
+            { name: 'MERIDIN', loanRange: [600000, 1000000], cashflow90: 800, cashflow70: 1000, cashback90: 80000, cashback70: 10000, capitalGain: 18, gradeCapital: 'B', gradeCashflow: 'B', status: 'C' },
             { name: 'WEI ZIAA', loanRange: [800000, 1000000], cashflow90: 500, cashflow70: 1000, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
             { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' }
         ];
@@ -221,7 +251,7 @@
         const timelineContainer = document.getElementById('timeline');
         const focusCard = { icon: document.getElementById('focusIcon'), title: document.getElementById('focusTitle'), milestones: document.getElementById('focusMilestones'), actions: document.getElementById('focusActions'), ageDisplays: document.querySelectorAll('.age-display') };
         const portfolioSelector = document.getElementById('portfolioSelector');
-        const visionCard = { unitsToBuy: document.getElementById('unitsToBuy'), unitsToSell: document.getElementById('unitsToSell'), unitsOwned: document.getElementById('unitsOwned'), passiveIncome: document.getElementById('passiveIncome') };
+        const visionCard = { unitsToBuy: document.getElementById('unitsToBuy'), unitsToSell: document.getElementById('unitsToSell'), unitsOwned: document.getElementById('unitsOwned'), passiveIncome: document.getElementById('passiveIncome'), propertyValue: document.getElementById('propertyValue'), netWorth: document.getElementById('netWorth') };
         const loanEligibilitySlider = document.getElementById('loanEligibilitySlider');
         const loanEligibilityValue = document.getElementById('loanEligibilityValue');
         const ltvSelector = document.getElementById('ltvSelector');
@@ -234,11 +264,22 @@
         const consultantLtvWrapper = document.getElementById('consultantLtvWrapper');
         const consultantLtvSelector = document.getElementById('consultantLtvSelector');
         const consultantRecommendationResult = document.getElementById('consultantRecommendationResult');
+        const pairingSpotlight = document.getElementById('pairingSpotlight');
 
         // --- FUNCTIONS ---
         function createTimeline() { ageStages.forEach(stage => { const item = document.createElement('div'); item.className = 'timeline-item'; item.id = `stage-${stage.stage}`; item.innerHTML = `<div class="timeline-dot"></div><div class="timeline-content"><p class="text-sm text-gray-500">${stage.displayText} years old</p><h3 class="font-bold text-lg text-gray-700 transition-colors">${stage.title}</h3></div>`; timelineContainer.appendChild(item); }); }
         function updateFocusArea(age) { const currentStageData = ageStages.find(s => age >= s.range[0] && age <= s.range[1]) || ageStages[0]; document.querySelectorAll('.timeline-item').forEach(item => item.classList.remove('active')); document.getElementById(`stage-${currentStageData.stage}`).classList.add('active'); focusCard.icon.innerHTML = `<i class="fas ${currentStageData.icon}"></i>`; focusCard.title.textContent = currentStageData.title; focusCard.milestones.innerHTML = currentStageData.milestones; focusCard.actions.innerHTML = currentStageData.actions.map(action => `<li>${action}</li>`).join(''); focusCard.ageDisplays.forEach(el => el.textContent = `${currentStageData.displayText}`); }
-        function updateVision() { const selectedValue = document.querySelector('input[name="portfolioGoal"]:checked').value; const data = portfolioTargets[selectedValue]; if(!data) return; visionCard.unitsToBuy.textContent = data.unitsToBuy; visionCard.unitsToSell.textContent = data.unitsToSell; visionCard.unitsOwned.textContent = data.unitsOwned; visionCard.passiveIncome.textContent = data.income; }
+        function updateVision() { 
+            const selectedValue = document.querySelector('input[name="portfolioGoal"]:checked').value; 
+            const data = portfolioTargets[selectedValue]; 
+            if(!data) return; 
+            visionCard.unitsToBuy.textContent = data.unitsToBuy; 
+            visionCard.unitsToSell.textContent = data.unitsToSell; 
+            visionCard.unitsOwned.textContent = data.unitsOwned; 
+            visionCard.passiveIncome.textContent = data.income;
+            visionCard.propertyValue.textContent = data.propertyValue;
+            visionCard.netWorth.textContent = data.netWorth;
+        }
         function formatCurrency(num) { return new Intl.NumberFormat('en-MY', { style: 'currency', currency: 'MYR', minimumFractionDigits: 0 }).format(num); }
 
         function recommendProperties() {
@@ -262,7 +303,7 @@
 
             if (nationality === 'singaporean' || nationality === 'others') {
                 consultantLtvWrapper.style.display = 'none';
-                if (loanEligibility > 3000000) { recommendation = { text: "Recommended Pairing (LTV 80%):", properties: ['Wei Ziaa', 'Riri', 'Meridin'], type: 'and' }; }
+                if (loanEligibility > 3000000) { recommendation = { text: "Recommended Pairing (LTV 80%):", properties: ['Dimm', 'Riri', 'Meridin'], type: 'and' }; }
                 else if (loanEligibility > 2000000) { recommendation = { text: "Recommended Choice (LTV 80%):", special: true, properties: ['Wei Ziaa', 'Dimm', 'Meridin'] }; }
                 else if (loanEligibility > 1000000) { recommendation = { text: "Recommended Choice (LTV 80%):", properties: ['Riri', 'Meridin', 'Wei Ziaa'], type: 'or' }; }
                 else { recommendation.text = "Increase loan eligibility for specific recommendations."; }
@@ -274,12 +315,15 @@
                     else { recommendation = { text: "Recommended Pairing (LTV 70%):", properties: ['Abby', 'Soya A'], type: 'and' }; }
                 } else if (loanEligibility > 1000000) {
                     if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Wei Ziaa', 'Riri', 'Meridin'], type: 'or' }; } 
-                    else { recommendation = { text: "Recommended Pairing (LTV 70%):", properties: ['Soya A', 'Meridin'], type: 'and' }; }
+                    else { recommendation = { text: "Recommended Pairing (LTV 70%):", properties: ['Dimm'], type: 'single' }; }
+                } else if (loanEligibility > 800000) {
+                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Ferra'], type: 'single' }; } 
+                    else { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Meridin'], type: 'or' }; }
                 } else if (loanEligibility > 500000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Una', 'Nexa', 'Ferra', 'Sora'], type: 'or' }; } 
+                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Una', 'Nexa', 'Sora'], type: 'or' }; } 
                     else { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Meridin'], type: 'or' }; }
                 } else { // <= 500,000
-                     if (ltv === '70') { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Meridin'], type: 'or' }; }
+                     if (ltv === '70') { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A'], type: 'single' }; }
                      else { recommendation.text = "No specific recommendation for 90% LTV at this eligibility. Consider 70% LTV or increasing loan eligibility."; }
                 }
             }
@@ -288,7 +332,7 @@
 
         function displayConsultantRecommendation(recommendation) {
             consultantRecommendationResult.innerHTML = '';
-            let content = `<h4 class="text-lg font-semibold text-gray-800">${recommendation.text}</h4>`;
+            let content = `<h4 class="text-lg font-semibold text-gray-800 inline-block p-2 rounded-md bg-green-100 text-green-800 font-bold">${recommendation.text}</h4>`;
             
             const getPropSpan = (propName) => {
                 const propData = propertyData.find(p => p.name.toUpperCase() === propName.toUpperCase());
@@ -310,11 +354,21 @@
                         </span>
                     `;
                 } else {
-                    propertyLinks = recommendation.properties.map(getPropSpan).join(recommendation.type === 'and' ? `<span class="mx-2 sm:mx-4 text-gray-500 font-bold text-2xl">&</span>` : `<span class="mx-2 sm:mx-4 text-gray-500 font-bold text-xl">OR</span>`);
+                    let separator = '';
+                    if (recommendation.type === 'and') separator = `<span class="mx-2 sm:mx-4 text-gray-500 font-bold text-2xl">&</span>`;
+                    else if (recommendation.type === 'or') separator = `<span class="mx-2 sm:mx-4 text-gray-500 font-bold text-xl">OR</span>`;
+                    propertyLinks = recommendation.properties.map(getPropSpan).join(separator);
                 }
                 content += `<div class="mt-4 p-4 bg-yellow-100 rounded-lg flex items-center justify-center flex-wrap gap-y-2">${propertyLinks}</div>`;
             }
             consultantRecommendationResult.innerHTML = content;
+
+            // Show or hide the pairing spotlight
+            if (recommendation.type === 'and' || recommendation.special) {
+                pairingSpotlight.classList.remove('hidden');
+            } else {
+                pairingSpotlight.classList.add('hidden');
+            }
         }
 
         // --- EVENT LISTENERS ---
