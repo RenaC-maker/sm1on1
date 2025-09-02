@@ -7,6 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -54,13 +57,24 @@
         .timeline-item {
             position: relative;
             padding-left: 40px;
-            padding-bottom: 30px;
-            border-left: 3px solid #d1d5db;
+            padding-bottom: 16px; /* Reduced padding */
         }
-        .timeline-item:last-child { border-left: 3px solid transparent; }
-        .timeline-dot { position: absolute; left: -11px; top: 0; height: 20px; width: 20px; border-radius: 50%; background-color: #d1d5db; border: 3px solid #f0f2f5; transition: all 0.4s ease; }
-        .timeline-item.active { border-left-color: #a1283b; } /* New Dark Red Tone */
+        .timeline-item:not(:last-child) {
+             border-left: 3px solid #d1d5db;
+        }
+        .timeline-dot { position: absolute; left: -12px; top: 0; height: 22px; width: 22px; border-radius: 50%; background-color: #d1d5db; border: 4px solid #f0f2f5; transition: all 0.4s ease; }
         .timeline-item.active .timeline-dot { background-color: #a1283b; transform: scale(1.2); } /* New Dark Red Tone */
+        .timeline-item .timeline-content {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+        }
+        .timeline-item.active .timeline-content {
+            border-color: #a1283b;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
         .timeline-item.active .timeline-content h3 { color: #a1283b; } /* New Dark Red Tone */
         
         .btn-group label { border: 1px solid #d1d5db; padding: 10px 20px; cursor: pointer; transition: all 0.2s ease; font-weight: 500; }
@@ -71,6 +85,13 @@
         .grade-a { background-color: #28a745; }
         .grade-b { background-color: #ffc107; color: #333 }
         .grade-c { background-color: #dc3545; }
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8">
@@ -92,8 +113,30 @@
 
         <!-- Section 2 & 3: Main Content Grid (Timeline & Stage) -->
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-            <div class="lg:col-span-2"><div class="card h-full"><h2 class="text-2xl font-bold main-title mb-6">Immediate/Medium Goal - Portfolio vs Age Timeline</h2><div id="timeline"></div></div></div>
-            <div class="lg:col-span-3"><div id="focusCard" class="card sticky top-8"><div class="flex items-center mb-4"><span id="focusIcon" class="text-4xl mr-4 text-white bg-red-800 p-3 rounded-lg"><i class="fas fa-rocket"></i></span><div><p class="text-sm text-gray-500">Your Current Focus (Age <span class="age-display">25-35</span>)</p><h2 id="focusTitle" class="text-3xl font-bold main-title">Stage 1: Foundation Building</h2></div></div><div class="bg-gray-50 p-6 rounded-lg"><h3 class="font-bold text-lg text-gray-800 mb-3">Key Milestones:</h3><p id="focusMilestones" class="text-gray-700 text-lg mb-4"></p><h3 class="font-bold text-lg text-gray-800 mb-3">Primary Actions:</h3><ul id="focusActions" class="space-y-2 list-disc list-inside text-gray-700"></ul></div></div></div>
+            <div class="lg:col-span-2">
+                <div class="card h-full">
+                    <h2 class="text-2xl font-bold main-title mb-6">Immediate/Medium Goal - Portfolio vs Age Timeline</h2>
+                    <div id="timeline"></div>
+                </div>
+            </div>
+            <div class="lg:col-span-3">
+                <div id="focusCard" class="card sticky top-8">
+                    <div class="flex items-center mb-4">
+                        <span id="focusIcon" class="text-4xl mr-4 text-white bg-red-800 p-3 rounded-lg"><i class="fas fa-rocket"></i></span>
+                        <div>
+                            <p class="text-sm text-gray-500">Your Current Focus (Age <span class="age-display">25-35</span>)</p>
+                            <h2 id="focusTitle" class="text-3xl font-bold main-title">Stage 1: Foundation Building</h2>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center"><i class="fas fa-bullseye mr-2 text-red-800"></i>Key Milestones:</h3>
+                        <p id="focusMilestones" class="text-gray-700 text-lg mb-4 pl-8"></p>
+                        
+                        <h3 class="font-bold text-lg text-gray-800 mb-4 flex items-center"><i class="fas fa-tasks mr-2 text-red-800"></i>Primary Actions:</h3>
+                        <div id="focusActions" class="space-y-4 pl-8"></div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- Section 4: Long Term Vision Section -->
@@ -136,7 +179,7 @@
                 </div>
                 <div>
                     <label for="consultantLoanEligibilitySlider" class="font-bold text-gray-700">Client's Max Loan Eligibility (RM)</label>
-                    <input type="range" id="consultantLoanEligibilitySlider" min="500000" max="5000000" value="1000000" step="100000" class="w-full mt-2">
+                    <input type="range" id="consultantLoanEligibilitySlider" min="400000" max="5000000" value="1000000" step="50000" class="w-full mt-2">
                     <p class="text-center text-xl font-bold main-title mt-1">RM <span id="consultantLoanEligibilityValue">1,000,000</span></p>
                 </div>
                 <div id="consultantLtvWrapper" class="md:col-span-2 text-center">
@@ -182,7 +225,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
                     <label for="loanEligibilitySlider" class="font-bold text-gray-700">Your Max Loan Eligibility (RM)</label>
-                    <input type="range" id="loanEligibilitySlider" min="200000" max="5000000" value="500000" step="100000" class="w-full mt-2">
+                    <input type="range" id="loanEligibilitySlider" min="200000" max="5000000" value="500000" step="50000" class="w-full mt-2">
                     <p class="text-center text-xl font-bold main-title mt-1">RM <span id="loanEligibilityValue">500,000</span></p>
                 </div>
                 <div class="text-center">
@@ -208,10 +251,10 @@
     document.addEventListener('DOMContentLoaded', function() {
         // --- DATA ---
         const ageStages = [
-            { range: [25, 35], displayText: '25-35', stage: 1, title: 'Stage 1: Foundation Building', icon: 'fa-rocket', milestones: 'Min <span class="highlight-value">1 mil</span> portfolio / Min <span class="highlight-value">RM50k</span> savings', actions: ['Consolidate bad debts (car, credit card, personal loan)','Purchase first investment properties','Increase emergency savings (6-12 months expenses)',] },
-            { range: [36, 45], displayText: '35-45', stage: 2, title: 'Stage 2: Expansion and Family', icon: 'fa-chart-line', milestones: 'Min <span class="highlight-value">3 mil</span> portfolio / Min <span class="highlight-value">RM100k</span> savings', actions: ['Plan for children\'s education','Strategize for cash-out opportunities','Balance cashout, capital gain & cashflow'] },
-            { range: [46, 55], displayText: '45-55', stage: 3, title: 'Stage 3: Wealth Consolidation', icon: 'fa-shield-halved', milestones: 'Min <span class="highlight-value">6 mil</span> portfolio / passive income <span class="highlight-value">RM15k</span>', actions: ['Focus on rental yield','Retirement planning'] },
-            { range: [56, 65], displayText: '55-65', stage: 4, title: 'Stage 4: Financial Freedom', icon: 'fa-trophy', milestones: 'Secure retirement fund / defensive assets / legacy planning', actions: ['Shift focus to defensive assets','Optimize for passive income streams','Implement legacy and estate planning'] }
+            { range: [25, 35], displayText: '25-35', stage: 1, title: 'Stage 1: Foundation Building', icon: 'fa-rocket', milestones: 'Min <span class="highlight-value">1 mil</span> portfolio / Min <span class="highlight-value">RM50k</span> savings', actions: [ {icon: 'fa-wallet', title: 'Consolidate bad debts', desc: 'car, credit card, personal loan'}, {icon: 'fa-building-columns', title: 'Purchase first investment properties', desc: 'Start building your asset base.'}, {icon: 'fa-piggy-bank', title: 'Increase emergency savings', desc: 'Aim for 6-12 months of expenses.'} ] },
+            { range: [36, 45], displayText: '35-45', stage: 2, title: 'Stage 2: Expansion and Family', icon: 'fa-chart-line', milestones: 'Min <span class="highlight-value">3 mil</span> portfolio / Min <span class="highlight-value">RM100k</span> savings', actions: [ {icon: 'fa-graduation-cap', title: 'Plan for children\'s education', desc: 'Secure future funding.'}, {icon: 'fa-magnifying-glass-dollar', title: 'Strategize for cash-out opportunities', desc: 'Leverage equity for growth.'}, {icon: 'fa-scale-balanced', title: 'Balance cashout, capital gain & cashflow', desc: 'Optimize portfolio performance.'} ] },
+            { range: [46, 55], displayText: '45-55', stage: 3, title: 'Stage 3: Wealth Consolidation', icon: 'fa-shield-halved', milestones: 'Min <span class="highlight-value">6 mil</span> portfolio / passive income <span class="highlight-value">RM15k</span>', actions: [ {icon: 'fa-hand-holding-dollar', title: 'Focus on rental yield', desc: 'Maximize passive income streams.'}, {icon: 'fa-umbrella-beach', title: 'Retirement planning', desc: 'Solidify your exit strategy.'} ] },
+            { range: [56, 65], displayText: '55-65', stage: 4, title: 'Stage 4: Financial Freedom', icon: 'fa-trophy', milestones: 'Secure retirement fund / defensive assets / legacy planning', actions: [ {icon: 'fa-chess-rook', title: 'Shift to defensive assets', desc: 'Preserve capital and reduce risk.'}, {icon: 'fa-file-invoice-dollar', title: 'Implement legacy and estate planning', desc: 'Secure your family\'s future.'} ] }
         ];
         
         const portfolioTargets = { 
@@ -225,24 +268,24 @@
         };
         
         const propertyData = [
-            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC' },
+            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed' },
             { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, capitalGain: 12, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
-            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
+            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed' },
             { name: 'TAYLOR', loanRange: [200000, 400000], cashflow90: -500, cashflow70: 1100, cashback90: 93000, cashback70: 14000, capitalGain: 17, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' },
             { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
-            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: -1000, cashflow70: -150, cashback90: 193000, cashback70: 0, capitalGain: 29, gradeCapital: 'A', gradeCashflow: 'C', status: 'UC' },
-            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, capitalGain: 15, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
+            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: -1000, cashflow70: -150, cashback90: 193000, cashback70: 0, capitalGain: 29, gradeCapital: 'A', gradeCashflow: 'C', status: 'Completed' },
+            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, capitalGain: 15, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', url: 'https://farcapital.zendesk.com/hc/en-us/sections/47180028617625-NEW-Project-NEXA-Cheras' },
             { name: 'PINNA', loanRange: [400000, 600000], cashflow90: -550, cashflow70: -150, cashback90: 107000, cashback70: 12000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'C', status: 'UC' },
-            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 15000, cashback70: -87000, capitalGain: 32, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
+            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed' },
+            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 15000, cashback70: -87000, capitalGain: 32, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed' },
             { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
             { name: 'AURELIA', loanRange: [400000, 600000], cashflow90: 800, cashflow70: 200, cashback90: 25000, cashback70: -100000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' },
-            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'A', gradeCashflow: 'C', status: 'UC' },
+            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'A', gradeCashflow: 'C', status: 'Completed' },
             { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -80000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'DIMM', loanRange: [600000, 900000], cashflow90: 250, cashflow70: 600, cashback90: 95000, cashback70: 5000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'MERIDIN', loanRange: [600000, 1000000], cashflow90: 800, cashflow70: 1000, cashback90: 80000, cashback70: 10000, capitalGain: 18, gradeCapital: 'B', gradeCashflow: 'B', status: 'C' },
-            { name: 'WEI ZIAA', loanRange: [800000, 1000000], cashflow90: 500, cashflow70: 1000, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' }
+            { name: 'DIMM', loanRange: [600000, 900000], cashflow90: 250, cashflow70: 600, cashback90: 95000, cashback70: 5000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed' },
+            { name: 'MERIDIN', loanRange: [600000, 1000000], cashflow90: 800, cashflow70: 1000, cashback90: 80000, cashback70: 10000, capitalGain: 18, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
+            { name: 'WEIZIA', loanRange: [800000, 1000000], cashflow90: 500, cashflow70: 1000, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
+            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed' }
         ];
 
         // --- DOM ELEMENTS ---
@@ -267,8 +310,28 @@
         const pairingSpotlight = document.getElementById('pairingSpotlight');
 
         // --- FUNCTIONS ---
-        function createTimeline() { ageStages.forEach(stage => { const item = document.createElement('div'); item.className = 'timeline-item'; item.id = `stage-${stage.stage}`; item.innerHTML = `<div class="timeline-dot"></div><div class="timeline-content"><p class="text-sm text-gray-500">${stage.displayText} years old</p><h3 class="font-bold text-lg text-gray-700 transition-colors">${stage.title}</h3></div>`; timelineContainer.appendChild(item); }); }
-        function updateFocusArea(age) { const currentStageData = ageStages.find(s => age >= s.range[0] && age <= s.range[1]) || ageStages[0]; document.querySelectorAll('.timeline-item').forEach(item => item.classList.remove('active')); document.getElementById(`stage-${currentStageData.stage}`).classList.add('active'); focusCard.icon.innerHTML = `<i class="fas ${currentStageData.icon}"></i>`; focusCard.title.textContent = currentStageData.title; focusCard.milestones.innerHTML = currentStageData.milestones; focusCard.actions.innerHTML = currentStageData.actions.map(action => `<li>${action}</li>`).join(''); focusCard.ageDisplays.forEach(el => el.textContent = `${currentStageData.displayText}`); }
+        function createTimeline() { 
+            timelineContainer.innerHTML = ''; 
+            ageStages.forEach(stage => { 
+                const item = document.createElement('div'); 
+                item.className = 'timeline-item'; 
+                item.id = `stage-${stage.stage}`; 
+                item.innerHTML = `<div class="timeline-dot"></div><div class="timeline-content"><p class="text-sm text-gray-500">${stage.displayText} years old</p><h3 class="font-bold text-lg text-gray-700 transition-colors">${stage.title}</h3></div>`; 
+                timelineContainer.appendChild(item); 
+            }); 
+        }
+        
+        function updateFocusArea(age) { 
+            const currentStageData = ageStages.find(s => age >= s.range[0] && age <= s.range[1]) || ageStages[0]; 
+            document.querySelectorAll('.timeline-item').forEach(item => item.classList.remove('active')); 
+            document.getElementById(`stage-${currentStageData.stage}`).classList.add('active'); 
+            focusCard.icon.innerHTML = `<i class="fas ${currentStageData.icon}"></i>`; 
+            focusCard.title.textContent = currentStageData.title; 
+            focusCard.milestones.innerHTML = currentStageData.milestones; 
+            focusCard.actions.innerHTML = currentStageData.actions.map(action => `<div class="flex items-start"><i class="fas ${action.icon} text-red-800 mt-1 mr-4 w-5 text-center"></i><div><h4 class="font-semibold text-gray-800">${action.title}</h4><p class="text-sm text-gray-600">${action.desc}</p></div></div>`).join(''); 
+            focusCard.ageDisplays.forEach(el => el.textContent = `${currentStageData.displayText}`); 
+        }
+        
         function updateVision() { 
             const selectedValue = document.querySelector('input[name="portfolioGoal"]:checked').value; 
             const data = portfolioTargets[selectedValue]; 
@@ -291,7 +354,17 @@
             filteredProperties.forEach(prop => {
                 const card = document.createElement('div'); card.className = 'bg-gray-50 p-4 rounded-lg border border-gray-200';
                 const cashflow = ltv === '90' ? prop.cashflow90 : prop.cashflow70; const cashback = ltv === '90' ? prop.cashback90 : prop.cashback70; const cashflowColor = cashflow >= 0 ? 'text-green-600' : 'text-red-600';
-                card.innerHTML = `<h4 class="font-bold text-xl main-title">${prop.name}</h4><p class="text-sm text-gray-500 mb-4">Price Range: ${formatCurrency(prop.loanRange[0])} - ${formatCurrency(prop.loanRange[1])}</p><div class="space-y-3 text-md"><div class="flex justify-between"><span class="font-semibold">Cashflow:</span><span class="font-bold ${cashflowColor}">${formatCurrency(cashflow)}/mo</span></div><div class="flex justify-between"><span class="font-semibold">Cashback:</span><span class="font-bold text-blue-600">${formatCurrency(cashback)}</span></div><div class="flex justify-between"><span class="font-semibold">Capital Gain:</span><span class="font-bold">${prop.capitalGain}%</span></div><div class="flex justify-between items-center pt-2 border-t mt-2"><span class="font-semibold">Grades:</span><div class="flex gap-2"><span class="grade grade-${prop.gradeCapital.toLowerCase()}" title="Capital Gain">${prop.gradeCapital}</span><span class="grade grade-${prop.gradeCashflow.toLowerCase()}" title="Cashflow">${prop.gradeCashflow}</span></div></div></div>`;
+                
+                const statusBadge = prop.status === 'Completed' 
+                    ? `<span class="status-badge bg-green-100 text-green-800">Completed</span>`
+                    : `<span class="status-badge bg-blue-100 text-blue-800">UC</span>`;
+
+                let propertyTitleHTML = `<div class="flex justify-between items-center"><h4 class="font-bold text-xl main-title">${prop.name}</h4>${statusBadge}</div>`;
+                if (prop.url) {
+                    propertyTitleHTML = `<a href="${prop.url}" target="_blank" class="hover:opacity-75">${propertyTitleHTML}</a>`;
+                }
+
+                card.innerHTML = `${propertyTitleHTML}<p class="text-sm text-gray-500 mb-4">Price Range: ${formatCurrency(prop.loanRange[0])} - ${formatCurrency(prop.loanRange[1])}</p><div class="space-y-3 text-md"><div class="flex justify-between"><span class="font-semibold">Cashflow:</span><span class="font-bold ${cashflowColor}">${formatCurrency(cashflow)}/mo</span></div><div class="flex justify-between"><span class="font-semibold">Cashback:</span><span class="font-bold text-blue-600">${formatCurrency(cashback)}</span></div><div class="flex justify-between"><span class="font-semibold">Capital Gain:</span><span class="font-bold">${prop.capitalGain}%</span></div><div class="flex justify-between items-center pt-2 border-t mt-2"><span class="font-semibold">Grades:</span><div class="flex gap-4"><div class="text-center"><span class="grade grade-${prop.gradeCapital.toLowerCase()}">${prop.gradeCapital}</span><p class="text-xs text-gray-500 mt-1">Capital</p></div><div class="text-center"><span class="grade grade-${prop.gradeCashflow.toLowerCase()}">${prop.gradeCashflow}</span><p class="text-xs text-gray-500 mt-1">Cashflow</p></div></div></div></div>`;
                 recommendationsContainer.appendChild(card);
             });
         }
@@ -304,27 +377,30 @@
             if (nationality === 'singaporean' || nationality === 'others') {
                 consultantLtvWrapper.style.display = 'none';
                 if (loanEligibility > 3000000) { recommendation = { text: "Recommended Pairing (LTV 80%):", properties: ['Dimm', 'Riri', 'Meridin'], type: 'and' }; }
-                else if (loanEligibility > 2000000) { recommendation = { text: "Recommended Choice (LTV 80%):", special: true, properties: ['Wei Ziaa', 'Dimm', 'Meridin'] }; }
-                else if (loanEligibility > 1000000) { recommendation = { text: "Recommended Choice (LTV 80%):", properties: ['Riri', 'Meridin', 'Wei Ziaa'], type: 'or' }; }
+                else if (loanEligibility > 2000000) { recommendation = { text: "Recommended Choice (LTV 80%):", special: true, properties: ['Weizia', 'Dimm', 'Meridin'] }; }
+                else if (loanEligibility > 1500000) { recommendation = { text: "Recommended Property (LTV 70%):", properties: ['Abby'], type: 'single' }; }
+                else if (loanEligibility > 1000000) { recommendation = { text: "Recommended Choice (LTV 80%):", properties: ['Riri', 'Weizia', 'Ferra'], type: 'or' }; }
                 else { recommendation.text = "Increase loan eligibility for specific recommendations."; }
             } else if (nationality === 'malaysian') {
                 consultantLtvWrapper.style.display = 'block';
                 const ltv = document.querySelector('input[name="consultantLtv"]:checked').value;
                 if (loanEligibility > 2000000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Pairing (LTV 90%):", properties: ['Wei Ziaa', 'Riri', 'Soya A'], type: 'and' }; } 
-                    else { recommendation = { text: "Recommended Pairing (LTV 70%):", properties: ['Abby', 'Soya A'], type: 'and' }; }
+                    if (ltv === '90') { recommendation = { text: "Recommended Pairing (LTV 90%):", properties: ['Weizia', 'Riri', 'Soya A'], type: 'and' }; } 
+                    else { recommendation = { text: "Recommended Pairing (LTV 70%):", properties: ['Dimm', 'Soya A'], type: 'and' }; }
                 } else if (loanEligibility > 1000000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Wei Ziaa', 'Riri', 'Meridin'], type: 'or' }; } 
-                    else { recommendation = { text: "Recommended Pairing (LTV 70%):", properties: ['Dimm'], type: 'single' }; }
+                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", special: true, properties: ['Weizia', 'Riri', 'Meridin'] }; } 
+                    else { recommendation = { text: "Recommended Property (LTV 70%):", properties: ['Dimm'], type: 'single' }; }
                 } else if (loanEligibility > 800000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Ferra'], type: 'single' }; } 
+                    if (ltv === '90') { recommendation = { text: "Recommended Property (LTV 90%):", properties: ['Ferra'], type: 'single' }; } 
                     else { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Meridin'], type: 'or' }; }
                 } else if (loanEligibility > 500000) {
                     if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Una', 'Nexa', 'Sora'], type: 'or' }; } 
-                    else { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Meridin'], type: 'or' }; }
-                } else { // <= 500,000
-                     if (ltv === '70') { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A'], type: 'single' }; }
-                     else { recommendation.text = "No specific recommendation for 90% LTV at this eligibility. Consider 70% LTV or increasing loan eligibility."; }
+                    else { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Lara'], type: 'or' }; }
+                } else if (loanEligibility > 499000) {
+                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Eva', 'Tessa'], type: 'or' }; }
+                     else { recommendation = { text: "Recommended Property (LTV 70%):", properties: ['Soya A'], type: 'single' }; }
+                } else {
+                    recommendation = { text: "Recommendation:", properties:[], textOnly: "Talk to your consultant how to increase LE"};
                 }
             }
             displayConsultantRecommendation(recommendation);
@@ -337,19 +413,24 @@
             const getPropSpan = (propName) => {
                 const propData = propertyData.find(p => p.name.toUpperCase() === propName.toUpperCase());
                 const color = propData ? 'text-red-700 font-bold' : 'text-gray-800 font-bold';
-                return `<span class="text-2xl ${color} p-2 bg-red-50 rounded-md">${propName}</span>`;
+                let spanContent = `<span class="text-2xl ${color} p-2 bg-red-50 rounded-md">${propName}</span>`;
+                if (propData && propData.url) {
+                    spanContent = `<a href="${propData.url}" target="_blank" class="hover:opacity-75 transition-opacity">${spanContent}</a>`;
+                }
+                return spanContent;
             };
 
             if (recommendation.properties.length > 0) {
                 let propertyLinks;
                 if (recommendation.special) {
-                    // Handle the special case: Weizia or (Dimm and Meridin)
+                    // Handle special cases like Weizia or (Dimm and Meridin)
+                    let operator = recommendation.properties.includes('Riri') ? '&' : 'OR';
                     propertyLinks = `
                         ${getPropSpan(recommendation.properties[0])}
                         <span class="mx-2 sm:mx-4 text-gray-500 font-bold text-xl">OR</span>
                         <span class="flex items-center gap-2">
                            (${getPropSpan(recommendation.properties[1])}
-                           <span class="text-gray-500 font-bold text-2xl">&</span>
+                           <span class="text-gray-500 font-bold text-2xl">${operator}</span>
                            ${getPropSpan(recommendation.properties[2])})
                         </span>
                     `;
@@ -394,3 +475,8 @@
     </script>
 </body>
 </html>
+
+
+
+
+
