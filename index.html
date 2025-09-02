@@ -268,24 +268,23 @@
         };
         
         const propertyData = [
-            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed' },
-            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, capitalGain: 12, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
-            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed' },
+            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC' },
+            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, capitalGain: 12, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC' },
+            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
             { name: 'TAYLOR', loanRange: [200000, 400000], cashflow90: -500, cashflow70: 1100, cashback90: 93000, cashback70: 14000, capitalGain: 17, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' },
             { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
-            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: -1000, cashflow70: -150, cashback90: 193000, cashback70: 0, capitalGain: 29, gradeCapital: 'A', gradeCashflow: 'C', status: 'Completed' },
+            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: -500, cashflow70: -150, cashback90: 193000, cashback70: 0, capitalGain: 29, gradeCapital: 'A', gradeCashflow: 'C', status: 'Completed' },
             { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, capitalGain: 15, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', url: 'https://farcapital.zendesk.com/hc/en-us/sections/47180028617625-NEW-Project-NEXA-Cheras' },
-            { name: 'PINNA', loanRange: [400000, 600000], cashflow90: -550, cashflow70: -150, cashback90: 107000, cashback70: 12000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'C', status: 'UC' },
-            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed' },
-            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 15000, cashback70: -87000, capitalGain: 32, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed' },
+            { name: 'PINNA', loanRange: [400000, 600000], cashflow90: -550, cashflow70: -150, cashback90: 107000, cashback70: 12000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed' },
+            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
+            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 15000, cashback70: -87000, capitalGain: 32, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
             { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
             { name: 'AURELIA', loanRange: [400000, 600000], cashflow90: 800, cashflow70: 200, cashback90: 25000, cashback70: -100000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' },
-            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'A', gradeCashflow: 'C', status: 'Completed' },
-            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -80000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'DIMM', loanRange: [600000, 900000], cashflow90: 250, cashflow70: 600, cashback90: 95000, cashback70: 5000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed' },
-            { name: 'MERIDIN', loanRange: [600000, 1000000], cashflow90: 800, cashflow70: 1000, cashback90: 80000, cashback70: 10000, capitalGain: 18, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
-            { name: 'WEIZIA', loanRange: [800000, 1000000], cashflow90: 500, cashflow70: 1000, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed' }
+            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'C', status: 'Completed' },
+            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed' },
+            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -90000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
+            { name: 'WEIZIA', loanRange: [800000, 1000000], cashflow90: -500, cashflow70: 700, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed' },
+            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed' }
         ];
 
         // --- DOM ELEMENTS ---
@@ -475,6 +474,7 @@
     </script>
 </body>
 </html>
+
 
 
 
