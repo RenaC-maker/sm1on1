@@ -92,6 +92,15 @@
             font-weight: 600;
             text-transform: uppercase;
         }
+        .arp-logo {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.25rem;
+            font-weight: 700;
+            background-color: #2563eb; /* Changed to a distinct blue */
+            color: white;
+            margin-left: 8px;
+        }
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8">
@@ -239,6 +248,19 @@
             <div class="mt-8"><h3 class="text-xl font-bold text-gray-800 mb-4">Recommended Properties:</h3><div id="propertyRecommendations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
         </div>
         
+        <!-- ARP Description Section -->
+        <div class="card mt-8">
+            <h2 class="text-2xl font-bold main-title mb-4 text-center">About the Automated Rental Programme (ARP)</h2>
+            <div class="bg-gray-50 rounded-lg p-6 text-gray-700">
+                <p class="text-center font-semibold mb-4">Key principles of the ARP:</p>
+                <ul class="list-disc list-inside space-y-2 max-w-2xl mx-auto">
+                    <li>Minimum <span class="font-bold">2 years tenancy</span> subject to option to renew for another 4 years (subject to T&C).</li>
+                    <li>Subject to fulfilling ARP renovation specification and agreeing to other T&C.</li>
+                    <li>Maximum <span class="font-bold">30 units per development</span> (1st come 1st serve basis).</li>
+                </ul>
+            </div>
+        </div>
+
         <!-- Disclaimer Section -->
         <div class="mt-8 text-center">
             <p class="text-xs italic text-gray-500">
@@ -268,25 +290,25 @@
         };
         
         const propertyData = [
-            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC' },
-            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, capitalGain: 12, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC' },
-            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
-            { name: 'TAYLOR', loanRange: [200000, 400000], cashflow90: -500, cashflow70: 1100, cashback90: 93000, cashback70: 14000, capitalGain: 17, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' },
-            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC' },
-            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: 500, cashflow70: 200, cashback90: 193000, cashback70: 0, capitalGain: 29, gradeCapital: 'A', gradeCashflow: 'C', status: 'Completed' },
-            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, capitalGain: 15, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', url: 'https://farcapital.zendesk.com/hc/en-us/sections/47180028617625-NEW-Project-NEXA-Cheras' },
-            { name: 'PINNA', loanRange: [400000, 600000], cashflow90: -550, cashflow70: -150, cashback90: 107000, cashback70: 12000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed' },
-            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, capitalGain: 32, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'AURELIA', loanRange: [400000, 600000], cashflow90: 800, cashflow70: 200, cashback90: 25000, cashback70: -100000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC' },
-            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'C', status: 'Completed' },
-            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed' },
-            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -90000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC' },
-            { name: 'WEIZIA', loanRange: [800000, 1000000], cashflow90: -500, cashflow70: 700, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed' },
-            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed' },
-            { name: 'ANA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 200, cashback90: 121000, cashback70: 15000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed' },
-            { name: 'YUNA', loanRange: [200000, 400000], cashflow90: 200, cashflow70: 500, cashback90: 85000, cashback70: -20000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed' }
+            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC', arp: false },
+            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, capitalGain: 12, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC', arp: false },
+            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', arp: false },
+            { name: 'TAYLOR', loanRange: [200000, 400000], cashflow90: -500, cashflow70: 1100, cashback90: 93000, cashback70: 14000, capitalGain: 17, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC', arp: false },
+            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', arp: false },
+            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: 500, cashflow70: 200, cashback90: 193000, cashback70: 0, capitalGain: 29, gradeCapital: 'A', gradeCashflow: 'C', status: 'Completed', arp: true },
+            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, capitalGain: 15, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', url: 'https://farcapital.zendesk.com/hc/en-us/sections/47180028617625-NEW-Project-NEXA-Cheras', arp: false },
+            { name: 'PINNA', loanRange: [400000, 600000], cashflow90: -550, cashflow70: -150, cashback90: 107000, cashback70: 12000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed', arp: false },
+            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false },
+            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, capitalGain: 32, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false },
+            { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false },
+            { name: 'AURELIA', loanRange: [400000, 600000], cashflow90: 800, cashflow70: 200, cashback90: 25000, cashback70: -100000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC', arp: false },
+            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'C', status: 'Completed', arp: false },
+            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed', arp: false },
+            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -90000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false },
+            { name: 'WEIZIA', loanRange: [800000, 1000000], cashflow90: -500, cashflow70: 700, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed', arp: true },
+            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed', arp: false },
+            { name: 'ANA', loanRange: [200000, 400000], cashflow90: 230, cashflow70: 200, cashback90: 121000, cashback70: 15000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed', arp: true },
+            { name: 'YUNA', loanRange: [200000, 400000], cashflow90: 200, cashflow70: 500, cashback90: 85000, cashback70: -20000, capitalGain: 24, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: false }
         ];
 
         // --- DOM ELEMENTS ---
@@ -359,8 +381,10 @@
                 const statusBadge = prop.status === 'Completed' 
                     ? `<span class="status-badge bg-green-100 text-green-800">Completed</span>`
                     : `<span class="status-badge bg-blue-100 text-blue-800">UC</span>`;
+                
+                const arpLogo = prop.arp ? `<span class="arp-logo">ARP</span>` : '';
 
-                let propertyTitleHTML = `<div class="flex justify-between items-center"><h4 class="font-bold text-xl main-title">${prop.name}</h4>${statusBadge}</div>`;
+                let propertyTitleHTML = `<div class="flex justify-between items-center"><div class="flex items-center"><h4 class="font-bold text-xl main-title">${prop.name}</h4>${arpLogo}</div>${statusBadge}</div>`;
                 if (prop.url) {
                     propertyTitleHTML = `<a href="${prop.url}" target="_blank" class="hover:opacity-75">${propertyTitleHTML}</a>`;
                 }
@@ -379,8 +403,7 @@
                 consultantLtvWrapper.style.display = 'none';
                 if (loanEligibility > 3000000) { recommendation = { text: "Recommended Pairing (LTV 80%):", properties: ['Dimm', 'Riri', 'Meridin'], type: 'and' }; }
                 else if (loanEligibility > 2000000) { recommendation = { text: "Recommended Choice (LTV 80%):", special: true, properties: ['Weizia', 'Dimm', 'Meridin'] }; }
-                else if (loanEligibility > 1500000) { recommendation = { text: "Recommended Property (LTV 70%):", properties: ['Abby'], type: 'single' }; }
-                else if (loanEligibility > 1000000) { recommendation = { text: "Recommended Choice (LTV 80%):", properties: ['Riri', 'Weizia', 'Ferra'], type: 'or' }; }
+                else if (loanEligibility > 1000000) { recommendation = { text: "Recommended Choice (LTV 80%):", properties: ['Riri', 'Weizia'], type: 'or' }; }
                 else { recommendation.text = "Increase loan eligibility for specific recommendations."; }
             } else if (nationality === 'malaysian') {
                 consultantLtvWrapper.style.display = 'block';
@@ -389,7 +412,7 @@
                     if (ltv === '90') { recommendation = { text: "Recommended Pairing (LTV 90%):", properties: ['Weizia', 'Riri', 'Soya A'], type: 'and' }; } 
                     else { recommendation = { text: "Recommended Pairing (LTV 70%):", properties: ['Dimm', 'Soya A'], type: 'and' }; }
                 } else if (loanEligibility > 1000000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", special: true, properties: ['Weizia', 'Riri', 'Meridin'] }; } 
+                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Weizia', 'Riri'], type: 'or' }; } 
                     else { recommendation = { text: "Recommended Property (LTV 70%):", properties: ['Dimm'], type: 'single' }; }
                 } else if (loanEligibility > 800000) {
                     if (ltv === '90') { recommendation = { text: "Recommended Property (LTV 90%):", properties: ['Ferra'], type: 'single' }; } 
@@ -397,9 +420,9 @@
                 } else if (loanEligibility > 500000) {
                     if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Una', 'Nexa', 'Sora'], type: 'or' }; } 
                     else { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Lara'], type: 'or' }; }
-                } else if (loanEligibility > 499000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Eva', 'Tessa'], type: 'or' }; }
-                     else { recommendation = { text: "Recommended Property (LTV 70%):", properties: ['Soya A'], type: 'single' }; }
+                } else if (loanEligibility > 400000) {
+                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Yuna', 'Eva'], type: 'or' }; }
+                     else { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Lara'], type: 'or' }; }
                 } else {
                     recommendation = { text: "Recommendation:", properties:[], textOnly: "Talk to your consultant how to increase LE"};
                 }
@@ -409,16 +432,19 @@
 
         function displayConsultantRecommendation(recommendation) {
             consultantRecommendationResult.innerHTML = '';
+            
+            if(recommendation.textOnly) {
+                consultantRecommendationResult.innerHTML = `<div class="mt-4 p-4 bg-yellow-100 rounded-lg text-center"><p class="text-xl font-semibold text-red-800">${recommendation.textOnly}</p></div>`;
+                pairingSpotlight.classList.add('hidden');
+                return;
+            }
+
             let content = `<h4 class="text-lg font-semibold text-gray-800 inline-block p-2 rounded-md bg-green-100 text-green-800 font-bold">${recommendation.text}</h4>`;
             
             const getPropSpan = (propName) => {
                 const propData = propertyData.find(p => p.name.toUpperCase() === propName.toUpperCase());
                 const color = propData ? 'text-red-700 font-bold' : 'text-gray-800 font-bold';
-                let spanContent = `<span class="text-2xl ${color} p-2 bg-red-50 rounded-md">${propName}</span>`;
-                if (propData && propData.url) {
-                    spanContent = `<a href="${propData.url}" target="_blank" class="hover:opacity-75 transition-opacity">${spanContent}</a>`;
-                }
-                return spanContent;
+                return `<span class="text-2xl ${color} p-2 bg-red-50 rounded-md">${propName}</span>`;
             };
 
             if (recommendation.properties.length > 0) {
@@ -476,6 +502,9 @@
     </script>
 </body>
 </html>
+
+
+
 
 
 
