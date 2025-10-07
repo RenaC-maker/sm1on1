@@ -7,9 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -248,16 +245,57 @@
             <div class="mt-8"><h3 class="text-xl font-bold text-gray-800 mb-4">Recommended Properties:</h3><div id="propertyRecommendations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
         </div>
         
-        <!-- ARP Description Section -->
+        <!-- ARP Calculator and Description Section -->
         <div class="card mt-8">
-            <h2 class="text-2xl font-bold main-title mb-4 text-center">About the Automated Rental Programme (ARP)</h2>
-            <div class="bg-gray-50 rounded-lg p-6 text-gray-700">
-                <p class="text-center font-semibold mb-4">Key principles of the ARP:</p>
-                <ul class="list-disc list-inside space-y-2 max-w-2xl mx-auto">
-                    <li>Minimum <span class="font-bold">2 years tenancy</span> subject to option to renew for another 4 years (subject to T&C).</li>
-                    <li>Subject to fulfilling ARP renovation specification and agreeing to other T&C.</li>
-                    <li>Maximum <span class="font-bold">30 units per development</span> (1st come 1st serve basis).</li>
-                </ul>
+            <h2 class="text-2xl font-bold main-title mb-6 text-center">Automated Rental Programme (ARP) Calculator</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <!-- ARP Calculator -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg text-gray-800 mb-4 text-center">ARP Income Projection</h3>
+                    <div>
+                        <label for="arpProjectSelect" class="block text-sm font-medium text-gray-700">Select a Project</label>
+                        <select id="arpProjectSelect" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm">
+                           <option value="" disabled selected>Select a Project</option>
+                        </select>
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div class="flex justify-between items-center bg-white p-3 rounded-md">
+                            <span id="arpM40Label" class="font-semibold text-gray-600">M40 Package (3% Yield):</span>
+                            <span id="arpM40" class="font-bold text-lg text-green-600">RM 0/m</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white p-3 rounded-md">
+                            <span id="arpT20Label" class="font-semibold text-gray-600">T20 Package (4% Yield):</span>
+                            <span id="arpT20" class="font-bold text-lg text-green-600">RM 0/m</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white p-3 rounded-md">
+                            <span id="arpT1Label" class="font-semibold text-gray-600">T1 Package (6% Yield):</span>
+                            <span id="arpT1" class="font-bold text-lg text-green-600">RM 0/m</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-xs text-gray-500 italic">
+                        <p>• Projection is based on average price of available units.</p>
+                        <p>• All units will come with different SPA & Net Price.</p>
+                        <p>• Refer the excel calculator uploaded in LMS to get the actual SPA & Net price for your unit.</p>
+                    </div>
+                </div>
+                <!-- ARP Description -->
+                <div class="text-gray-700">
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">About the ARP</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Minimum <span class="font-bold">2 years tenancy</span> subject to option to renew for another 4 years (subject to T&C).</li>
+                        <li>Subject to fulfilling ARP renovation specification and agreeing to other T&C.</li>
+                        <li>Maximum <span class="font-bold">30 units per development</span> (1st come 1st serve basis).</li>
+                    </ul>
+                     <div class="mt-4 pt-4 border-t">
+                        <h4 class="font-semibold text-lg text-gray-800 mb-2">Type of Package</h4>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>Premium Client = T1</strong> @ <strong>6% yields ARP</strong></li>
+                            <li><strong>Lite Client = T20</strong> @ <strong>4% yields ARP</strong></li>
+                        </ul>
+                        <p class="text-xs italic text-gray-500 mt-2">(Check with your SM if you do not know your package)</p>
+                     </div>
+                     <p class="text-xs italic text-gray-500 mt-4">*All ARP is based on nett purchase price.</p>
+                </div>
             </div>
         </div>
 
@@ -290,27 +328,28 @@
         };
         
         const propertyData = [
-            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC', arp: false },
-            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, capitalGain: 12, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC', arp: false },
-            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', arp: false },
-            { name: 'TAYLOR', loanRange: [200000, 400000], cashflow90: -500, cashflow70: 1100, cashback90: 93000, cashback70: 14000, capitalGain: 17, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC', arp: false },
-            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', arp: false },
-            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: 500, cashflow70: 200, cashback90: 193000, cashback70: 0, capitalGain: 29, gradeCapital: 'A', gradeCashflow: 'C', status: 'Completed', arp: true },
-            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, capitalGain: 15, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', url: 'https://farcapital.zendesk.com/hc/en-us/sections/47180028617625-NEW-Project-NEXA-Cheras', arp: false },
-            { name: 'PINNA', loanRange: [400000, 600000], cashflow90: -550, cashflow70: -150, cashback90: 107000, cashback70: 12000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed', arp: false },
-            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false },
-            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, capitalGain: 32, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false },
-            { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false },
-            { name: 'AURELIA', loanRange: [400000, 600000], cashflow90: 800, cashflow70: 200, cashback90: 25000, cashback70: -100000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC', arp: false },
-            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'C', status: 'Completed', arp: false },
-            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed', arp: false },
-            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -90000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false },
-            { name: 'WEIZIA', loanRange: [800000, 1000000], cashflow90: -500, cashflow70: 700, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed', arp: true },
-            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed', arp: false },
-            { name: 'ANA', loanRange: [200000, 400000], cashflow90: 230, cashflow70: 200, cashback90: 121000, cashback70: 15000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed', arp: true },
-            { name: 'YUNA', loanRange: [200000, 400000], cashflow90: 200, cashflow70: 500, cashback90: 85000, cashback70: -20000, capitalGain: 24, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true },
-            { name: 'KAYLEE', loanRange: [200000, 400000], cashflow90: 400, cashflow70: 700, cashback90: 80000, cashback70: 14000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true },
-            { name: 'VIANA', loanRange: [800000, 1000000], cashflow90: 2000, cashflow70: 1200, cashback90: 300000, cashback70: -10000, capitalGain: 30, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true }
+            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC', arp: false, nettPrice: null },
+            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, capitalGain: 12, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC', arp: false, nettPrice: 460000 },
+            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', arp: false, nettPrice: 490000 },
+            { name: 'TAYLOR', loanRange: [200000, 400000], cashflow90: -500, cashflow70: 1100, cashback90: 93000, cashback70: 14000, capitalGain: 17, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC', arp: false, nettPrice: 265000 },
+            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', arp: false, nettPrice: 350000 },
+            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: 500, cashflow70: 200, cashback90: 193000, cashback70: 0, capitalGain: 29, gradeCapital: 'A', gradeCashflow: 'C', status: 'Completed', arp: true, nettPrice: 680000, arpType: 'fixed', fixedRental: 3500 },
+            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, capitalGain: 15, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', url: 'https://farcapital.zendesk.com/hc/en-us/sections/47180028617625-NEW-Project-NEXA-Cheras', arp: false, nettPrice: 500000 },
+            { name: 'PINNA', loanRange: [400000, 600000], cashflow90: -550, cashflow70: -150, cashback90: 107000, cashback70: 12000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed', arp: false, nettPrice: null },
+            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: true, nettPrice: 580000, arpType: 'percentage' },
+            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, capitalGain: 32, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: true, nettPrice: 488000, arpType: 'percentage' },
+            { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false, nettPrice: 465000 },
+            { name: 'AURELIA', loanRange: [400000, 600000], cashflow90: 800, cashflow70: 200, cashback90: 25000, cashback70: -100000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC', arp: false, nettPrice: null },
+            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'C', status: 'Completed', arp: true, nettPrice: 618000, arpType: 'percentage' },
+            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed', arp: false, nettPrice: null },
+            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -90000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false, nettPrice: 780000 },
+            { name: 'WEIZIA', loanRange: [800000, 1000000], cashflow90: -500, cashflow70: 700, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed', arp: true, nettPrice: 950000, arpType: 'fixed', fixedRental: 5000 },
+            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed', arp: false, nettPrice: 1250000 },
+            { name: 'ANA', loanRange: [200000, 400000], cashflow90: 230, cashflow70: 200, cashback90: 121000, cashback70: 15000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed', arp: true, nettPrice: 380000, arpType: 'fixed', fixedRental: 1800 },
+            { name: 'YUNA', loanRange: [200000, 400000], cashflow90: 200, cashflow70: 500, cashback90: 85000, cashback70: -20000, capitalGain: 24, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true, nettPrice: 480000, arpType: 'percentage' },
+            { name: 'KAYLEE', loanRange: [200000, 400000], cashflow90: 400, cashflow70: 700, cashback90: 80000, cashback70: 14000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true, nettPrice: 240000, arpType: 'percentage' },
+            { name: 'VIANA', loanRange: [800000, 1000000], cashflow90: 2000, cashflow70: 1200, cashback90: 300000, cashback70: -10000, capitalGain: 30, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true, nettPrice: 970000, arpType: 'percentage' },
+            { name: 'DIMM', loanRange: [800000, 1000000], cashflow90: 350, cashflow70: 1500, cashback90: 210000, cashback70: -70000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true, nettPrice: 1050638, arpType: 'percentage' }
         ];
 
         // --- DOM ELEMENTS ---
@@ -333,6 +372,16 @@
         const consultantLtvSelector = document.getElementById('consultantLtvSelector');
         const consultantRecommendationResult = document.getElementById('consultantRecommendationResult');
         const pairingSpotlight = document.getElementById('pairingSpotlight');
+        
+        // ARP Calculator Elements
+        const arpProjectSelect = document.getElementById('arpProjectSelect');
+        const arpM40Display = document.getElementById('arpM40');
+        const arpT20Display = document.getElementById('arpT20');
+        const arpT1Display = document.getElementById('arpT1');
+        const arpM40Label = document.getElementById('arpM40Label');
+        const arpT20Label = document.getElementById('arpT20Label');
+        const arpT1Label = document.getElementById('arpT1Label');
+
 
         // --- FUNCTIONS ---
         function createTimeline() { 
@@ -391,7 +440,7 @@
                     propertyTitleHTML = `<a href="${prop.url}" target="_blank" class="hover:opacity-75">${propertyTitleHTML}</a>`;
                 }
 
-                card.innerHTML = `${propertyTitleHTML}<p class="text-sm text-gray-500 mb-4">Price Range: ${formatCurrency(prop.loanRange[0])} - ${formatCurrency(prop.loanRange[1])}</p><div class="space-y-3 text-md"><div class="flex justify-between"><span class="font-semibold">Cashflow:</span><span class="font-bold ${cashflowColor}">${formatCurrency(cashflow)}/mo</span></div><div class="flex justify-between"><span class="font-semibold">Cashback:</span><span class="font-bold text-blue-600">${formatCurrency(cashback)}</span></div><div class="flex justify-between"><span class="font-semibold">Capital Gain:</span><span class="font-bold">${prop.capitalGain}%</span></div><div class="flex justify-between items-center pt-2 border-t mt-2"><span class="font-semibold">Grades:</span><div class="flex gap-4"><div class="text-center"><span class="grade grade-${prop.gradeCapital.toLowerCase()}">${prop.gradeCapital}</span><p class="text-xs text-gray-500 mt-1">Capital</p></div><div class="text-center"><span class="grade grade-${prop.gradeCashflow.toLowerCase()}">${prop.gradeCashflow}</span><p class="text-xs text-gray-500 mt-1">Cashflow</p></div></div></div></div>`;
+                card.innerHTML = `${propertyTitleHTML}<p class="text-sm text-gray-500 mb-4">Price Range: ${formatCurrency(prop.loanRange[0])} - ${formatCurrency(prop.loanRange[1])}</p><div class="space-y-3 text-md"><div class="flex justify-between"><span class="font-semibold">Cashflow:</span><span class="font-bold ${cashflowColor}">${formatCurrency(cashflow)}/m</span></div><div class="flex justify-between"><span class="font-semibold">Cashback:</span><span class="font-bold text-blue-600">${formatCurrency(cashback)}</span></div><div class="flex justify-between"><span class="font-semibold">Capital Gain:</span><span class="font-bold">${prop.capitalGain}%</span></div><div class="flex justify-between items-center pt-2 border-t mt-2"><span class="font-semibold">Grades:</span><div class="flex gap-4"><div class="text-center"><span class="grade grade-${prop.gradeCapital.toLowerCase()}">${prop.gradeCapital}</span><p class="text-xs text-gray-500 mt-1">Capital</p></div><div class="text-center"><span class="grade grade-${prop.gradeCashflow.toLowerCase()}">${prop.gradeCashflow}</span><p class="text-xs text-gray-500 mt-1">Cashflow</p></div></div></div></div>`;
                 recommendationsContainer.appendChild(card);
             });
         }
@@ -405,7 +454,8 @@
                 consultantLtvWrapper.style.display = 'none';
                 if (loanEligibility > 3000000) { recommendation = { text: "Recommended Pairing (LTV 80%):", properties: ['Dimm', 'Riri', 'Meridin'], type: 'and' }; }
                 else if (loanEligibility > 2000000) { recommendation = { text: "Recommended Choice (LTV 80%):", special: true, properties: ['Weizia', 'Dimm', 'Meridin'] }; }
-                else if (loanEligibility > 1000000) { recommendation = { text: "Recommended Choice (LTV 80%):", properties: ['Riri', 'Weizia'], type: 'or' }; }
+                else if (loanEligibility > 1500000) { recommendation = { text: "Recommended Property (LTV 70%):", properties: ['Abby'], type: 'single' }; }
+                else if (loanEligibility > 1000000) { recommendation = { text: "Recommended Choice (LTV 80%):", properties: ['Riri', 'Weizia', 'Ferra'], type: 'or' }; }
                 else { recommendation.text = "Increase loan eligibility for specific recommendations."; }
             } else if (nationality === 'malaysian') {
                 consultantLtvWrapper.style.display = 'block';
@@ -414,7 +464,7 @@
                     if (ltv === '90') { recommendation = { text: "Recommended Pairing (LTV 90%):", properties: ['Weizia', 'Riri', 'Soya A'], type: 'and' }; } 
                     else { recommendation = { text: "Recommended Pairing (LTV 70%):", properties: ['Dimm', 'Soya A'], type: 'and' }; }
                 } else if (loanEligibility > 1000000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Weizia', 'Riri'], type: 'or' }; } 
+                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", special: true, properties: ['Weizia', 'Riri', 'Meridin'] }; } 
                     else { recommendation = { text: "Recommended Property (LTV 70%):", properties: ['Dimm'], type: 'single' }; }
                 } else if (loanEligibility > 800000) {
                     if (ltv === '90') { recommendation = { text: "Recommended Property (LTV 90%):", properties: ['Ferra'], type: 'single' }; } 
@@ -452,9 +502,9 @@
             if (recommendation.properties.length > 0) {
                 let propertyLinks;
                 if (recommendation.special) {
-                    // Handle special cases like Weizia or (Dimm and Meridin)
-                    let operator = recommendation.properties.includes('Riri') ? '&' : 'OR';
-                    propertyLinks = `
+                    // Handle special cases like Weizia or (Dimm and Meridin) or (Weizia or Riri and Meridin)
+                    let operator = (recommendation.properties.includes('Riri') && recommendation.properties.includes('Meridin')) ? '&' : 'OR';
+                     propertyLinks = `
                         ${getPropSpan(recommendation.properties[0])}
                         <span class="mx-2 sm:mx-4 text-gray-500 font-bold text-xl">OR</span>
                         <span class="flex items-center gap-2">
@@ -480,6 +530,62 @@
                 pairingSpotlight.classList.add('hidden');
             }
         }
+        
+        function populateArpProjects() {
+            arpProjectSelect.innerHTML = '<option value="" disabled selected>Select a Project</option>';
+            const arpProperties = propertyData.filter(p => p.arp || (p.nettPrice && p.nettPrice > 0));
+            arpProperties.forEach(p => {
+                const option = document.createElement('option');
+                option.value = p.name;
+                option.textContent = p.name;
+                arpProjectSelect.appendChild(option);
+            });
+        }
+
+        function calculateARP() {
+            const selectedProjectName = arpProjectSelect.value;
+            if (!selectedProjectName) return;
+
+            const project = propertyData.find(p => p.name === selectedProjectName);
+            const formatMYR = (num) => `RM ${num.toLocaleString('en-US', { maximumFractionDigits: 0 })}/m`;
+            const arpT1Label = document.getElementById('arpT1Label');
+
+            // Reset labels to default first
+            arpM40Label.textContent = 'M40 Package (3% Yield):';
+            arpT20Label.textContent = 'T20 Package (4% Yield):';
+            arpT1Label.textContent = 'T1 Package (6% Yield):';
+
+            if (project.arpType === 'fixed') {
+                const fixedRentalText = project.fixedRental ? `${formatMYR(project.fixedRental)} (Fixed)` : 'N/A (Fixed)';
+                arpM40Display.textContent = 'N/A';
+                arpT20Display.textContent = 'N/A';
+                arpT1Display.textContent = fixedRentalText;
+                arpT1Label.textContent = 'T1 Package:';
+            } else { // Assumes 'percentage'
+                 const price = project.nettPrice || 0;
+                 if (price === 0) {
+                     const notApplicable = 'N/A';
+                     arpM40Display.textContent = notApplicable;
+                     arpT20Display.textContent = notApplicable;
+                     arpT1Display.textContent = notApplicable;
+                     return;
+                 }
+                const m40_yield = (price * 0.03) / 12;
+                const t20_yield = (price * 0.04) / 12;
+                let t1_yield;
+
+                if (project.name === 'VIANA') {
+                    t1_yield = (price * 0.07) / 12;
+                    arpT1Label.textContent = 'T1 Package (7% Yield):';
+                } else {
+                    t1_yield = (price * 0.06) / 12;
+                }
+
+                arpM40Display.textContent = formatMYR(m40_yield);
+                arpT20Display.textContent = formatMYR(t20_yield);
+                arpT1Display.textContent = formatMYR(t1_yield);
+            }
+        }
 
         // --- EVENT LISTENERS ---
         ageSlider.addEventListener('input', (e) => { ageValue.textContent = e.target.value; updateFocusArea(e.target.value); });
@@ -491,6 +597,9 @@
         nationalitySelector.addEventListener('change', consultantRecommend);
         consultantLoanEligibilitySlider.addEventListener('input', (e) => { consultantLoanEligibilityValue.textContent = parseInt(e.target.value).toLocaleString('en-US'); consultantRecommend(); });
         consultantLtvSelector.addEventListener('change', consultantRecommend);
+        
+        // ARP Calculator Listener
+        arpProjectSelect.addEventListener('change', calculateARP);
 
         // --- INITIALIZATION ---
         createTimeline();
@@ -500,12 +609,9 @@
         recommendProperties();
         consultantLoanEligibilityValue.textContent = parseInt(consultantLoanEligibilitySlider.value).toLocaleString('en-US');
         consultantRecommend();
+        populateArpProjects();
     });
     </script>
 </body>
 </html>
-
-
-
-
 
