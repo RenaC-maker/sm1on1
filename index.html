@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personalized Property Roadmap</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -20,13 +20,12 @@
             transition: all 0.3s ease;
         }
         .main-title {
-            color: #a1283b; /* New Dark Red Tone */
+            color: #a1283b;
         }
         .highlight-value {
-            color: #c5a560; /* Gold accent */
+            color: #c5a560;
             font-weight: 700;
         }
-        /* Input Slider Styles */
         input[type=range] {
             -webkit-appearance: none;
             width: 100%;
@@ -44,23 +43,21 @@
             height: 24px;
             width: 24px;
             border-radius: 50%;
-            background: #a1283b; /* New Dark Red Tone */
+            background: #a1283b;
             cursor: pointer;
             margin-top: -8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
-        
-        /* Timeline Styles */
         .timeline-item {
             position: relative;
             padding-left: 40px;
-            padding-bottom: 16px; /* Reduced padding */
+            padding-bottom: 16px;
         }
         .timeline-item:not(:last-child) {
              border-left: 3px solid #d1d5db;
         }
         .timeline-dot { position: absolute; left: -12px; top: 0; height: 22px; width: 22px; border-radius: 50%; background-color: #d1d5db; border: 4px solid #f0f2f5; transition: all 0.4s ease; }
-        .timeline-item.active .timeline-dot { background-color: #a1283b; transform: scale(1.2); } /* New Dark Red Tone */
+        .timeline-item.active .timeline-dot { background-color: #a1283b; transform: scale(1.2); }
         .timeline-item .timeline-content {
             background-color: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -72,16 +69,12 @@
             border-color: #a1283b;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
-        .timeline-item.active .timeline-content h3 { color: #a1283b; } /* New Dark Red Tone */
+        .timeline-item.active .timeline-content h3 { color: #a1283b; }
         
         .btn-group label { border: 1px solid #d1d5db; padding: 10px 20px; cursor: pointer; transition: all 0.2s ease; font-weight: 500; }
-        .btn-group input[type="radio"]:checked + label { background-color: #a1283b; color: white; border-color: #a1283b; } /* New Dark Red Tone */
+        .btn-group input[type="radio"]:checked + label { background-color: #a1283b; color: white; border-color: #a1283b; }
         .btn-group input[type="radio"] { display: none; }
-
-        .grade { display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; border-radius: 50%; font-weight: bold; color: white; }
-        .grade-a { background-color: #28a745; }
-        .grade-b { background-color: #ffc107; color: #333 }
-        .grade-c { background-color: #dc3545; }
+        
         .status-badge {
             font-size: 0.75rem;
             padding: 0.25rem 0.75rem;
@@ -89,15 +82,88 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-        .arp-logo {
-            font-size: 0.7rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 0.25rem;
-            font-weight: 700;
-            background-color: #2563eb; /* Changed to a distinct blue */
-            color: white;
-            margin-left: 8px;
+
+        /* ARP Section Styles */
+        .arp-calc-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
+        .arp-title {
+            text-align: center;
+            color: #d9534f;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        @media (min-width: 768px) {
+            .info-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .info-item {
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        .info-item.mortgage { background-color: #f0f7ff; border-color: #b3d4ff; color: #0056b3; }
+        .info-item.rebate { background-color: #fffaf0; border-color: #ffe4b3; color: #e67e22; }
+        .info-item span { font-size: 1.5rem; font-weight: 800; display: block; margin-top: 4px; }
+        
+        .nett-price-display {
+            text-align: center;
+            margin: 32px 0;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 12px;
+        }
+        .nett-price-display strong { font-size: 1rem; color: #64748b; display: block; }
+        .nett-price-display span { font-size: 2.5rem; font-weight: 800; color: #1e293b; }
+
+        .projection-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .projection-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .projection-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        .projection-card:hover { transform: translateY(-4px); }
+        .projection-card.highlight { border: 2px solid #3b82f6; background-color: #f8faff; }
+        
+        .projection-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+        .projection-card .basis-text { font-size: 0.75rem; color: #94a3b8; margin-bottom: 20px; display: block; }
+        .projection-card .val-label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-top: 16px; }
+        .projection-card .val-amount { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
+        .projection-card hr { border: 0; border-top: 1px solid #f1f5f9; margin: 16px 0; }
+        
+        .cashflow-positive { color: #16a34a !important; }
+        .cashflow-negative { color: #dc2626 !important; }
+        
+        .ecf-perks {
+            background-color: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+        .ecf-perks h3 { font-weight: 800; color: #0369a1; margin-bottom: 16px; font-size: 1.25rem; }
+        .ecf-perks ul li { margin-bottom: 10px; padding-left: 24px; position: relative; color: #334155; }
+        .ecf-perks ul li::before { content: "✓"; position: absolute; left: 0; color: #0284c7; font-weight: 900; }
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8">
@@ -109,19 +175,18 @@
             <p class="text-gray-600 mt-2">Aligning Your Age with Your Financial Future</p>
         </div>
 
-        <!-- Section 1: Age Selector Card -->
+        <!-- Section 1: Age Selector -->
         <div class="card mb-8">
             <h2 class="text-xl font-bold text-gray-800 mb-2 text-center">What is your current age?</h2>
-            <p class="text-center text-gray-500 mb-4">Slide to see your recommended focus area.</p>
             <input type="range" id="ageSlider" min="25" max="65" value="30" class="w-full">
             <p class="text-center text-2xl font-bold main-title mt-2">Current Age: <span id="ageValue">30</span></p>
         </div>
 
-        <!-- Section 2 & 3: Main Content Grid (Timeline & Stage) -->
+        <!-- Section 2: Main Content Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
             <div class="lg:col-span-2">
                 <div class="card h-full">
-                    <h2 class="text-2xl font-bold main-title mb-6">Immediate/Medium Goal - Portfolio vs Age Timeline</h2>
+                    <h2 class="text-2xl font-bold main-title mb-6 text-center lg:text-left">Immediate/Medium Goal Timeline</h2>
                     <div id="timeline"></div>
                 </div>
             </div>
@@ -137,219 +202,220 @@
                     <div class="bg-gray-50 p-6 rounded-lg">
                         <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center"><i class="fas fa-bullseye mr-2 text-red-800"></i>Key Milestones:</h3>
                         <p id="focusMilestones" class="text-gray-700 text-lg mb-4 pl-8"></p>
-                        
                         <h3 class="font-bold text-lg text-gray-800 mb-4 flex items-center"><i class="fas fa-tasks mr-2 text-red-800"></i>Primary Actions:</h3>
                         <div id="focusActions" class="space-y-4 pl-8"></div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Section 4: Long Term Vision Section -->
-        <div class="card mt-8">
-             <h2 class="text-2xl font-bold main-title mb-4 text-center">Long-Term Vision: The "Sell 1, Free 3" Strategy</h2>
-             <p class="text-center text-gray-600 mb-6">Select a portfolio target to see the required property plan.</p>
-             <div id="portfolioSelector" class="flex flex-wrap justify-center gap-2 btn-group rounded-lg overflow-hidden mb-8">
-                <input type="radio" id="target1m" name="portfolioGoal" value="1"><label for="target1m" class="rounded-lg">RM 1M</label>
-                <input type="radio" id="target2m" name="portfolioGoal" value="2"><label for="target2m" class="rounded-lg">RM 2M</label>
-                <input type="radio" id="target3m" name="portfolioGoal" value="3" checked><label for="target3m" class="rounded-lg">RM 3M</label>
-                <input type="radio" id="target4m" name="portfolioGoal" value="4"><label for="target4m" class="rounded-lg">RM 4M</label>
-                <input type="radio" id="target5m" name="portfolioGoal" value="5"><label for="target5m" class="rounded-lg">RM 5M</label>
-                <input type="radio" id="target6m" name="portfolioGoal" value="6"><label for="target6m" class="rounded-lg">RM 6M</label>
-                <input type="radio" id="target10m" name="portfolioGoal" value="10"><label for="target10m" class="rounded-lg">RM 10M+</label>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
-                <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Units to Buy (~RM500k)</p><p id="unitsToBuy" class="text-4xl highlight-value">6</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Units to Sell (Yr 20)</p><p id="unitsToSell" class="text-4xl highlight-value">2</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Units Fully Owned</p><p id="unitsOwned" class="text-4xl highlight-value">4</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Est. Passive Income</p><p id="passiveIncome" class="text-4xl highlight-value">~RM 20k</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Total Property Value (Yr 20)</p><p id="propertyValue" class="text-4xl highlight-value">~RM 6M</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg"><p class="text-gray-600">Net Worth (Yr 20)</p><p id="netWorth" class="text-4xl highlight-value">~RM 4.5M</p></div>
-            </div>
-        </div>
 
-        <!-- Section 5: Consultant Recommender -->
+        <!-- Consultant Finder Section -->
         <div class="card mt-8">
             <h2 class="text-2xl font-bold main-title mb-2 text-center">Consultant Recommender</h2>
-            <p class="text-center text-gray-600 mb-6">Get tailored property recommendations based on nationality and financial profile.</p>
+            <p class="text-center text-gray-600 mb-6">Strategic logic updated based on latest criteria.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 items-start">
-                <!-- Inputs -->
                 <div>
                     <label class="font-bold text-gray-700 mb-2 block">Client Nationality</label>
                     <div id="nationalitySelector" class="flex justify-start btn-group rounded-lg overflow-hidden">
                         <input type="radio" id="natMalaysian" name="nationality" value="malaysian" checked><label for="natMalaysian" class="rounded-l-lg">Malaysian</label>
-                        <input type="radio" id="natSingaporean" name="nationality" value="singaporean"><label for="natSingaporean">Singaporean</label>
-                        <input type="radio" id="natOthers" name="nationality" value="others"><label for="natOthers" class="rounded-r-lg">Others</label>
+                        <input type="radio" id="natSingaporean" name="nationality" value="singaporean"><label for="natSingaporean" class="rounded-r-lg">Singaporean / Others</label>
                     </div>
                 </div>
                 <div>
                     <label for="consultantLoanEligibilitySlider" class="font-bold text-gray-700">Client's Max Loan Eligibility (RM)</label>
-                    <input type="range" id="consultantLoanEligibilitySlider" min="400000" max="5000000" value="1000000" step="50000" class="w-full mt-2">
+                    <input type="range" id="consultantLoanEligibilitySlider" min="200000" max="5000000" value="1000000" step="50000" class="w-full mt-2">
                     <p class="text-center text-xl font-bold main-title mt-1">RM <span id="consultantLoanEligibilityValue">1,000,000</span></p>
                 </div>
                 <div id="consultantLtvWrapper" class="md:col-span-2 text-center">
-                     <label class="font-bold text-gray-700 mb-2 block">Investment Strategy (LTV)</label>
+                     <label class="font-bold text-gray-700 mb-2 block">Margin of Finance (LTV)</label>
                     <div id="consultantLtvSelector" class="flex justify-center btn-group rounded-lg overflow-hidden">
-                        <input type="radio" id="consultantLtv90" name="consultantLtv" value="90"><label for="consultantLtv90" class="rounded-l-lg">90% LTV (Cashback)</label>
-                        <input type="radio" id="consultantLtv70" name="consultantLtv" value="70" checked><label for="consultantLtv70" class="rounded-r-lg">70% LTV (Cashflow)</label>
+                        <input type="radio" id="consultantLtv90" name="consultantLtv" value="90" checked><label for="consultantLtv90" class="rounded-l-lg">90% LTV</label>
+                        <input type="radio" id="consultantLtv70" name="consultantLtv" value="70"><label for="consultantLtv70" class="rounded-r-lg">70% LTV</label>
                     </div>
                 </div>
             </div>
 
-            <!-- Recommendation Output -->
             <div id="consultantRecommendationResult" class="mt-6 pt-6 border-t"></div>
-            
-            <!-- Pairing Idea Spotlight -->
-            <div id="pairingSpotlight" class="hidden mt-6 pt-6 border-t border-dashed">
-                <h3 class="text-xl font-bold text-gray-800 text-center mb-4">What is a Pairing Strategy? (Example)</h3>
-                <div class="bg-gray-50 rounded-lg p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div>
-                            <h4 class="font-bold text-lg main-title">BUY 1 FREE 1 PROPERTY</h4>
-                            <p class="font-semibold text-gray-700">Pairing WEI ZIAA + SOYA A</p>
-                            <p class="mt-2 text-sm text-gray-600">This strategy uses the cashback from a high-cashback property (like WEI ZIAA) to cover the entry costs of a high-cashflow property (like SOYA A), effectively getting you the second property for "free".</p>
-                        </div>
-                        <div class="border-l pl-6">
-                             <h4 class="font-bold text-lg main-title">Buy SOYA A @ LTV70 For Free</h4>
-                             <p class="text-sm text-gray-600">Using WEI ZIAA Cashback</p>
-                             <ul class="text-sm space-y-1 mt-2">
-                                 <li><span class="font-semibold">Renovation Cost:</span> ~RM40,000</li>
-                             </ul>
-                             <p class="text-sm font-bold text-green-600 mt-2">+ Cashflow Positive ~RM800++</p>
-                        </div>
-                    </div>
-                    <p class="text-center mt-6 font-semibold text-gray-700">🎯 Talk to your SM for more pairing recommendation strategy</p>
-                </div>
-            </div>
         </div>
 
-        <!-- Section 6: Property Opportunity Finder -->
+        <!-- Property Finder Section -->
         <div class="card mt-8">
             <h2 class="text-2xl font-bold main-title mb-2 text-center">Property Opportunity Finder</h2>
-            <p class="text-center text-gray-600 mb-6">Find suitable properties based on your loan eligibility and preferred strategy.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <p class="text-center text-gray-600 mb-6">Find suitable properties based on your financial capacity.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-gray-50 p-4 rounded-lg mb-6">
                 <div>
-                    <label for="loanEligibilitySlider" class="font-bold text-gray-700">Your Max Loan Eligibility (RM)</label>
-                    <input type="range" id="loanEligibilitySlider" min="200000" max="5000000" value="500000" step="50000" class="w-full mt-2">
-                    <p class="text-center text-xl font-bold main-title mt-1">RM <span id="loanEligibilityValue">500,000</span></p>
+                    <label for="clientAge" class="block text-sm font-medium text-gray-700">Client Age</label>
+                    <input type="number" id="clientAge" value="30" min="18" max="70" class="mt-1 block w-full rounded-md border-gray-300 p-2 border">
+                </div>
+                <div>
+                    <label for="interestRate" class="block text-sm font-medium text-gray-700">Interest Rate (%)</label>
+                    <input type="number" id="interestRate" value="3.7" step="0.1" class="mt-1 block w-full rounded-md border-gray-300 p-2 border">
+                </div>
+                <div>
+                    <label for="loanTenure" class="block text-sm font-medium text-gray-700">Loan Tenure (Years)</label>
+                    <input type="number" id="loanTenure" value="35" min="5" max="35" class="mt-1 block w-full rounded-md border-gray-300 p-2 border">
                 </div>
                 <div class="text-center">
-                    <label class="font-bold text-gray-700 mb-2 block">Investment Strategy (LTV)</label>
-                    <div id="ltvSelector" class="flex justify-center btn-group rounded-lg overflow-hidden">
-                        <input type="radio" id="ltv90" name="ltv" value="90" checked><label for="ltv90" class="rounded-l-lg">90% LTV (Cashback)</label>
-                        <input type="radio" id="ltv70" name="ltv" value="70"><label for="ltv70" class="rounded-r-lg">70% LTV (Cashflow)</label>
+                    <label class="font-bold text-gray-700 mb-2 block">MOF (LTV)</label>
+                    <div id="ltvSelectorFinder" class="flex justify-center btn-group rounded-lg overflow-hidden">
+                        <input type="radio" id="finderLtv90" name="finderLtv" value="90" checked><label for="finderLtv90" class="rounded-l-lg">90%</label>
+                        <input type="radio" id="finderLtv70" name="finderLtv" value="70"><label for="finderLtv70" class="rounded-r-lg">70%</label>
                     </div>
                 </div>
             </div>
-            <div class="mt-8"><h3 class="text-xl font-bold text-gray-800 mb-4">Recommended Properties:</h3><div id="propertyRecommendations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
+
+            <div class="mb-6">
+                <label for="loanEligibilityInput" class="font-bold text-gray-700">Filter by Max Loan Eligibility (RM)</label>
+                <input type="number" id="loanEligibilityInput" value="1000000" step="10000" class="mt-1 block w-full md:w-1/3 rounded-md border-gray-300 font-bold p-2 border">
+            </div>
+            
+            <div id="propertyRecommendations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
-        
-        <!-- ARP Calculator and Description Section -->
-        <div class="card mt-8">
-            <h2 class="text-2xl font-bold main-title mb-6 text-center">Automated Rental Programme (ARP) Calculator</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <!-- ARP Calculator -->
-                <div class="bg-gray-50 p-6 rounded-lg">
-                    <h3 class="font-semibold text-lg text-gray-800 mb-4 text-center">ARP Income Projection</h3>
-                    <div>
-                        <label for="arpProjectSelect" class="block text-sm font-medium text-gray-700">Select a Project</label>
-                        <select id="arpProjectSelect" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm">
-                           <option value="" disabled selected>Select a Project</option>
-                        </select>
-                    </div>
-                    <div class="mt-4 space-y-2">
-                        <div class="flex justify-between items-center bg-white p-3 rounded-md">
-                            <span id="arpM40Label" class="font-semibold text-gray-600">M40 Package (3% Yield):</span>
-                            <span id="arpM40" class="font-bold text-lg text-green-600">RM 0/m</span>
-                        </div>
-                        <div class="flex justify-between items-center bg-white p-3 rounded-md">
-                            <span id="arpT20Label" class="font-semibold text-gray-600">T20 Package (4% Yield):</span>
-                            <span id="arpT20" class="font-bold text-lg text-green-600">RM 0/m</span>
-                        </div>
-                        <div class="flex justify-between items-center bg-white p-3 rounded-md">
-                            <span id="arpT1Label" class="font-semibold text-gray-600">T1 Package (6% Yield):</span>
-                            <span id="arpT1" class="font-bold text-lg text-green-600">RM 0/m</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 text-xs text-gray-500 italic">
-                        <p>• Projection is based on average price of available units.</p>
-                        <p>• All units will come with different SPA & Net Price.</p>
-                        <p>• Refer the excel calculator uploaded in LMS to get the actual SPA & Net price for your unit.</p>
-                    </div>
+
+        <!-- NEW REDESIGNED ARP Section -->
+        <div class="arp-calc-container mt-8">
+            <h2 class="arp-title">ARP & Mortgage Calculator</h2>
+            
+            <div class="mb-8 flex flex-col items-center">
+                <label for="arpProjectSelect" class="font-bold text-gray-700 mb-2">Select a Project:</label>
+                <select id="arpProjectSelect" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm p-3 border">
+                    <option value="" disabled selected>-- Select a Project --</option>
+                </select>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item mortgage">
+                    <strong>Estimated Monthly Mortgage</strong>
+                    <span id="arpMonthlyMortgage">RM 0.00 /m</span>
                 </div>
-                <!-- ARP Description -->
-                <div class="text-gray-700">
-                    <h3 class="font-semibold text-lg text-gray-800 mb-2">About the ARP</h3>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Minimum <span class="font-bold">2 years tenancy</span> subject to option to renew for another 4 years (subject to T&C).</li>
-                        <li>Subject to fulfilling ARP renovation specification and agreeing to other T&C.</li>
-                        <li>Maximum <span class="font-bold">30 units per development</span> (1st come 1st serve basis).</li>
-                    </ul>
-                     <div class="mt-4 pt-4 border-t">
-                        <h4 class="font-semibold text-lg text-gray-800 mb-2">Type of Package</h4>
-                        <ul class="list-disc list-inside space-y-2">
-                            <li><strong>Premium Client = T1</strong> @ <strong>6% yields ARP</strong></li>
-                            <li><strong>Lite Client = T20</strong> @ <strong>4% yields ARP</strong></li>
-                        </ul>
-                        <p class="text-xs italic text-gray-500 mt-2">(Check with your SM if you do not know your package)</p>
-                     </div>
-                     <p class="text-xs italic text-gray-500 mt-4">*All ARP is based on nett purchase price.</p>
+                <div class="info-item rebate">
+                    <strong>ECF 3% Rebate (One-Time)</strong>
+                    <span id="arpEcfRebate">RM 0.00</span>
                 </div>
+            </div>
+
+            <div class="projection-header">
+                <h2 class="text-2xl font-extrabold text-gray-800">ARP Rental Projection</h2>
+                <p class="text-gray-500">Visualize the potential rental yield difference across packages.</p>
+            </div>
+
+            <div class="nett-price-display">
+                <strong>Property Nett Price</strong>
+                <span id="arpDisplayPrice">RM 0.00</span>
+            </div>
+
+            <div class="projection-grid">
+                <!-- M40 Card -->
+                <div class="projection-card">
+                    <h3>M40 Package: 3% ARP Return</h3>
+                    <span class="basis-text" id="m40_basis">Based on nett price</span>
+                    <hr>
+                    <div class="val-label">Monthly Return</div>
+                    <div id="m40_monthly" class="val-amount">RM 0.00</div>
+                    <hr>
+                    <div class="val-label">Monthly Net Cashflow</div>
+                    <div id="m40_cashflow" class="val-amount">RM 0.00</div>
+                </div>
+
+                <!-- T20 Card -->
+                <div class="projection-card">
+                    <h3>T20 Package: 4% ARP Return</h3>
+                    <span class="basis-text" id="t20_basis">Based on nett price</span>
+                    <hr>
+                    <div class="val-label">Monthly Return</div>
+                    <div id="t20_monthly" class="val-amount">RM 0.00</div>
+                    <hr>
+                    <div class="val-label">Monthly Cashflow Gain</div>
+                    <div id="t20_gain" class="val-amount cashflow-positive">+RM 0.00</div>
+                </div>
+
+                <!-- T1 Card -->
+                <div class="projection-card highlight">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider">Premium</div>
+                    <h3>T1 Package: 6% ARP Return</h3>
+                    <span class="basis-text" id="t1_basis">Based on nett price</span>
+                    <hr>
+                    <div class="val-label">Monthly Return</div>
+                    <div id="t1_monthly" class="val-amount">RM 0.00</div>
+                    <div class="val-label">Annual Return</div>
+                    <div id="t1_annual" class="val-amount">RM 0.00</div>
+                    <hr>
+                    <div class="val-label">Monthly Cashflow Gain</div>
+                    <div id="t1_gain" class="val-amount cashflow-positive">+RM 0.00</div>
+                </div>
+
+                <!-- ECF Card -->
+                <div class="projection-card highlight">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider">Exclusive</div>
+                    <h3>ECF Package: 7% ARP Return</h3>
+                    <span class="basis-text" id="ecf_basis">Based on nett price</span>
+                    <hr>
+                    <div class="val-label">Monthly Return</div>
+                    <div id="ecf_monthly" class="val-amount">RM 0.00</div>
+                    <div class="val-label">Annual Return</div>
+                    <div id="ecf_annual" class="val-amount">RM 0.00</div>
+                    <hr>
+                    <div class="val-label">Monthly Cashflow Gain</div>
+                    <div id="ecf_gain" class="val-amount cashflow-positive">+RM 0.00</div>
+                </div>
+            </div>
+
+            <div class="ecf-perks">
+                <h3>ECF Investors Perks:</h3>
+                <ul>
+                    <li><strong>Complimentary T1 membership package upgrade</strong> (worth RM10,000)</li>
+                    <li><strong>Additional 3% rebates</strong> for personal purchases and 2% for CP/CA until 150% recovery</li>
+                    <li><strong>Minimum 7% ARP</strong> (Guaranteed yield)</li>
+                    <li>Potentially a <strong>guaranteed return</strong> of ECF investment (150% monetary value)</li>
+                </ul>
             </div>
         </div>
 
-        <!-- Disclaimer Section -->
-        <div class="mt-8 text-center">
-            <p class="text-xs italic text-gray-500">
-                Disclaimer: Images, illustrations,details, features, figures and/or calculations above are provided by and/or derived from Developer’s representations and/or publicly representation or guarantee by FAR Capital Sdn Bhd the Developer, external factors or may not be applicable to the client’s profile. The above shall not constitute as a representation or guarantee by FAR Capital Sdn Bhd.
-            </p>
+        <div class="mt-8 text-center text-xs text-gray-400 pb-12">
+            Disclaimer: Figures provided are for illustrative purposes and based on developer representations.
         </div>
     </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // --- DATA ---
-        const ageStages = [
-            { range: [25, 35], displayText: '25-35', stage: 1, title: 'Stage 1: Foundation Building', icon: 'fa-rocket', milestones: 'Min <span class="highlight-value">1 mil</span> portfolio / Min <span class="highlight-value">RM50k</span> savings', actions: [ {icon: 'fa-wallet', title: 'Consolidate bad debts', desc: 'car, credit card, personal loan'}, {icon: 'fa-building-columns', title: 'Purchase first investment properties', desc: 'Start building your asset base.'}, {icon: 'fa-piggy-bank', title: 'Increase emergency savings', desc: 'Aim for 6-12 months of expenses.'} ] },
-            { range: [36, 45], displayText: '35-45', stage: 2, title: 'Stage 2: Expansion and Family', icon: 'fa-chart-line', milestones: 'Min <span class="highlight-value">3 mil</span> portfolio / Min <span class="highlight-value">RM100k</span> savings', actions: [ {icon: 'fa-graduation-cap', title: 'Plan for children\'s education', desc: 'Secure future funding.'}, {icon: 'fa-magnifying-glass-dollar', title: 'Strategize for cash-out opportunities', desc: 'Leverage equity for growth.'}, {icon: 'fa-scale-balanced', title: 'Balance cashout, capital gain & cashflow', desc: 'Optimize portfolio performance.'} ] },
-            { range: [46, 55], displayText: '45-55', stage: 3, title: 'Stage 3: Wealth Consolidation', icon: 'fa-shield-halved', milestones: 'Min <span class="highlight-value">6 mil</span> portfolio / passive income <span class="highlight-value">RM15k</span>', actions: [ {icon: 'fa-hand-holding-dollar', title: 'Focus on rental yield', desc: 'Maximize passive income streams.'}, {icon: 'fa-umbrella-beach', title: 'Retirement planning', desc: 'Solidify your exit strategy.'} ] },
-            { range: [56, 65], displayText: '55-65', stage: 4, title: 'Stage 4: Financial Freedom', icon: 'fa-trophy', milestones: 'Secure retirement fund / defensive assets / legacy planning', actions: [ {icon: 'fa-chess-rook', title: 'Shift to defensive assets', desc: 'Preserve capital and reduce risk.'}, {icon: 'fa-file-invoice-dollar', title: 'Implement legacy and estate planning', desc: 'Secure your family\'s future.'} ] }
-        ];
-        
-        const portfolioTargets = { 
-            1: { unitsToBuy: 2, unitsToSell: 1, unitsOwned: 1, income: '~RM 5k', propertyValue: '~RM 2M', netWorth: '~RM 1.5M' },
-            2: { unitsToBuy: 4, unitsToSell: 1, unitsOwned: 3, income: '~RM 15k', propertyValue: '~RM 4M', netWorth: '~RM 3M' },
-            3: { unitsToBuy: 6, unitsToSell: 2, unitsOwned: 4, income: '~RM 20k', propertyValue: '~RM 6M', netWorth: '~RM 4.5M' },
-            4: { unitsToBuy: 8, unitsToSell: 2, unitsOwned: 6, income: '~RM 30k', propertyValue: '~RM 8M', netWorth: '~RM 6M' },
-            5: { unitsToBuy: 10, unitsToSell: 3, unitsOwned: 7, income: '~RM 35k', propertyValue: '~RM 10M', netWorth: '~RM 7.5M' },
-            6: { unitsToBuy: 12, unitsToSell: 3, unitsOwned: 9, income: '~RM 45k', propertyValue: '~RM 12M', netWorth: '~RM 9M' },
-            10: { unitsToBuy: 20, unitsToSell: 5, unitsOwned: 15, income: '~RM 75k', propertyValue: '~RM 20M', netWorth: '~RM 15M' } 
-        };
-        
         const propertyData = [
-            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC', arp: false, nettPrice: null },
-            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, capitalGain: 12, gradeCapital: 'B', gradeCashflow: 'A', status: 'UC', arp: false, nettPrice: 460000 },
-            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, capitalGain: 20, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', arp: false, nettPrice: 490000 },
-            { name: 'TAYLOR', loanRange: [200000, 400000], cashflow90: -500, cashflow70: 1100, cashback90: 93000, cashback70: 14000, capitalGain: 17, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC', arp: false, nettPrice: 265000 },
-            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', arp: false, nettPrice: 350000 },
-            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: 500, cashflow70: 200, cashback90: 193000, cashback70: 0, capitalGain: 29, gradeCapital: 'A', gradeCashflow: 'C', status: 'Completed', arp: true, nettPrice: 680000, arpType: 'fixed', fixedRental: 3500 },
-            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, capitalGain: 15, gradeCapital: 'B', gradeCashflow: 'B', status: 'UC', url: 'https://farcapital.zendesk.com/hc/en-us/sections/47180028617625-NEW-Project-NEXA-Cheras', arp: false, nettPrice: 500000 },
-            { name: 'PINNA', loanRange: [400000, 600000], cashflow90: -550, cashflow70: -150, cashback90: 107000, cashback70: 12000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed', arp: false, nettPrice: null },
-            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: true, nettPrice: 580000, arpType: 'percentage' },
-            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, capitalGain: 32, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: true, nettPrice: 488000, arpType: 'percentage' },
-            { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false, nettPrice: 465000 },
-            { name: 'AURELIA', loanRange: [400000, 600000], cashflow90: 800, cashflow70: 200, cashback90: 25000, cashback70: -100000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'UC', arp: false, nettPrice: null },
-            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'C', status: 'Completed', arp: true, nettPrice: 618000, arpType: 'percentage' },
-            { name: 'DINA', loanRange: [600000, 800000], cashflow90: -600, cashflow70: 300, cashback90: 270000, cashback70: 75000, capitalGain: 40, gradeCapital: 'B', gradeCashflow: 'B', status: 'Completed', arp: false, nettPrice: null },
-            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -90000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'A', status: 'UC', arp: false, nettPrice: 780000 },
-            { name: 'WEIZIA', loanRange: [800000, 1000000], cashflow90: -500, cashflow70: 700, cashback90: 221000, cashback70: -35000, capitalGain: 10, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed', arp: true, nettPrice: 950000, arpType: 'fixed', fixedRental: 5000 },
-            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, capitalGain: 26, gradeCapital: 'A', gradeCashflow: 'A', status: 'Completed', arp: false, nettPrice: 1250000 },
-            { name: 'ANA', loanRange: [200000, 400000], cashflow90: 230, cashflow70: 200, cashback90: 121000, cashback70: 15000, capitalGain: 20, gradeCapital: 'A', gradeCashflow: 'B', status: 'Completed', arp: true, nettPrice: 380000, arpType: 'fixed', fixedRental: 1800 },
-            { name: 'YUNA', loanRange: [200000, 400000], cashflow90: 200, cashflow70: 500, cashback90: 85000, cashback70: -20000, capitalGain: 24, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true, nettPrice: 480000, arpType: 'percentage' },
-            { name: 'KAYLEE', loanRange: [200000, 400000], cashflow90: 400, cashflow70: 700, cashback90: 80000, cashback70: 14000, capitalGain: 10, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true, nettPrice: 240000, arpType: 'percentage' },
-            { name: 'VIANA', loanRange: [800000, 1000000], cashflow90: 2000, cashflow70: 1200, cashback90: 300000, cashback70: -10000, capitalGain: 30, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true, nettPrice: 970000, arpType: 'percentage' },
-            { name: 'DIMM', loanRange: [800000, 1000000], cashflow90: 350, cashflow70: 1500, cashback90: 210000, cashback70: -70000, capitalGain: 25, gradeCapital: 'B', gradeCashflow: 'A', status: 'Completed', arp: true, nettPrice: 1050638, arpType: 'percentage' }
+            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, status: 'UC', nettPrice: 460000 },
+            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, status: 'UC', nettPrice: 490000 },
+            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, status: 'UC', nettPrice: 350000 },
+            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: 500, cashflow70: 200, cashback90: 193000, cashback70: 0, status: 'Completed', nettPrice: 685000 },
+            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, status: 'UC', nettPrice: 500000 },
+            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, status: 'UC', nettPrice: 580000 },
+            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, status: 'UC', nettPrice: 488000 },
+            { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, status: 'UC', nettPrice: 465000 },
+            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, status: 'Completed', nettPrice: 618000 },
+            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -90000, status: 'UC', nettPrice: 863296 },
+            { name: 'WEI ZIAA', loanRange: [800000, 1000000], cashflow90: -500, cashflow70: 700, cashback90: 221000, cashback70: -35000, status: 'Completed', nettPrice: 966010 },
+            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, status: 'Completed', nettPrice: 748872 },
+            { name: 'YUNA', loanRange: [200000, 400000], cashflow90: 200, cashflow70: 500, cashback90: 85000, cashback70: -20000, status: 'Completed', nettPrice: 480000 },
+            { name: 'DIMM', loanRange: [800000, 1000000], cashflow90: 350, cashflow70: 1500, cashback90: 210000, cashback70: -70000, status: 'Completed', nettPrice: 949658 },
+            { name: 'ZIZIE', loanRange: [600000, 800000], cashflow90: 100, cashflow70: 350, cashback90: 130000, cashback70: -70000, status: 'UC', nettPrice: 800000 },
+            { name: 'MERIDIN', loanRange: [1000000, 5000000], cashflow90: 0, cashflow70: 0, cashback90: 0, cashback70: 0, status: 'Completed', nettPrice: 1000000 }
+        ];
+
+        const arpProjects = [
+            { name: 'Ana, Johor', price: 361000 }, { name: 'Tessa, Puchong', price: 340747 },
+            { name: 'Una, Cyberjaya', price: 463770 }, { name: 'Taylor, Genting', price: 265240 },
+            { name: 'Sora, Maluri', price: 403093 }, { name: 'Eva, Kepong', price: 359786 },
+            { name: 'Lara, Bangsar South', price: 313480 }, { name: 'Yuna, Nilai', price: 223240 },
+            { name: 'Riri, Kuala Lumpur', price: 863296 }, { name: 'Dimm, Damansara', price: 949658 },
+            { name: 'Abby, Kuala Lumpur', price: 748872 }, { name: 'Diana, Johor Bahru', price: 530000 },
+            { name: 'Wei Ziaa, Bukit Jalil', price: 966010 }, { name: 'Ferra, Penang', price: 685000 },
+            { name: 'Zizie, Maluri', price: 800000 }
+        ];
+
+        const ageStages = [
+            { range: [25, 35], displayText: '25-35', stage: 1, title: 'Stage 1: Foundation Building', icon: 'fa-rocket', milestones: 'Min <span class="highlight-value">1 mil</span> portfolio / Min <span class="highlight-value">RM50k</span> savings', actions: [{icon:'fa-wallet', title:'Consolidate debt', desc:'Clean up profile'}, {icon:'fa-building', title:'First acquisition', desc:'Build assets'}] },
+            { range: [36, 45], displayText: '35-45', stage: 2, title: 'Stage 2: Expansion & Strategy', icon: 'fa-chart-line', milestones: 'Min <span class="highlight-value">3 mil</span> portfolio / Min <span class="highlight-value">RM100k</span> savings', actions: [{icon:'fa-scale-balanced', title:'Balance Growth', desc:'LTV optimization'}] },
+            { range: [46, 55], displayText: '45-55', stage: 3, title: 'Stage 3: Wealth Consolidation', icon: 'fa-shield-halved', milestones: 'Min <span class="highlight-value">6 mil</span> portfolio', actions: [{icon:'fa-hand-holding-dollar', title:'Max yield', desc:'Passive focus'}] },
+            { range: [56, 65], displayText: '55-65', stage: 4, title: 'Stage 4: Legacy', icon: 'fa-trophy', milestones: 'Retirement fund / Exit plan', actions: [{icon:'fa-crown', title:'Legacy planning', desc:'Assets distribution'}] }
         ];
 
         // --- DOM ELEMENTS ---
@@ -357,33 +423,35 @@
         const ageValue = document.getElementById('ageValue');
         const timelineContainer = document.getElementById('timeline');
         const focusCard = { icon: document.getElementById('focusIcon'), title: document.getElementById('focusTitle'), milestones: document.getElementById('focusMilestones'), actions: document.getElementById('focusActions'), ageDisplays: document.querySelectorAll('.age-display') };
-        const portfolioSelector = document.getElementById('portfolioSelector');
-        const visionCard = { unitsToBuy: document.getElementById('unitsToBuy'), unitsToSell: document.getElementById('unitsToSell'), unitsOwned: document.getElementById('unitsOwned'), passiveIncome: document.getElementById('passiveIncome'), propertyValue: document.getElementById('propertyValue'), netWorth: document.getElementById('netWorth') };
-        const loanEligibilitySlider = document.getElementById('loanEligibilitySlider');
-        const loanEligibilityValue = document.getElementById('loanEligibilityValue');
-        const ltvSelector = document.getElementById('ltvSelector');
-        const recommendationsContainer = document.getElementById('propertyRecommendations');
         
-        // Consultant Recommender Elements
+        const loanEligibilityInput = document.getElementById('loanEligibilityInput');
+        const recommendationsContainer = document.getElementById('propertyRecommendations');
+        const clientAgeInput = document.getElementById('clientAge');
+        const interestRateInput = document.getElementById('interestRate');
+        const loanTenureInput = document.getElementById('loanTenure');
+        
         const nationalitySelector = document.getElementById('nationalitySelector');
         const consultantLoanEligibilitySlider = document.getElementById('consultantLoanEligibilitySlider');
         const consultantLoanEligibilityValue = document.getElementById('consultantLoanEligibilityValue');
         const consultantLtvWrapper = document.getElementById('consultantLtvWrapper');
         const consultantLtvSelector = document.getElementById('consultantLtvSelector');
         const consultantRecommendationResult = document.getElementById('consultantRecommendationResult');
-        const pairingSpotlight = document.getElementById('pairingSpotlight');
-        
-        // ARP Calculator Elements
+
         const arpProjectSelect = document.getElementById('arpProjectSelect');
-        const arpM40Display = document.getElementById('arpM40');
-        const arpT20Display = document.getElementById('arpT20');
-        const arpT1Display = document.getElementById('arpT1');
-        const arpM40Label = document.getElementById('arpM40Label');
-        const arpT20Label = document.getElementById('arpT20Label');
-        const arpT1Label = document.getElementById('arpT1Label');
 
+        // --- CORE FUNCTIONS ---
+        function formatCurrency(num, perMonth = true) {
+            const prefix = num < 0 ? "-RM " : "RM ";
+            return `${prefix}${Math.abs(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}${perMonth ? '/m' : ''}`;
+        }
 
-        // --- FUNCTIONS ---
+        function calculateMonthlyInstallment(loanAmount, annualRate, tenureYears) {
+            if (loanAmount <= 0) return 0;
+            const r = (annualRate / 100) / 12;
+            const n = tenureYears * 12;
+            return loanAmount * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+        }
+
         function createTimeline() { 
             timelineContainer.innerHTML = ''; 
             ageStages.forEach(stage => { 
@@ -405,213 +473,127 @@
             focusCard.actions.innerHTML = currentStageData.actions.map(action => `<div class="flex items-start"><i class="fas ${action.icon} text-red-800 mt-1 mr-4 w-5 text-center"></i><div><h4 class="font-semibold text-gray-800">${action.title}</h4><p class="text-sm text-gray-600">${action.desc}</p></div></div>`).join(''); 
             focusCard.ageDisplays.forEach(el => el.textContent = `${currentStageData.displayText}`); 
         }
-        
-        function updateVision() { 
-            const selectedValue = document.querySelector('input[name="portfolioGoal"]:checked').value; 
-            const data = portfolioTargets[selectedValue]; 
-            if(!data) return; 
-            visionCard.unitsToBuy.textContent = data.unitsToBuy; 
-            visionCard.unitsToSell.textContent = data.unitsToSell; 
-            visionCard.unitsOwned.textContent = data.unitsOwned; 
-            visionCard.passiveIncome.textContent = data.income;
-            visionCard.propertyValue.textContent = data.propertyValue;
-            visionCard.netWorth.textContent = data.netWorth;
-        }
-        function formatCurrency(num) { return new Intl.NumberFormat('en-MY', { style: 'currency', currency: 'MYR', minimumFractionDigits: 0 }).format(num); }
 
         function recommendProperties() {
-            const maxLoan = parseInt(loanEligibilitySlider.value);
-            const ltv = document.querySelector('input[name="ltv"]:checked').value;
-            const filteredProperties = propertyData.filter(prop => prop.loanRange[0] <= maxLoan);
+            const maxLoan = parseInt(loanEligibilityInput.value) || 0;
+            const ltv = document.querySelector('input[name="finderLtv"]:checked').value === '90' ? 0.9 : 0.7;
+            const filtered = propertyData.filter(p => p.loanRange[0] <= maxLoan);
             recommendationsContainer.innerHTML = '';
-            if (filteredProperties.length === 0) { recommendationsContainer.innerHTML = `<p class="text-gray-500 col-span-full text-center">No properties match the selected loan eligibility. Try increasing the amount.</p>`; return; }
-            filteredProperties.forEach(prop => {
-                const card = document.createElement('div'); card.className = 'bg-gray-50 p-4 rounded-lg border border-gray-200';
-                const cashflow = ltv === '90' ? prop.cashflow90 : prop.cashflow70; const cashback = ltv === '90' ? prop.cashback90 : prop.cashback70; const cashflowColor = cashflow >= 0 ? 'text-green-600' : 'text-red-600';
-                
-                const statusBadge = prop.status === 'Completed' 
-                    ? `<span class="status-badge bg-green-100 text-green-800">Completed</span>`
-                    : `<span class="status-badge bg-blue-100 text-blue-800">UC</span>`;
-                
-                const arpLogo = prop.arp ? `<span class="arp-logo">ARP</span>` : '';
-
-                let propertyTitleHTML = `<div class="flex justify-between items-center"><div class="flex items-center"><h4 class="font-bold text-xl main-title">${prop.name}</h4>${arpLogo}</div>${statusBadge}</div>`;
-                if (prop.url) {
-                    propertyTitleHTML = `<a href="${prop.url}" target="_blank" class="hover:opacity-75">${propertyTitleHTML}</a>`;
-                }
-
-                card.innerHTML = `${propertyTitleHTML}<p class="text-sm text-gray-500 mb-4">Price Range: ${formatCurrency(prop.loanRange[0])} - ${formatCurrency(prop.loanRange[1])}</p><div class="space-y-3 text-md"><div class="flex justify-between"><span class="font-semibold">Cashflow:</span><span class="font-bold ${cashflowColor}">${formatCurrency(cashflow)}/m</span></div><div class="flex justify-between"><span class="font-semibold">Cashback:</span><span class="font-bold text-blue-600">${formatCurrency(cashback)}</span></div><div class="flex justify-between"><span class="font-semibold">Capital Gain:</span><span class="font-bold">${prop.capitalGain}%</span></div><div class="flex justify-between items-center pt-2 border-t mt-2"><span class="font-semibold">Grades:</span><div class="flex gap-4"><div class="text-center"><span class="grade grade-${prop.gradeCapital.toLowerCase()}">${prop.gradeCapital}</span><p class="text-xs text-gray-500 mt-1">Capital</p></div><div class="text-center"><span class="grade grade-${prop.gradeCashflow.toLowerCase()}">${prop.gradeCashflow}</span><p class="text-xs text-gray-500 mt-1">Cashflow</p></div></div></div></div>`;
-                recommendationsContainer.appendChild(card);
+            filtered.forEach(p => {
+                const cashflow = ltv === 0.9 ? p.cashflow90 : p.cashflow70;
+                const cashback = ltv === 0.9 ? p.cashback90 : p.cashback70;
+                const inst = calculateMonthlyInstallment((p.nettPrice || p.loanRange[1]) * ltv, parseFloat(interestRateInput.value), parseInt(loanTenureInput.value));
+                recommendationsContainer.innerHTML += `
+                    <div class="bg-gray-50 p-4 rounded-lg border">
+                        <h4 class="font-bold text-xl main-title mb-2">${p.name}</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between"><span>Est. Installment:</span><span class="font-bold text-gray-800">${formatCurrency(inst)}</span></div>
+                            <div class="flex justify-between"><span>Est. Cashflow:</span><span class="font-bold ${cashflow >= 0 ? 'text-green-600' : 'text-red-600'}">${formatCurrency(cashflow)}</span></div>
+                            <div class="flex justify-between"><span>Est. Cashback:</span><span class="font-bold text-blue-600">${formatCurrency(cashback, false)}</span></div>
+                        </div>
+                    </div>`;
             });
         }
 
         function consultantRecommend() {
             const nationality = document.querySelector('input[name="nationality"]:checked').value;
             const loanEligibility = parseInt(consultantLoanEligibilitySlider.value);
-            let recommendation = { text: "No specific recommendation for this criteria.", special: false, properties: [] };
+            let recommendation = { text: "Recommendation:", properties: [], type: 'single', textOnly: null };
 
-            if (nationality === 'singaporean' || nationality === 'others') {
-                consultantLtvWrapper.style.display = 'none';
-                if (loanEligibility > 3000000) { recommendation = { text: "Recommended Pairing (LTV 80%):", properties: ['Dimm', 'Riri', 'Meridin'], type: 'and' }; }
-                else if (loanEligibility > 2000000) { recommendation = { text: "Recommended Choice (LTV 80%):", special: true, properties: ['Weizia', 'Dimm', 'Meridin'] }; }
-                else if (loanEligibility > 1500000) { recommendation = { text: "Recommended Property (LTV 70%):", properties: ['Abby'], type: 'single' }; }
-                else if (loanEligibility > 1000000) { recommendation = { text: "Recommended Choice (LTV 80%):", properties: ['Riri', 'Weizia', 'Ferra'], type: 'or' }; }
-                else { recommendation.text = "Increase loan eligibility for specific recommendations."; }
-            } else if (nationality === 'malaysian') {
+            if (nationality === 'malaysian') {
                 consultantLtvWrapper.style.display = 'block';
                 const ltv = document.querySelector('input[name="consultantLtv"]:checked').value;
-                if (loanEligibility > 2000000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Pairing (LTV 90%):", properties: ['Weizia', 'Riri', 'Soya A'], type: 'and' }; } 
-                    else { recommendation = { text: "Recommended Pairing (LTV 70%):", properties: ['Dimm', 'Soya A'], type: 'and' }; }
-                } else if (loanEligibility > 1000000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", special: true, properties: ['Weizia', 'Riri', 'Meridin'] }; } 
-                    else { recommendation = { text: "Recommended Property (LTV 70%):", properties: ['Dimm'], type: 'single' }; }
-                } else if (loanEligibility > 800000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Property (LTV 90%):", properties: ['Ferra'], type: 'single' }; } 
-                    else { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Pinna'], type: 'or' }; }
-                } else if (loanEligibility > 500000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Una', 'Nexa', 'Sora'], type: 'or' }; } 
-                    else { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Lara'], type: 'or' }; }
-                } else if (loanEligibility > 400000) {
-                    if (ltv === '90') { recommendation = { text: "Recommended Choice (LTV 90%):", properties: ['Yuna', 'Eva'], type: 'or' }; }
-                     else { recommendation = { text: "Recommended Choice (LTV 70%):", properties: ['Soya A', 'Lara'], type: 'or' }; }
-                } else {
-                    recommendation = { text: "Recommendation:", properties:[], textOnly: "Talk to your consultant how to increase LE"};
+                if (ltv === '90') {
+                    if (loanEligibility > 2000000) recommendation = { text: "Recommended Pairing (90%):", properties: ['Abby', 'Zizie'], type: 'and' };
+                    else if (loanEligibility > 1000000) recommendation = { text: "Recommended Choice (90%):", properties: ['Ferra', 'Dimm'], type: 'or' };
+                    else if (loanEligibility > 800000) recommendation = { text: "Recommended Unit (90%):", properties: ['Ferra'], type: 'single' };
+                    else if (loanEligibility > 500000) recommendation = { text: "Recommended Choice (90%):", properties: ['Eva', 'Sora'], type: 'or' };
+                    else if (loanEligibility >= 400000) recommendation = { text: "Recommended Unit (90%):", properties: ['Eva'], type: 'single' };
+                    else recommendation.textOnly = "Talk to your consultant how to increase LE";
+                } else { // 70%
+                    if (loanEligibility > 2000000) recommendation = { text: "Recommended Pairing (70%):", properties: ['Dimm', 'Lara'], type: 'and' };
+                    else if (loanEligibility > 1000000) recommendation = { text: "Recommended Unit (70%):", properties: ['Dimm'], type: 'single' };
+                    else if (loanEligibility >= 500000) recommendation = { text: "Recommended Choice (70%):", properties: ['Soya A', 'Lara'], type: 'or' };
+                    else recommendation = { text: "Recommended Unit (70%):", properties: ['Lara'], type: 'single' };
                 }
+            } else { // Singaporean
+                consultantLtvWrapper.style.display = 'none';
+                if (loanEligibility > 3000000) recommendation = { text: "Triple Pairing Recommended (80%):", properties: ['Dimm', 'Abby', 'Meridin'], type: 'and' };
+                else if (loanEligibility > 2000000) recommendation = { text: "Pairing Recommended (80%):", properties: ['Abby', 'Ferra'], type: 'and' };
+                else if (loanEligibility > 1500000) recommendation = { text: "Top Choice (70%):", properties: ['Abby'], type: 'single' };
+                else if (loanEligibility > 1000000) recommendation = { text: "Smart Choice (80%):", properties: ['Ferra', 'Zizie'], type: 'or' };
             }
             displayConsultantRecommendation(recommendation);
         }
 
-        function displayConsultantRecommendation(recommendation) {
+        function displayConsultantRecommendation(rec) {
             consultantRecommendationResult.innerHTML = '';
-            
-            if(recommendation.textOnly) {
-                consultantRecommendationResult.innerHTML = `<div class="mt-4 p-4 bg-yellow-100 rounded-lg text-center"><p class="text-xl font-semibold text-red-800">${recommendation.textOnly}</p></div>`;
-                pairingSpotlight.classList.add('hidden');
+            if(rec.textOnly) {
+                consultantRecommendationResult.innerHTML = `<div class="mt-4 p-4 bg-yellow-100 rounded-lg text-center"><p class="text-xl font-semibold text-red-800">${rec.textOnly}</p></div>`;
                 return;
             }
-
-            let content = `<h4 class="text-lg font-semibold text-gray-800 inline-block p-2 rounded-md bg-green-100 text-green-800 font-bold">${recommendation.text}</h4>`;
+            let content = `<h4 class="text-lg font-bold p-2 bg-green-50 text-green-800 rounded inline-block mb-4">${rec.text}</h4>`;
+            const propSpan = (p) => `<span class="text-2xl text-red-700 font-extrabold p-2 bg-red-50 rounded mx-1">${p}</span>`;
             
-            const getPropSpan = (propName) => {
-                const propData = propertyData.find(p => p.name.toUpperCase() === propName.toUpperCase());
-                const color = propData ? 'text-red-700 font-bold' : 'text-gray-800 font-bold';
-                return `<span class="text-2xl ${color} p-2 bg-red-50 rounded-md">${propName}</span>`;
-            };
-
-            if (recommendation.properties.length > 0) {
-                let propertyLinks;
-                if (recommendation.special) {
-                    // Handle special cases like Weizia or (Dimm and Meridin) or (Weizia or Riri and Meridin)
-                    let operator = (recommendation.properties.includes('Riri') && recommendation.properties.includes('Meridin')) ? '&' : 'OR';
-                     propertyLinks = `
-                        ${getPropSpan(recommendation.properties[0])}
-                        <span class="mx-2 sm:mx-4 text-gray-500 font-bold text-xl">OR</span>
-                        <span class="flex items-center gap-2">
-                           (${getPropSpan(recommendation.properties[1])}
-                           <span class="text-gray-500 font-bold text-2xl">${operator}</span>
-                           ${getPropSpan(recommendation.properties[2])})
-                        </span>
-                    `;
-                } else {
-                    let separator = '';
-                    if (recommendation.type === 'and') separator = `<span class="mx-2 sm:mx-4 text-gray-500 font-bold text-2xl">&</span>`;
-                    else if (recommendation.type === 'or') separator = `<span class="mx-2 sm:mx-4 text-gray-500 font-bold text-xl">OR</span>`;
-                    propertyLinks = recommendation.properties.map(getPropSpan).join(separator);
-                }
-                content += `<div class="mt-4 p-4 bg-yellow-100 rounded-lg flex items-center justify-center flex-wrap gap-y-2">${propertyLinks}</div>`;
+            if (rec.properties.length > 0) {
+                let sep = rec.type === 'and' ? ' & ' : ' OR ';
+                let list = rec.properties.map(propSpan).join(`<span class="text-gray-400 font-bold">${sep}</span>`);
+                content += `<div class="flex flex-wrap items-center justify-center p-6 bg-yellow-50 rounded-xl border border-yellow-100 shadow-sm">${list}</div>`;
             }
             consultantRecommendationResult.innerHTML = content;
-
-            // Show or hide the pairing spotlight
-            if (recommendation.type === 'and' || recommendation.special) {
-                pairingSpotlight.classList.remove('hidden');
-            } else {
-                pairingSpotlight.classList.add('hidden');
-            }
-        }
-        
-        function populateArpProjects() {
-            arpProjectSelect.innerHTML = '<option value="" disabled selected>Select a Project</option>';
-            const arpProperties = propertyData.filter(p => p.arp || (p.nettPrice && p.nettPrice > 0));
-            arpProperties.forEach(p => {
-                const option = document.createElement('option');
-                option.value = p.name;
-                option.textContent = p.name;
-                arpProjectSelect.appendChild(option);
-            });
         }
 
-        function calculateARP() {
-            const selectedProjectName = arpProjectSelect.value;
-            if (!selectedProjectName) return;
+        function updateARP() {
+            const price = parseFloat(arpProjectSelect.value) || 0;
+            const displayPrice = formatCurrency(price, false);
+            const mortgage = calculateMonthlyInstallment(price * 0.9, 3.7, 35);
+            
+            document.getElementById('arpDisplayPrice').textContent = displayPrice;
+            document.getElementById('arpMonthlyMortgage').textContent = formatCurrency(mortgage);
+            document.getElementById('arpEcfRebate').textContent = formatCurrency(price * 0.03, false);
+            
+            const pkg = (id, rate) => {
+                const returnMonthly = (price * rate) / 12;
+                const cashflow = returnMonthly - mortgage;
+                const returnAnnual = returnMonthly * 12;
+                const m40Monthly = (price * 0.03) / 12;
+                const gain = returnMonthly - m40Monthly;
 
-            const project = propertyData.find(p => p.name === selectedProjectName);
-            const formatMYR = (num) => `RM ${num.toLocaleString('en-US', { maximumFractionDigits: 0 })}/m`;
-            const arpT1Label = document.getElementById('arpT1Label');
-
-            // Reset labels to default first
-            arpM40Label.textContent = 'M40 Package (3% Yield):';
-            arpT20Label.textContent = 'T20 Package (4% Yield):';
-            arpT1Label.textContent = 'T1 Package (6% Yield):';
-
-            if (project.arpType === 'fixed') {
-                const fixedRentalText = project.fixedRental ? `${formatMYR(project.fixedRental)} (Fixed)` : 'N/A (Fixed)';
-                arpM40Display.textContent = 'N/A';
-                arpT20Display.textContent = 'N/A';
-                arpT1Display.textContent = fixedRentalText;
-                arpT1Label.textContent = 'T1 Package:';
-            } else { // Assumes 'percentage'
-                 const price = project.nettPrice || 0;
-                 if (price === 0) {
-                     const notApplicable = 'N/A';
-                     arpM40Display.textContent = notApplicable;
-                     arpT20Display.textContent = notApplicable;
-                     arpT1Display.textContent = notApplicable;
-                     return;
-                 }
-                const m40_yield = (price * 0.03) / 12;
-                const t20_yield = (price * 0.04) / 12;
-                let t1_yield;
-
-                if (project.name === 'VIANA') {
-                    t1_yield = (price * 0.07) / 12;
-                    arpT1Label.textContent = 'T1 Package (7% Yield):';
+                document.getElementById(`${id}_basis`).textContent = `Based on nett price of ${displayPrice}`;
+                document.getElementById(`${id}_monthly`).textContent = formatCurrency(returnMonthly);
+                if(document.getElementById(`${id}_annual`)) document.getElementById(`${id}_annual`).textContent = formatCurrency(returnAnnual, false);
+                
+                const cfEl = document.getElementById(`${id}_cashflow`) || document.getElementById(`${id}_gain`);
+                if(id === 'm40') {
+                    cfEl.textContent = formatCurrency(cashflow);
+                    cfEl.className = `val-amount ${cashflow >= 0 ? 'cashflow-positive' : 'cashflow-negative'}`;
                 } else {
-                    t1_yield = (price * 0.06) / 12;
+                    cfEl.textContent = `+${formatCurrency(gain)}`;
                 }
+            };
 
-                arpM40Display.textContent = formatMYR(m40_yield);
-                arpT20Display.textContent = formatMYR(t20_yield);
-                arpT1Display.textContent = formatMYR(t1_yield);
-            }
+            pkg('m40', 0.03); pkg('t20', 0.04); pkg('t1', 0.06); pkg('ecf', 0.07);
         }
 
-        // --- EVENT LISTENERS ---
+        // --- LISTENERS ---
         ageSlider.addEventListener('input', (e) => { ageValue.textContent = e.target.value; updateFocusArea(e.target.value); });
-        portfolioSelector.addEventListener('change', updateVision);
-        loanEligibilitySlider.addEventListener('input', (e) => { loanEligibilityValue.textContent = parseInt(e.target.value).toLocaleString('en-US'); recommendProperties(); });
-        ltvSelector.addEventListener('change', recommendProperties);
-        
-        // Consultant Recommender Listeners
+        loanEligibilityInput.addEventListener('input', recommendProperties);
+        [clientAgeInput, interestRateInput, loanTenureInput].forEach(el => el.addEventListener('input', recommendProperties));
+        document.querySelectorAll('input[name="finderLtv"]').forEach(el => el.addEventListener('change', recommendProperties));
         nationalitySelector.addEventListener('change', consultantRecommend);
         consultantLoanEligibilitySlider.addEventListener('input', (e) => { consultantLoanEligibilityValue.textContent = parseInt(e.target.value).toLocaleString('en-US'); consultantRecommend(); });
         consultantLtvSelector.addEventListener('change', consultantRecommend);
-        
-        // ARP Calculator Listener
-        arpProjectSelect.addEventListener('change', calculateARP);
+        arpProjectSelect.addEventListener('change', updateARP);
 
-        // --- INITIALIZATION ---
-        createTimeline();
-        updateFocusArea(ageSlider.value);
-        updateVision();
-        loanEligibilityValue.textContent = parseInt(loanEligibilitySlider.value).toLocaleString('en-US');
-        recommendProperties();
-        consultantLoanEligibilityValue.textContent = parseInt(consultantLoanEligibilitySlider.value).toLocaleString('en-US');
-        consultantRecommend();
-        populateArpProjects();
+        // --- INIT ---
+        arpProjects.sort((a,b)=>a.name.localeCompare(b.name)).forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.price; opt.textContent = p.name;
+            arpProjectSelect.appendChild(opt);
+        });
+
+        createTimeline(); updateFocusArea(ageSlider.value); recommendProperties(); consultantRecommend();
     });
     </script>
 </body>
 </html>
-
