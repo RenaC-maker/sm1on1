@@ -169,7 +169,7 @@
 <body class="p-4 sm:p-6 md:p-8">
 
     <div class="max-w-7xl mx-auto">
-        <!-- Section 1: Header -->
+        <!-- Header -->
         <div class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-bold main-title">Your Personalized Property Roadmap</h1>
             <p class="text-gray-600 mt-2">Aligning Your Age with Your Financial Future</p>
@@ -209,10 +209,10 @@
             </div>
         </div>
 
-        <!-- Consultant Finder Section -->
+        <!-- Consultant Recommender -->
         <div class="card mt-8">
             <h2 class="text-2xl font-bold main-title mb-2 text-center">Consultant Recommender</h2>
-            <p class="text-center text-gray-600 mb-6">Strategic logic updated based on latest criteria.</p>
+            <p class="text-center text-gray-600 mb-6">Strategic logic updated based on latest pairing criteria.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 items-start">
                 <div>
@@ -236,10 +236,10 @@
                 </div>
             </div>
 
-            <div id="consultantRecommendationResult" class="mt-6 pt-6 border-t"></div>
+            <div id="consultantRecommendationResult" class="mt-6 pt-6 border-t text-center"></div>
         </div>
 
-        <!-- Property Finder Section -->
+        <!-- Property Opportunity Finder -->
         <div class="card mt-8">
             <h2 class="text-2xl font-bold main-title mb-2 text-center">Property Opportunity Finder</h2>
             <p class="text-center text-gray-600 mb-6">Find suitable properties based on your financial capacity.</p>
@@ -274,7 +274,7 @@
             <div id="propertyRecommendations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
 
-        <!-- NEW REDESIGNED ARP Section -->
+        <!-- ARP Section -->
         <div class="arp-calc-container mt-8">
             <h2 class="arp-title">ARP & Mortgage Calculator</h2>
             
@@ -296,9 +296,8 @@
                 </div>
             </div>
 
-            <div class="projection-header">
+            <div class="projection-header text-center mb-8">
                 <h2 class="text-2xl font-extrabold text-gray-800">ARP Rental Projection</h2>
-                <p class="text-gray-500">Visualize the potential rental yield difference across packages.</p>
             </div>
 
             <div class="nett-price-display">
@@ -307,9 +306,8 @@
             </div>
 
             <div class="projection-grid">
-                <!-- M40 Card -->
                 <div class="projection-card">
-                    <h3>M40 Package: 3% ARP Return</h3>
+                    <h3>M40 Package: 3% ARP</h3>
                     <span class="basis-text" id="m40_basis">Based on nett price</span>
                     <hr>
                     <div class="val-label">Monthly Return</div>
@@ -319,22 +317,20 @@
                     <div id="m40_cashflow" class="val-amount">RM 0.00</div>
                 </div>
 
-                <!-- T20 Card -->
                 <div class="projection-card">
-                    <h3>T20 Package: 4% ARP Return</h3>
+                    <h3>T20 Package: 4% ARP</h3>
                     <span class="basis-text" id="t20_basis">Based on nett price</span>
                     <hr>
                     <div class="val-label">Monthly Return</div>
                     <div id="t20_monthly" class="val-amount">RM 0.00</div>
                     <hr>
-                    <div class="val-label">Monthly Cashflow Gain</div>
+                    <div class="val-label">Monthly Gain vs M40</div>
                     <div id="t20_gain" class="val-amount cashflow-positive">+RM 0.00</div>
                 </div>
 
-                <!-- T1 Card -->
                 <div class="projection-card highlight">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider">Premium</div>
-                    <h3>T1 Package: 6% ARP Return</h3>
+                    <h3>T1 Package: 6% ARP</h3>
                     <span class="basis-text" id="t1_basis">Based on nett price</span>
                     <hr>
                     <div class="val-label">Monthly Return</div>
@@ -342,14 +338,13 @@
                     <div class="val-label">Annual Return</div>
                     <div id="t1_annual" class="val-amount">RM 0.00</div>
                     <hr>
-                    <div class="val-label">Monthly Cashflow Gain</div>
+                    <div class="val-label">Monthly Gain vs M40</div>
                     <div id="t1_gain" class="val-amount cashflow-positive">+RM 0.00</div>
                 </div>
 
-                <!-- ECF Card -->
                 <div class="projection-card highlight">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider">Exclusive</div>
-                    <h3>ECF Package: 7% ARP Return</h3>
+                    <h3>ECF Package: 7% ARP</h3>
                     <span class="basis-text" id="ecf_basis">Based on nett price</span>
                     <hr>
                     <div class="val-label">Monthly Return</div>
@@ -357,7 +352,7 @@
                     <div class="val-label">Annual Return</div>
                     <div id="ecf_annual" class="val-amount">RM 0.00</div>
                     <hr>
-                    <div class="val-label">Monthly Cashflow Gain</div>
+                    <div class="val-label">Monthly Gain vs M40</div>
                     <div id="ecf_gain" class="val-amount cashflow-positive">+RM 0.00</div>
                 </div>
             </div>
@@ -374,48 +369,38 @@
         </div>
 
         <div class="mt-8 text-center text-xs text-gray-400 pb-12">
-            Disclaimer: Figures provided are for illustrative purposes and based on developer representations.
+            Disclaimer: Figures provided are for illustrative purposes and do not constitute a guarantee.
         </div>
     </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // --- DATA ---
+        // MERIDIN removed from finder data as per request
         const propertyData = [
-            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, status: 'UC', nettPrice: 460000 },
-            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, status: 'UC', nettPrice: 490000 },
-            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, status: 'UC', nettPrice: 350000 },
-            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: 500, cashflow70: 200, cashback90: 193000, cashback70: 0, status: 'Completed', nettPrice: 685000 },
-            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, status: 'UC', nettPrice: 500000 },
-            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, status: 'UC', nettPrice: 580000 },
-            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, status: 'UC', nettPrice: 488000 },
-            { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, status: 'UC', nettPrice: 465000 },
-            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, status: 'Completed', nettPrice: 618000 },
-            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -90000, status: 'UC', nettPrice: 863296 },
-            { name: 'WEI ZIAA', loanRange: [800000, 1000000], cashflow90: -500, cashflow70: 700, cashback90: 221000, cashback70: -35000, status: 'Completed', nettPrice: 966010 },
-            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, status: 'Completed', nettPrice: 748872 },
-            { name: 'YUNA', loanRange: [200000, 400000], cashflow90: 200, cashflow70: 500, cashback90: 85000, cashback70: -20000, status: 'Completed', nettPrice: 480000 },
-            { name: 'DIMM', loanRange: [800000, 1000000], cashflow90: 350, cashflow70: 1500, cashback90: 210000, cashback70: -70000, status: 'Completed', nettPrice: 949658 },
-            { name: 'ZIZIE', loanRange: [600000, 800000], cashflow90: 100, cashflow70: 350, cashback90: 130000, cashback70: -70000, status: 'UC', nettPrice: 800000 },
-            { name: 'MERIDIN', loanRange: [1000000, 5000000], cashflow90: 0, cashflow70: 0, cashback90: 0, cashback70: 0, status: 'Completed', nettPrice: 1000000 }
-        ];
-
-        const arpProjects = [
-            { name: 'Ana, Johor', price: 361000 }, { name: 'Tessa, Puchong', price: 340747 },
-            { name: 'Una, Cyberjaya', price: 463770 }, { name: 'Taylor, Genting', price: 265240 },
-            { name: 'Sora, Maluri', price: 403093 }, { name: 'Eva, Kepong', price: 359786 },
-            { name: 'Lara, Bangsar South', price: 313480 }, { name: 'Yuna, Nilai', price: 223240 },
-            { name: 'Riri, Kuala Lumpur', price: 863296 }, { name: 'Dimm, Damansara', price: 949658 },
-            { name: 'Abby, Kuala Lumpur', price: 748872 }, { name: 'Diana, Johor Bahru', price: 530000 },
-            { name: 'Wei Ziaa, Bukit Jalil', price: 966010 }, { name: 'Ferra, Penang', price: 685000 },
-            { name: 'Zizie, Maluri', price: 800000 }
+            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, nettPrice: 200000 },
+            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, nettPrice: 400000 },
+            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, nettPrice: 450000 },
+            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, nettPrice: 350000 },
+            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: 500, cashflow70: 200, cashback90: 193000, cashback70: 0, nettPrice: 680000 },
+            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, nettPrice: 500000 },
+            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, nettPrice: 580000 },
+            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, nettPrice: 488000 },
+            { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, nettPrice: 465000 },
+            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, nettPrice: 618000 },
+            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -90000, nettPrice: 780000 },
+            { name: 'WEI ZIAA', loanRange: [800000, 1000000], cashflow90: -200, cashflow70: 700, cashback90: 221000, cashback70: -35000, nettPrice: 950000 },
+            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, nettPrice: 1350000 },
+            { name: 'YUNA', loanRange: [200000, 400000], cashflow90: 200, cashflow70: 500, cashback90: 85000, cashback70: -20000, nettPrice: 450000 },
+            { name: 'DIMM', loanRange: [800000, 1000000], cashflow90: 350, cashflow70: 1500, cashback90: 210000, cashback70: -70000, nettPrice: 1050638 },
+            { name: 'ZIZIE', loanRange: [600000, 800000], cashflow90: 100, cashflow70: 350, cashback90: 130000, cashback70: -70000, nettPrice: 800000 }
         ];
 
         const ageStages = [
-            { range: [25, 35], displayText: '25-35', stage: 1, title: 'Stage 1: Foundation Building', icon: 'fa-rocket', milestones: 'Min <span class="highlight-value">1 mil</span> portfolio / Min <span class="highlight-value">RM50k</span> savings', actions: [{icon:'fa-wallet', title:'Consolidate debt', desc:'Clean up profile'}, {icon:'fa-building', title:'First acquisition', desc:'Build assets'}] },
-            { range: [36, 45], displayText: '35-45', stage: 2, title: 'Stage 2: Expansion & Strategy', icon: 'fa-chart-line', milestones: 'Min <span class="highlight-value">3 mil</span> portfolio / Min <span class="highlight-value">RM100k</span> savings', actions: [{icon:'fa-scale-balanced', title:'Balance Growth', desc:'LTV optimization'}] },
-            { range: [46, 55], displayText: '45-55', stage: 3, title: 'Stage 3: Wealth Consolidation', icon: 'fa-shield-halved', milestones: 'Min <span class="highlight-value">6 mil</span> portfolio', actions: [{icon:'fa-hand-holding-dollar', title:'Max yield', desc:'Passive focus'}] },
-            { range: [56, 65], displayText: '55-65', stage: 4, title: 'Stage 4: Legacy', icon: 'fa-trophy', milestones: 'Retirement fund / Exit plan', actions: [{icon:'fa-crown', title:'Legacy planning', desc:'Assets distribution'}] }
+            { range: [25, 35], displayText: '25-35', stage: 1, title: 'Stage 1: Foundation Building', icon: 'fa-rocket', milestones: 'Min <span class="highlight-value">1 mil</span> portfolio / Min <span class="highlight-value">RM50k</span> savings', actions: [{icon:'fa-wallet', title:'Consolidate debt', desc:'Clean profile'}, {icon:'fa-building', title:'Acquisition', desc:'Build assets'}] },
+            { range: [36, 45], displayText: '36-45', stage: 2, title: 'Stage 2: Expansion & Strategy', icon: 'fa-chart-line', milestones: 'Min <span class="highlight-value">3 mil</span> portfolio / Min <span class="highlight-value">RM100k</span> savings', actions: [{icon:'fa-scale-balanced', title:'Strategic Mix', desc:'LTV & Cashflow'}] },
+            { range: [46, 55], displayText: '46-55', stage: 3, title: 'Stage 3: Consolidation', icon: 'fa-shield-halved', milestones: 'Min <span class="highlight-value">6 mil</span> portfolio', actions: [{icon:'fa-hand-holding-dollar', title:'Passive focus', desc:'Yield max'}] },
+            { range: [56, 65], displayText: '56-65', stage: 4, title: 'Stage 4: Legacy', icon: 'fa-trophy', milestones: 'Retirement fund / legacy planning', actions: [{icon:'fa-crown', title:'Exit plan', desc:'Preserve wealth'}] }
         ];
 
         // --- DOM ELEMENTS ---
@@ -482,13 +467,13 @@
             filtered.forEach(p => {
                 const cashflow = ltv === 0.9 ? p.cashflow90 : p.cashflow70;
                 const cashback = ltv === 0.9 ? p.cashback90 : p.cashback70;
-                const inst = calculateMonthlyInstallment((p.nettPrice || p.loanRange[1]) * ltv, parseFloat(interestRateInput.value), parseInt(loanTenureInput.value));
+                const inst = calculateMonthlyInstallment((p.nettPrice) * ltv, parseFloat(interestRateInput.value), parseInt(loanTenureInput.value));
                 recommendationsContainer.innerHTML += `
                     <div class="bg-gray-50 p-4 rounded-lg border">
                         <h4 class="font-bold text-xl main-title mb-2">${p.name}</h4>
                         <div class="space-y-2 text-sm">
                             <div class="flex justify-between"><span>Est. Installment:</span><span class="font-bold text-gray-800">${formatCurrency(inst)}</span></div>
-                            <div class="flex justify-between"><span>Est. Cashflow:</span><span class="font-bold ${cashflow >= 0 ? 'text-green-600' : 'text-red-600'}">${formatCurrency(cashflow)}</span></div>
+                            <div class="flex justify-between"><span>Est. Net Cashflow:</span><span class="font-bold ${cashflow >= 0 ? 'text-green-600' : 'text-red-600'}">${formatCurrency(cashflow)}</span></div>
                             <div class="flex justify-between"><span>Est. Cashback:</span><span class="font-bold text-blue-600">${formatCurrency(cashback, false)}</span></div>
                         </div>
                     </div>`;
@@ -522,6 +507,7 @@
                 else if (loanEligibility > 2000000) recommendation = { text: "Pairing Recommended (80%):", properties: ['Abby', 'Ferra'], type: 'and' };
                 else if (loanEligibility > 1500000) recommendation = { text: "Top Choice (70%):", properties: ['Abby'], type: 'single' };
                 else if (loanEligibility > 1000000) recommendation = { text: "Smart Choice (80%):", properties: ['Ferra', 'Zizie'], type: 'or' };
+                else recommendation.textOnly = "Increase loan eligibility for specific recommendations.";
             }
             displayConsultantRecommendation(recommendation);
         }
@@ -546,7 +532,7 @@
         function updateARP() {
             const price = parseFloat(arpProjectSelect.value) || 0;
             const displayPrice = formatCurrency(price, false);
-            const mortgage = calculateMonthlyInstallment(price * 0.9, 3.7, 35);
+            const mortgage = calculateMonthlyInstallment(price * 1.0, 3.7, 35);
             
             document.getElementById('arpDisplayPrice').textContent = displayPrice;
             document.getElementById('arpMonthlyMortgage').textContent = formatCurrency(mortgage);
@@ -585,8 +571,19 @@
         consultantLtvSelector.addEventListener('change', consultantRecommend);
         arpProjectSelect.addEventListener('change', updateARP);
 
-        // --- INIT ---
-        arpProjects.sort((a,b)=>a.name.localeCompare(b.name)).forEach(p => {
+        // --- INITIALIZATION ---
+        const arpProjectsList = [
+            { name: 'Ana, Johor', price: 361000 }, { name: 'Tessa, Puchong', price: 340747 },
+            { name: 'Una, Cyberjaya', price: 463770 }, { name: 'Taylor, Genting', price: 265240 },
+            { name: 'Sora, Maluri', price: 403093 }, { name: 'Eva, Kepong', price: 400000 },
+            { name: 'Lara, Bangsar South', price: 450000 }, { name: 'Yuna, Nilai', price: 450000 },
+            { name: 'Riri, Kuala Lumpur', price: 780000 }, { name: 'Dimm, Damansara', price: 1050638 },
+            { name: 'Abby, Kuala Lumpur', price: 1350000 }, { name: 'Diana, Johor Bahru', price: 530000 },
+            { name: 'Wei Ziaa, Bukit Jalil', price: 950000 }, { name: 'Ferra, Penang', price: 680000 },
+            { name: 'Zizie, Maluri', price: 800000 }, { name: 'Nexa, Cheras', price: 500000 }
+        ];
+
+        arpProjectsList.sort((a,b)=>a.name.localeCompare(b.name)).forEach(p => {
             const opt = document.createElement('option');
             opt.value = p.price; opt.textContent = p.name;
             arpProjectSelect.appendChild(opt);
