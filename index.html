@@ -217,16 +217,26 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 items-start">
                 <div>
                     <label class="font-bold text-gray-700 mb-2 block">Client Nationality</label>
-                    <div id="nationalitySelector" class="flex justify-start btn-group rounded-lg overflow-hidden">
-                        <input type="radio" id="natMalaysian" name="nationality" value="malaysian" checked><label for="natMalaysian" class="rounded-l-lg">Malaysian</label>
-                        <input type="radio" id="natSingaporean" name="nationality" value="singaporean"><label for="natSingaporean" class="rounded-r-lg">Singaporean / Others</label>
+                    <div id="nationalitySelector" class="flex justify-start btn-group rounded-lg overflow-hidden w-full">
+                        <input type="radio" id="natMalaysian" name="nationality" value="malaysian" checked><label for="natMalaysian" class="rounded-l-lg flex-1 text-center">Malaysian</label>
+                        <input type="radio" id="natSingaporean" name="nationality" value="singaporean"><label for="natSingaporean" class="rounded-r-lg flex-1 text-center">Singaporean / Others</label>
                     </div>
                 </div>
-                <div>
+
+                <div id="employmentWrapper">
+                    <label class="font-bold text-gray-700 mb-2 block">Employment Type</label>
+                    <div id="employmentSelector" class="flex justify-start btn-group rounded-lg overflow-hidden w-full">
+                        <input type="radio" id="empNonGov" name="employment" value="nongov" checked><label for="empNonGov" class="rounded-l-lg flex-1 text-center">Non-Government</label>
+                        <input type="radio" id="empGov" name="employment" value="gov"><label for="empGov" class="rounded-r-lg flex-1 text-center">Government Servant</label>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-2 mt-4">
                     <label for="consultantLoanEligibilitySlider" class="font-bold text-gray-700">Client's Max Loan Eligibility (RM)</label>
                     <input type="range" id="consultantLoanEligibilitySlider" min="200000" max="5000000" value="1000000" step="50000" class="w-full mt-2">
                     <p class="text-center text-xl font-bold main-title mt-1">RM <span id="consultantLoanEligibilityValue">1,000,000</span></p>
                 </div>
+                
                 <div id="consultantLtvWrapper" class="md:col-span-2 text-center">
                      <label class="font-bold text-gray-700 mb-2 block">Margin of Finance (LTV)</label>
                     <div id="consultantLtvSelector" class="flex justify-center btn-group rounded-lg overflow-hidden">
@@ -239,7 +249,7 @@
             <div id="consultantRecommendationResult" class="mt-6 pt-6 border-t text-center"></div>
         </div>
 
-        <!-- Property Opportunity Finder -->
+        <!-- Property Finder Section -->
         <div class="card mt-8">
             <h2 class="text-2xl font-bold main-title mb-2 text-center">Property Opportunity Finder</h2>
             <p class="text-center text-gray-600 mb-6">Find suitable properties based on your financial capacity.</p>
@@ -376,24 +386,20 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // --- DATA ---
-        // MERIDIN removed from finder data as per request
         const propertyData = [
-            { name: 'VIVY', loanRange: [0, 200000], cashflow90: 190, cashflow70: 420, cashback90: 53000, cashback70: 0, nettPrice: 200000 },
-            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, nettPrice: 400000 },
-            { name: 'LARA', loanRange: [200000, 400000], cashflow90: 350, cashflow70: 350, cashback90: 108000, cashback70: 3000, nettPrice: 450000 },
-            { name: 'TESSA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 280, cashback90: 46000, cashback70: -39000, nettPrice: 350000 },
-            { name: 'FERRA', loanRange: [400000, 600000], cashflow90: 500, cashflow70: 200, cashback90: 193000, cashback70: 0, nettPrice: 680000 },
-            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, nettPrice: 500000 },
-            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, nettPrice: 580000 },
-            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, nettPrice: 488000 },
-            { name: 'UNA', loanRange: [400000, 600000], cashflow90: 450, cashflow70: 800, cashback90: 40000, cashback70: -70000, nettPrice: 465000 },
-            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, nettPrice: 618000 },
-            { name: 'RIRI', loanRange: [600000, 800000], cashflow90: 300, cashflow70: 1000, cashback90: 100000, cashback70: -90000, nettPrice: 780000 },
-            { name: 'WEI ZIAA', loanRange: [800000, 1000000], cashflow90: -200, cashflow70: 700, cashback90: 221000, cashback70: -35000, nettPrice: 950000 },
-            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, nettPrice: 1350000 },
-            { name: 'YUNA', loanRange: [200000, 400000], cashflow90: 200, cashflow70: 500, cashback90: 85000, cashback70: -20000, nettPrice: 450000 },
-            { name: 'DIMM', loanRange: [800000, 1000000], cashflow90: 350, cashflow70: 1500, cashback90: 210000, cashback70: -70000, nettPrice: 1050638 },
-            { name: 'ZIZIE', loanRange: [600000, 800000], cashflow90: 100, cashflow70: 350, cashback90: 130000, cashback70: -70000, nettPrice: 800000 }
+            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, status: 'UC', nettPrice: 400000 },
+            { name: 'MARIE', loanRange: [200000, 400000], cashflow90: 130, cashflow70: 300, cashback90: 39000, cashback70: -30000, status: 'UC', nettPrice: 355000 },
+            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, status: 'UC', nettPrice: 500000 },
+            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, status: 'UC', nettPrice: 580000 },
+            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, status: 'UC', nettPrice: 488000 },
+            { name: 'DORA', loanRange: [400000, 600000], cashflow90: 250, cashflow70: 600, cashback90: 130000, cashback70: -20000, status: 'UC', nettPrice: 450000 },
+            { name: 'RINN', loanRange: [400000, 600000], cashflow90: 230, cashflow70: 330, cashback90: 70000, cashback70: -45000, status: 'UC', nettPrice: 460000 },
+            { name: 'SABRINA', loanRange: [400000, 600000], cashflow90: 0, cashflow70: 500, cashback90: 85000, cashback70: -48000, status: 'UC', nettPrice: 500000 },
+            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, status: 'Completed', nettPrice: 618000 },
+            { name: 'WEI ZIAA', loanRange: [800000, 1000000], cashflow90: -200, cashflow70: 700, cashback90: 221000, cashback70: -35000, status: 'Completed', nettPrice: 950000 },
+            { name: 'FERRA', loanRange: [800000, 1000000], cashflow90: 300, cashflow70: 500, cashback90: 200000, cashback70: 0, status: 'Completed', nettPrice: 900000 },
+            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, status: 'Completed', nettPrice: 1350000 },
+            { name: 'DIMM', loanRange: [800000, 1000000], cashflow90: 350, cashflow70: 1500, cashback90: 210000, cashback70: -70000, status: 'Completed', nettPrice: 1050638 }
         ];
 
         const ageStages = [
@@ -416,6 +422,7 @@
         const loanTenureInput = document.getElementById('loanTenure');
         
         const nationalitySelector = document.getElementById('nationalitySelector');
+        const employmentWrapper = document.getElementById('employmentWrapper');
         const consultantLoanEligibilitySlider = document.getElementById('consultantLoanEligibilitySlider');
         const consultantLoanEligibilityValue = document.getElementById('consultantLoanEligibilityValue');
         const consultantLtvWrapper = document.getElementById('consultantLtvWrapper');
@@ -480,48 +487,260 @@
             });
         }
 
+        // --- NEW: Dynamic Government Strategy Template Generator ---
+        function generateGovStrategyHTML(loanEligibility) {
+            if (loanEligibility >= 1000000) {
+                // Return >1 Million Template
+                return `
+                <div class="bg-white border-2 border-red-100 rounded-xl overflow-hidden mt-4 text-left">
+                    <div class="bg-red-50 py-4 px-6 text-center border-b border-red-100">
+                        <h3 class="text-xl font-extrabold text-red-700">Strategi untuk Gomen LPPSA+ Bank Loan</h3>
+                        <p class="text-gray-600 font-medium">(Kelayakan pinjaman atas RM1,000,000)</p>
+                    </div>
+                    <div class="flex flex-col lg:flex-row">
+                        <div class="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Step 1 -->
+                            <div class="text-center relative">
+                                <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">1</div>
+                                <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota Pertama<br><span class="text-xs font-normal text-gray-500">90%-100%</span></div>
+                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna Pinjaman bank<br><span class="text-[10px] font-normal text-gray-500">Rumah yang sudah siap / hampir siap</span></div>
+                                <div class="bg-yellow-100 p-3 rounded font-bold text-yellow-800 mb-4 shadow-sm">ESTEE<br><span class="text-xs font-normal text-yellow-600">Jalan Ampang KL</span></div>
+                                <div class="bg-slate-800 text-white text-[11px] p-3 rounded text-left space-y-1 shadow-inner">
+                                    <div class="flex justify-between"><span class="text-slate-400">Cashout:</span> <span class="font-bold">RM 360,000</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Hasil sewaan:</span> <span class="font-bold">RM3,500</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-red-400">-RM1,000</span></div>
+                                </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="text-center relative">
+                                <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow"><i class="fas fa-plus text-sm absolute -ml-8 text-gray-400"></i>1</div>
+                                <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">LPPSA<br><span class="text-xs font-normal text-gray-500">100%</span></div>
+                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna LPPSA<br><span class="text-[10px] font-normal text-gray-500">Rumah dalam pembinaan 3 tahun</span></div>
+                                <div class="bg-yellow-100 p-3 rounded font-bold text-yellow-800 mb-4 shadow-sm">RINN<br><span class="text-xs font-normal text-yellow-600">Langkawi</span></div>
+                                <div class="bg-slate-800 text-white text-[11px] p-3 rounded text-left space-y-1 shadow-inner">
+                                    <div class="flex justify-between"><span class="text-slate-400">Cashout:</span> <span class="font-bold">RM128K</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Hasil sewaan:</span> <span class="font-bold">RM7,000</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-green-400">+RM2,500</span></div>
+                                </div>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="text-center relative">
+                                <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">2</div>
+                                <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota ke-2<br><span class="text-xs font-normal text-gray-500">90%</span></div>
+                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna Pinjaman bank<br><span class="text-[10px] font-normal text-gray-500">Rumah yang sudah siap / hampir siap</span></div>
+                                <div class="bg-yellow-100 p-3 rounded font-bold text-yellow-800 mb-4 shadow-sm">FERRA<br><span class="text-xs font-normal text-yellow-600">Batu Ferringhi Penang</span></div>
+                                <div class="bg-slate-800 text-white text-[11px] p-3 rounded text-left space-y-1 shadow-inner">
+                                    <div class="flex justify-between"><span class="text-slate-400">Cashout:</span> <span class="font-bold">RM0</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Hasil sewaan:</span> <span class="font-bold">RM4,300</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-green-400">+RM1,200</span></div>
+                                </div>
+                            </div>
+                            <!-- Step 4 -->
+                            <div class="text-center relative">
+                                <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">3</div>
+                                <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota ke-3<br><span class="text-xs font-normal text-gray-500">70%</span></div>
+                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna Pinjaman bank<br><span class="text-[10px] font-normal text-gray-500">Hartanah yang bagi keuntungan modal</span></div>
+                                <div class="bg-yellow-100 p-3 rounded font-bold text-yellow-800 mb-4 shadow-sm">KAAYAA<br><span class="text-xs font-normal text-yellow-600">Damansara</span></div>
+                                <div class="bg-slate-800 text-white text-[11px] p-3 rounded text-left space-y-1 shadow-inner">
+                                    <div class="flex justify-between"><span class="text-slate-400">Cashout:</span> <span class="font-bold">RM50K</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Hasil sewaan:</span> <span class="font-bold">RM2,000</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-green-400">+RM800</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Summary Sidebar -->
+                        <div class="bg-slate-900 text-white p-6 lg:w-64 flex flex-col justify-center space-y-6 border-t lg:border-t-0 lg:border-l border-slate-700">
+                            <div class="text-center pb-4 border-b border-slate-700">
+                                <h4 class="text-red-500 font-bold text-xs uppercase tracking-wider mb-1">Hasil Selepas Pembelian Hartanah</h4>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-400 uppercase tracking-wide">Jumlah Cashout</p>
+                                <p class="text-2xl font-bold text-yellow-400">RM538K</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-400 uppercase tracking-wide">Jumlah hasil sewaan</p>
+                                <p class="text-2xl font-bold text-yellow-400">RM16,800</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-400 uppercase tracking-wide">Aliran tunai</p>
+                                <p class="text-2xl font-bold text-blue-400">+RM3,500</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-400 uppercase tracking-wide">Modal yang diperlukan</p>
+                                <p class="text-2xl font-bold text-white">RM0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            } else {
+                // Return <1 Million Template (from older screenshot)
+                return `
+                <div class="bg-white border-2 border-red-100 rounded-xl overflow-hidden mt-4 text-left">
+                    <div class="bg-red-50 py-4 px-6 text-center border-b border-red-100">
+                        <h3 class="text-xl font-extrabold text-red-700">Strategi untuk Gomen with LPPSA + Bank Loan</h3>
+                        <p class="text-gray-600 font-medium">(Kelayakan pinjaman bawah RM850K)</p>
+                    </div>
+                    <div class="flex flex-col lg:flex-row">
+                        <div class="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Step 1 -->
+                            <div class="text-center relative">
+                                <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">1</div>
+                                <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota Pertama<br><span class="text-xs font-normal text-gray-500">90%-100%</span></div>
+                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna Pinjaman bank<br><span class="text-[10px] font-normal text-gray-500">Rumah siap / hampir siap</span></div>
+                                <div class="bg-yellow-100 p-3 rounded font-bold text-yellow-800 mb-4 shadow-sm">SABRINA<br><span class="text-xs font-normal text-yellow-600">Penang Island</span></div>
+                                <div class="bg-slate-800 text-white text-[11px] p-3 rounded text-left space-y-1 shadow-inner">
+                                    <div class="flex justify-between"><span class="text-slate-400">Cashout:</span> <span class="font-bold">RM80K</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Sewa:</span> <span class="font-bold">RM2,700</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-green-400">+RM100</span></div>
+                                </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="text-center relative">
+                                <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow"><i class="fas fa-plus text-sm absolute -ml-8 text-gray-400"></i>1</div>
+                                <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">LPPSA<br><span class="text-xs font-normal text-gray-500">100%</span></div>
+                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna LPPSA<br><span class="text-[10px] font-normal text-gray-500">Rumah dalam pembinaan 3 thn</span></div>
+                                <div class="bg-yellow-100 p-3 rounded font-bold text-yellow-800 mb-4 shadow-sm">RINN<br><span class="text-xs font-normal text-yellow-600">Langkawi</span></div>
+                                <div class="bg-slate-800 text-white text-[11px] p-3 rounded text-left space-y-1 shadow-inner">
+                                    <div class="flex justify-between"><span class="text-slate-400">Cashout:</span> <span class="font-bold">RM128K</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Sewa:</span> <span class="font-bold">RM7,000</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-green-400">+RM2,500</span></div>
+                                </div>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="text-center relative">
+                                <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">2</div>
+                                <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota ke-2<br><span class="text-xs font-normal text-gray-500">90%</span></div>
+                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna Pinjaman bank<br><span class="text-[10px] font-normal text-gray-500">Rumah siap / hampir siap</span></div>
+                                <div class="bg-yellow-100 p-3 rounded font-bold text-yellow-800 mb-4 shadow-sm">DORA<br><span class="text-xs font-normal text-yellow-600">Sri Hartamas KL</span></div>
+                                <div class="bg-slate-800 text-white text-[11px] p-3 rounded text-left space-y-1 shadow-inner">
+                                    <div class="flex justify-between"><span class="text-slate-400">Cashout:</span> <span class="font-bold">RM250K</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Sewa:</span> <span class="font-bold">RM3,200</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-red-400">-RM500</span></div>
+                                </div>
+                            </div>
+                            <!-- Step 4 -->
+                            <div class="text-center relative">
+                                <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">3</div>
+                                <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota ke-3<br><span class="text-xs font-normal text-gray-500">70%</span></div>
+                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna Pinjaman bank<br><span class="text-[10px] font-normal text-gray-500">Hartanah capital gain</span></div>
+                                <div class="bg-yellow-100 p-3 rounded font-bold text-yellow-800 mb-4 shadow-sm">KAAYAA<br><span class="text-xs font-normal text-yellow-600">Damansara</span></div>
+                                <div class="bg-slate-800 text-white text-[11px] p-3 rounded text-left space-y-1 shadow-inner">
+                                    <div class="flex justify-between"><span class="text-slate-400">Cashout:</span> <span class="font-bold">RM50K</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Sewa:</span> <span class="font-bold">RM2,000</span></div>
+                                    <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-green-400">+RM800</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Summary Sidebar -->
+                        <div class="bg-slate-900 text-white p-6 lg:w-64 flex flex-col justify-center space-y-6 border-t lg:border-t-0 lg:border-l border-slate-700">
+                            <div class="text-center pb-4 border-b border-slate-700">
+                                <h4 class="text-red-500 font-bold text-xs uppercase tracking-wider mb-1">Hasil Selepas Pembelian</h4>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-400 uppercase tracking-wide">Jumlah Cashout</p>
+                                <p class="text-2xl font-bold text-yellow-400">RM508K</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-400 uppercase tracking-wide">Jumlah Hasil Sewaan</p>
+                                <p class="text-2xl font-bold text-yellow-400">RM14,900</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-400 uppercase tracking-wide">Aliran Tunai Bersih</p>
+                                <p class="text-2xl font-bold text-blue-400">+RM2,900</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-400 uppercase tracking-wide">Modal Diperlukan</p>
+                                <p class="text-2xl font-bold text-white">RM0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        }
+
         function consultantRecommend() {
             const nationality = document.querySelector('input[name="nationality"]:checked').value;
+            const employment = document.querySelector('input[name="employment"]:checked')?.value || 'nongov';
             const loanEligibility = parseInt(consultantLoanEligibilitySlider.value);
-            let recommendation = { text: "Recommendation:", properties: [], type: 'single', textOnly: null };
+            
+            if (nationality === 'malaysian') {
+                employmentWrapper.style.display = 'block';
+            } else {
+                employmentWrapper.style.display = 'none';
+            }
+
+            let recommendation = { text: "", properties: [], type: 'single', textOnly: null, customHTML: null, special: null };
 
             if (nationality === 'malaysian') {
-                consultantLtvWrapper.style.display = 'block';
-                const ltv = document.querySelector('input[name="consultantLtv"]:checked').value;
-                if (ltv === '90') {
-                    if (loanEligibility > 2000000) recommendation = { text: "Recommended Pairing (90%):", properties: ['Abby', 'Zizie'], type: 'and' };
-                    else if (loanEligibility > 1000000) recommendation = { text: "Recommended Choice (90%):", properties: ['Ferra', 'Dimm'], type: 'or' };
-                    else if (loanEligibility > 800000) recommendation = { text: "Recommended Unit (90%):", properties: ['Ferra'], type: 'single' };
-                    else if (loanEligibility > 500000) recommendation = { text: "Recommended Choice (90%):", properties: ['Eva', 'Sora'], type: 'or' };
-                    else if (loanEligibility >= 400000) recommendation = { text: "Recommended Unit (90%):", properties: ['Eva'], type: 'single' };
-                    else recommendation.textOnly = "Talk to your consultant how to increase LE";
-                } else { // 70%
-                    if (loanEligibility > 2000000) recommendation = { text: "Recommended Pairing (70%):", properties: ['Dimm', 'Lara'], type: 'and' };
-                    else if (loanEligibility > 1000000) recommendation = { text: "Recommended Unit (70%):", properties: ['Dimm'], type: 'single' };
-                    else if (loanEligibility >= 500000) recommendation = { text: "Recommended Choice (70%):", properties: ['Soya A', 'Lara'], type: 'or' };
-                    else recommendation = { text: "Recommended Unit (70%):", properties: ['Lara'], type: 'single' };
+                if (employment === 'gov') {
+                    consultantLtvWrapper.style.display = 'none';
+                    // Pass the loanEligibility so it generates the right layout
+                    recommendation.customHTML = generateGovStrategyHTML(loanEligibility);
+                } else {
+                    consultantLtvWrapper.style.display = 'block';
+                    const ltv = document.querySelector('input[name="consultantLtv"]:checked').value;
+                    if (ltv === '90') {
+                        if (loanEligibility >= 2000000) recommendation = { text: "Recommended Pairing (90%):", properties: ['Abby', 'Sabrina', 'Kaaya'], type: 'and' };
+                        else if (loanEligibility >= 1000000) recommendation = { text: "Recommended Choice (90%):", special: 'ferra_dimm_kaaya' };
+                        else if (loanEligibility >= 800000) recommendation = { text: "Recommended Unit (90%):", properties: ['Ferra'], type: 'single' };
+                        else if (loanEligibility >= 600000) recommendation = { text: "Recommended Unit (90%):", properties: ['Dora'], type: 'single' };
+                        else if (loanEligibility >= 500000) recommendation = { text: "Recommended Choice (90%):", properties: ['Sabrina', 'Dora'], type: 'or' };
+                        else if (loanEligibility >= 400000) recommendation = { text: "Recommended Unit (90%):", properties: ['Sabrina'], type: 'single' };
+                        else recommendation.textOnly = "Talk to your consultant how to increase LE";
+                    } else { // 70%
+                        if (loanEligibility >= 2000000) recommendation = { text: "Recommended Pairing (70%):", properties: ['Dimm', 'Marie', 'Kaaya'], type: 'and' };
+                        else if (loanEligibility >= 1000000) recommendation = { text: "Recommended Choice (70%):", special: 'estee_laatinn_marie' };
+                        else if (loanEligibility >= 500000) recommendation = { text: "Recommended Choice (70%):", properties: ['Estee', 'Laatinn', 'Marie'], type: 'or' };
+                        else if (loanEligibility >= 400000) recommendation = { text: "Recommended Choice (70%):", properties: ['Laatinn', 'Marie'], type: 'or' };
+                        else recommendation.textOnly = "Talk to your consultant how to increase LE";
+                    }
                 }
-            } else { // Singaporean
+            } else { // Singaporean / Others
                 consultantLtvWrapper.style.display = 'none';
-                if (loanEligibility > 3000000) recommendation = { text: "Triple Pairing Recommended (80%):", properties: ['Dimm', 'Abby', 'Meridin'], type: 'and' };
-                else if (loanEligibility > 2000000) recommendation = { text: "Pairing Recommended (80%):", properties: ['Abby', 'Ferra'], type: 'and' };
-                else if (loanEligibility > 1500000) recommendation = { text: "Top Choice (70%):", properties: ['Abby'], type: 'single' };
-                else if (loanEligibility > 1000000) recommendation = { text: "Smart Choice (80%):", properties: ['Ferra', 'Zizie'], type: 'or' };
+                if (loanEligibility >= 3000000) recommendation = { text: "Triple Pairing Recommended (80%):", properties: ['Abby', 'Dimm', 'Marie'], type: 'and' };
+                else if (loanEligibility >= 2000000) recommendation = { text: "Pairing Recommended (80%):", properties: ['Ferra', 'Marie'], type: 'and' };
+                else if (loanEligibility >= 1500000) recommendation = { text: "Top Choice (70%):", properties: ['Abby'], type: 'single' };
+                else if (loanEligibility >= 1000000) recommendation = { text: "Smart Choice (80%):", properties: ['Dimm'], type: 'single' };
                 else recommendation.textOnly = "Increase loan eligibility for specific recommendations.";
             }
+            
             displayConsultantRecommendation(recommendation);
         }
 
         function displayConsultantRecommendation(rec) {
             consultantRecommendationResult.innerHTML = '';
+            
+            if (rec.customHTML) {
+                consultantRecommendationResult.innerHTML = rec.customHTML;
+                return;
+            }
             if(rec.textOnly) {
                 consultantRecommendationResult.innerHTML = `<div class="mt-4 p-4 bg-yellow-100 rounded-lg text-center"><p class="text-xl font-semibold text-red-800">${rec.textOnly}</p></div>`;
                 return;
             }
+
             let content = `<h4 class="text-lg font-bold p-2 bg-green-50 text-green-800 rounded inline-block mb-4">${rec.text}</h4>`;
             const propSpan = (p) => `<span class="text-2xl text-red-700 font-extrabold p-2 bg-red-50 rounded mx-1">${p}</span>`;
             
-            if (rec.properties.length > 0) {
+            if (rec.special === 'ferra_dimm_kaaya') {
+                 content += `
+                 <div class="flex flex-wrap items-center justify-center p-6 bg-yellow-50 rounded-xl border border-yellow-100 shadow-sm">
+                    <span class="text-gray-400 font-bold text-2xl mr-2">(</span>
+                    ${propSpan('Ferra')} <span class="mx-2 text-gray-400 font-bold">OR</span> ${propSpan('Dimm')}
+                    <span class="text-gray-400 font-bold text-2xl ml-2">)</span>
+                    <span class="mx-4 text-gray-400 font-bold text-xl">&</span>
+                    ${propSpan('Kaaya')}
+                 </div>`;
+            } else if (rec.special === 'estee_laatinn_marie') {
+                 content += `
+                 <div class="flex flex-wrap items-center justify-center p-6 bg-yellow-50 rounded-xl border border-yellow-100 shadow-sm">
+                    ${propSpan('Estee')}
+                    <span class="mx-4 text-gray-400 font-bold text-xl">&</span>
+                    <span class="text-gray-400 font-bold text-2xl mr-2">(</span>
+                    ${propSpan('Laatinn')} <span class="mx-2 text-gray-400 font-bold">OR</span> ${propSpan('Marie')}
+                    <span class="text-gray-400 font-bold text-2xl ml-2">)</span>
+                 </div>`;
+            } else if (rec.properties.length > 0) {
                 let sep = rec.type === 'and' ? ' & ' : ' OR ';
                 let list = rec.properties.map(propSpan).join(`<span class="text-gray-400 font-bold">${sep}</span>`);
                 content += `<div class="flex flex-wrap items-center justify-center p-6 bg-yellow-50 rounded-xl border border-yellow-100 shadow-sm">${list}</div>`;
@@ -532,6 +751,7 @@
         function updateARP() {
             const price = parseFloat(arpProjectSelect.value) || 0;
             const displayPrice = formatCurrency(price, false);
+            // Based on 100% Loan amount (price * 1.0)
             const mortgage = calculateMonthlyInstallment(price * 1.0, 3.7, 35);
             
             document.getElementById('arpDisplayPrice').textContent = displayPrice;
@@ -547,7 +767,10 @@
 
                 document.getElementById(`${id}_basis`).textContent = `Based on nett price of ${displayPrice}`;
                 document.getElementById(`${id}_monthly`).textContent = formatCurrency(returnMonthly);
-                if(document.getElementById(`${id}_annual`)) document.getElementById(`${id}_annual`).textContent = formatCurrency(returnAnnual, false);
+                
+                if(document.getElementById(`${id}_annual`)) {
+                    document.getElementById(`${id}_annual`).textContent = formatCurrency(returnAnnual, false);
+                }
                 
                 const cfEl = document.getElementById(`${id}_cashflow`) || document.getElementById(`${id}_gain`);
                 if(id === 'm40') {
@@ -567,20 +790,26 @@
         [clientAgeInput, interestRateInput, loanTenureInput].forEach(el => el.addEventListener('input', recommendProperties));
         document.querySelectorAll('input[name="finderLtv"]').forEach(el => el.addEventListener('change', recommendProperties));
         nationalitySelector.addEventListener('change', consultantRecommend);
+        document.querySelectorAll('input[name="employment"]').forEach(el => el.addEventListener('change', consultantRecommend));
         consultantLoanEligibilitySlider.addEventListener('input', (e) => { consultantLoanEligibilityValue.textContent = parseInt(e.target.value).toLocaleString('en-US'); consultantRecommend(); });
         consultantLtvSelector.addEventListener('change', consultantRecommend);
         arpProjectSelect.addEventListener('change', updateARP);
 
         // --- INITIALIZATION ---
         const arpProjectsList = [
-            { name: 'Ana, Johor', price: 361000 }, { name: 'Tessa, Puchong', price: 340747 },
-            { name: 'Una, Cyberjaya', price: 463770 }, { name: 'Taylor, Genting', price: 265240 },
-            { name: 'Sora, Maluri', price: 403093 }, { name: 'Eva, Kepong', price: 400000 },
-            { name: 'Lara, Bangsar South', price: 450000 }, { name: 'Yuna, Nilai', price: 450000 },
-            { name: 'Riri, Kuala Lumpur', price: 780000 }, { name: 'Dimm, Damansara', price: 1050638 },
-            { name: 'Abby, Kuala Lumpur', price: 1350000 }, { name: 'Diana, Johor Bahru', price: 530000 },
-            { name: 'Wei Ziaa, Bukit Jalil', price: 950000 }, { name: 'Ferra, Penang', price: 680000 },
-            { name: 'Zizie, Maluri', price: 800000 }, { name: 'Nexa, Cheras', price: 500000 }
+            { name: 'EVA', price: 400000 },
+            { name: 'MARIE', price: 355000 },
+            { name: 'NEXA', price: 500000 },
+            { name: 'SORA', price: 580000 },
+            { name: 'SOYA A', price: 488000 },
+            { name: 'DORA', price: 450000 },
+            { name: 'RINN', price: 460000 },
+            { name: 'SABRINA', price: 500000 },
+            { name: 'ESTEE', price: 618000 },
+            { name: 'WEI ZIAA', price: 950000 },
+            { name: 'FERRA', price: 900000 },
+            { name: 'ABBY', price: 1350000 },
+            { name: 'DIMM', price: 1050638 }
         ];
 
         arpProjectsList.sort((a,b)=>a.name.localeCompare(b.name)).forEach(p => {
