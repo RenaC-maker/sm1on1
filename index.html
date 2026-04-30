@@ -87,69 +87,73 @@
         .arp-calc-container {
             background-color: #ffffff;
             border-radius: 12px;
-            padding: 24px;
+            padding: 16px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-w: 100%;
         }
         .arp-title {
             text-align: center;
             color: #d9534f;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
         .info-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
         @media (min-width: 768px) {
             .info-grid { grid-template-columns: 1fr 1fr; }
         }
         .info-item {
-            padding: 16px;
+            padding: 12px;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
             text-align: center;
         }
         .info-item.mortgage { background-color: #f0f7ff; border-color: #b3d4ff; color: #0056b3; }
         .info-item.rebate { background-color: #fffaf0; border-color: #ffe4b3; color: #e67e22; }
-        .info-item span { font-size: 1.5rem; font-weight: 800; display: block; margin-top: 4px; }
+        .info-item span { font-size: 1.25rem; font-weight: 800; display: block; margin-top: 4px; }
         
         .nett-price-display {
             text-align: center;
-            margin: 32px 0;
-            padding: 20px;
+            margin: 16px 0;
+            padding: 12px;
             background-color: #f8fafc;
             border-radius: 12px;
         }
-        .nett-price-display strong { font-size: 1rem; color: #64748b; display: block; }
-        .nett-price-display span { font-size: 2.5rem; font-weight: 800; color: #1e293b; }
+        .nett-price-display strong { font-size: 0.85rem; color: #64748b; display: block; }
+        .nett-price-display span { font-size: 1.8rem; font-weight: 800; color: #1e293b; }
 
         .projection-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 12px;
         }
         @media (min-width: 768px) {
             .projection-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (min-width: 1024px) {
+            .projection-grid { grid-template-columns: repeat(4, 1fr); }
         }
         .projection-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 24px;
+            padding: 16px;
             text-align: center;
             transition: transform 0.2s ease;
         }
-        .projection-card:hover { transform: translateY(-4px); }
+        .projection-card:hover { transform: translateY(-2px); }
         .projection-card.highlight { border: 2px solid #3b82f6; background-color: #f8faff; }
         
-        .projection-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
-        .projection-card .basis-text { font-size: 0.75rem; color: #94a3b8; margin-bottom: 20px; display: block; }
-        .projection-card .val-label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-top: 16px; }
-        .projection-card .val-amount { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
-        .projection-card hr { border: 0; border-top: 1px solid #f1f5f9; margin: 16px 0; }
+        .projection-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+        .projection-card .basis-text { font-size: 0.7rem; color: #94a3b8; margin-bottom: 12px; display: block; }
+        .projection-card .val-label { font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-top: 10px; }
+        .projection-card .val-amount { font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-bottom: 4px; }
+        .projection-card hr { border: 0; border-top: 1px solid #f1f5f9; margin: 10px 0; }
         
         .cashflow-positive { color: #16a34a !important; }
         .cashflow-negative { color: #dc2626 !important; }
@@ -158,11 +162,12 @@
             background-color: #f0f9ff;
             border: 1px solid #bae6fd;
             border-radius: 12px;
-            padding: 24px;
-            margin-top: 32px;
+            padding: 16px;
+            margin-top: 20px;
+            font-size: 0.85rem;
         }
-        .ecf-perks h3 { font-weight: 800; color: #0369a1; margin-bottom: 16px; font-size: 1.25rem; }
-        .ecf-perks ul li { margin-bottom: 10px; padding-left: 24px; position: relative; color: #334155; }
+        .ecf-perks h3 { font-weight: 800; color: #0369a1; margin-bottom: 8px; font-size: 1rem; }
+        .ecf-perks ul li { margin-bottom: 6px; padding-left: 20px; position: relative; color: #334155; }
         .ecf-perks ul li::before { content: "✓"; position: absolute; left: 0; color: #0284c7; font-weight: 900; }
     </style>
 </head>
@@ -183,7 +188,7 @@
         </div>
 
         <!-- Section 2: Main Content Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-8">
             <div class="lg:col-span-2">
                 <div class="card h-full">
                     <h2 class="text-2xl font-bold main-title mb-6 text-center lg:text-left">Immediate/Medium Goal Timeline</h2>
@@ -207,6 +212,87 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Section 3: Strategy Concept (Sell 1 Free 3) -->
+        <div class="card mb-8 border-2 border-red-800 bg-red-50/50">
+            <div class="flex items-center mb-6">
+                <span class="text-4xl mr-4 text-white bg-red-800 p-3 rounded-lg"><i class="fas fa-chess-knight"></i></span>
+                <div>
+                    <h2 class="text-2xl font-bold main-title">The "Sell 1, Free 3" Strategy</h2>
+                    <p class="text-sm text-gray-600 font-medium">A 20-Year Blueprint for Debt-Free Passive Income</p>
+                </div>
+            </div>
+
+            <!-- Conceptual Steps -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-red-100 text-center hover:-translate-y-1 transition-transform">
+                    <div class="w-10 h-10 bg-red-100 text-red-800 rounded-full flex items-center justify-center font-bold mx-auto mb-3">1</div>
+                    <h4 class="font-bold text-gray-800">Acquire</h4>
+                    <p class="text-xs text-gray-500 mt-2">Buy 4 properties today at roughly RM 500k each.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-red-100 text-center hover:-translate-y-1 transition-transform">
+                    <div class="w-10 h-10 bg-red-100 text-red-800 rounded-full flex items-center justify-center font-bold mx-auto mb-3">2</div>
+                    <h4 class="font-bold text-gray-800">Hold 20 Years</h4>
+                    <p class="text-xs text-gray-500 mt-2">Value doubles to RM 1M. Loan balance reduces to half (RM 250k).</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-red-100 text-center hover:-translate-y-1 transition-transform">
+                    <div class="w-10 h-10 bg-red-100 text-red-800 rounded-full flex items-center justify-center font-bold mx-auto mb-3">3</div>
+                    <h4 class="font-bold text-gray-800">Sell One</h4>
+                    <p class="text-xs text-gray-500 mt-2">Sell 1 property. (RM 1M - RM 250k remaining loan = RM 750k Profit).</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-red-100 text-center hover:-translate-y-1 transition-transform">
+                    <div class="w-10 h-10 bg-red-100 text-red-800 rounded-full flex items-center justify-center font-bold mx-auto mb-3">4</div>
+                    <h4 class="font-bold text-gray-800">Free 3 Units</h4>
+                    <p class="text-xs text-gray-500 mt-2">Use the RM 750k profit to completely pay off the 3 remaining RM 250k loans.</p>
+                </div>
+            </div>
+
+            <!-- Projection Goals Table -->
+            <div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-red-100">
+                <table class="min-w-full divide-y divide-gray-200 text-center text-sm">
+                    <thead class="bg-red-800 text-white">
+                        <tr>
+                            <th class="px-4 py-4 font-semibold text-left">Target Passive Income</th>
+                            <th class="px-4 py-4 font-semibold">Units Bought<br><span class="text-xs font-normal opacity-80">(~RM500k Property)</span></th>
+                            <th class="px-4 py-4 font-semibold">Sell Units<br><span class="text-xs font-normal opacity-80">(Year 20)</span></th>
+                            <th class="px-4 py-4 font-semibold">Units Fully Paid<br><span class="text-xs font-normal opacity-80">(Year 20)</span></th>
+                            <th class="px-4 py-4 font-semibold">Total Property Value<br><span class="text-xs font-normal opacity-80">(Year 20)</span></th>
+                            <th class="px-4 py-4 font-semibold">Net Worth<br><span class="text-xs font-normal opacity-80">(Year 20)</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-4 font-bold text-red-800 text-left">RM 15k / month</td>
+                            <td class="px-4 py-4 font-medium">4 units</td>
+                            <td class="px-4 py-4">1 unit</td>
+                            <td class="px-4 py-4 font-bold text-green-700">3 units</td>
+                            <td class="px-4 py-4 text-gray-600">RM 4M</td>
+                            <td class="px-4 py-4 text-gray-900 font-bold">~RM 3M</td>
+                        </tr>
+                        <tr class="bg-red-50 hover:bg-red-100/50">
+                            <td class="px-4 py-4 font-bold text-red-800 text-left">RM 30k / month</td>
+                            <td class="px-4 py-4 font-medium">8 units</td>
+                            <td class="px-4 py-4">2 units</td>
+                            <td class="px-4 py-4 font-bold text-green-700">6 units</td>
+                            <td class="px-4 py-4 text-gray-600">RM 8M</td>
+                            <td class="px-4 py-4 text-gray-900 font-bold">~RM 6M</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-4 font-bold text-red-800 text-left">RM 50k / month</td>
+                            <td class="px-4 py-4 font-medium">13 units</td>
+                            <td class="px-4 py-4">3 units</td>
+                            <td class="px-4 py-4 font-bold text-green-700">10 units</td>
+                            <td class="px-4 py-4 text-gray-600">RM 13M</td>
+                            <td class="px-4 py-4 text-gray-900 font-bold">~RM 10M</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p class="text-xs text-gray-500 mt-4 text-center">
+                * Assumptions based on: 3.75% interest rates, 30-year loan, 6% rental yields, property and rental value doubling in 20 years.
+            </p>
         </div>
 
         <!-- Consultant Recommender -->
@@ -233,8 +319,8 @@
                 
                 <div class="md:col-span-2 mt-4">
                     <label for="consultantLoanEligibilitySlider" class="font-bold text-gray-700">Client's Max Loan Eligibility (RM)</label>
-                    <input type="range" id="consultantLoanEligibilitySlider" min="200000" max="5000000" value="1000000" step="50000" class="w-full mt-2">
-                    <p class="text-center text-xl font-bold main-title mt-1">RM <span id="consultantLoanEligibilityValue">1,000,000</span></p>
+                    <input type="range" id="consultantLoanEligibilitySlider" min="200000" max="5000000" value="2500000" step="50000" class="w-full mt-2">
+                    <p class="text-center text-xl font-bold main-title mt-1">RM <span id="consultantLoanEligibilityValue">2,500,000</span></p>
                 </div>
                 
                 <div id="consultantLtvWrapper" class="md:col-span-2 text-center">
@@ -249,10 +335,10 @@
             <div id="consultantRecommendationResult" class="mt-6 pt-6 border-t text-center"></div>
         </div>
 
-        <!-- Property Finder Section -->
+        <!-- NEW Property Finder Section (Fully Dynamic) -->
         <div class="card mt-8">
-            <h2 class="text-2xl font-bold main-title mb-2 text-center">Property Opportunity Finder</h2>
-            <p class="text-center text-gray-600 mb-6">Find suitable properties based on your financial capacity.</p>
+            <h2 class="text-2xl font-bold main-title mb-2 text-center">Property Opportunity Finder (Dynamic Mode)</h2>
+            <p class="text-center text-gray-600 mb-6">Calculations now sync in real-time based on actual SPA, Valuation, and Nett figures.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-gray-50 p-4 rounded-lg mb-6">
                 <div>
@@ -266,11 +352,14 @@
                 <div>
                     <label for="loanTenure" class="block text-sm font-medium text-gray-700">Loan Tenure (Years)</label>
                     <input type="number" id="loanTenure" value="35" min="5" max="35" class="mt-1 block w-full rounded-md border-gray-300 p-2 border">
+                    <p id="maxTenureMsg" class="text-xs text-red-600 mt-1 hidden">Tenure automatically capped by age.</p>
                 </div>
                 <div class="text-center">
                     <label class="font-bold text-gray-700 mb-2 block">MOF (LTV)</label>
                     <div id="ltvSelectorFinder" class="flex justify-center btn-group rounded-lg overflow-hidden">
                         <input type="radio" id="finderLtv90" name="finderLtv" value="90" checked><label for="finderLtv90" class="rounded-l-lg">90%</label>
+                        <input type="radio" id="finderLtv85" name="finderLtv" value="85"><label for="finderLtv85">85%</label>
+                        <input type="radio" id="finderLtv80" name="finderLtv" value="80"><label for="finderLtv80">80%</label>
                         <input type="radio" id="finderLtv70" name="finderLtv" value="70"><label for="finderLtv70" class="rounded-r-lg">70%</label>
                     </div>
                 </div>
@@ -278,36 +367,36 @@
 
             <div class="mb-6">
                 <label for="loanEligibilityInput" class="font-bold text-gray-700">Filter by Max Loan Eligibility (RM)</label>
-                <input type="number" id="loanEligibilityInput" value="1000000" step="10000" class="mt-1 block w-full md:w-1/3 rounded-md border-gray-300 font-bold p-2 border">
+                <input type="number" id="loanEligibilityInput" value="5000000" step="10000" class="mt-1 block w-full md:w-1/3 rounded-md border-gray-300 font-bold p-2 border">
             </div>
             
             <div id="propertyRecommendations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
 
         <!-- ARP Section -->
-        <div class="arp-calc-container mt-8">
+        <div class="arp-calc-container mt-8 max-w-5xl mx-auto">
             <h2 class="arp-title">ARP & Mortgage Calculator</h2>
             
-            <div class="mb-8 flex flex-col items-center">
-                <label for="arpProjectSelect" class="font-bold text-gray-700 mb-2">Select a Project:</label>
-                <select id="arpProjectSelect" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm p-3 border">
+            <div class="mb-5 flex flex-col items-center">
+                <label for="arpProjectSelect" class="font-bold text-gray-700 mb-1 text-sm">Select a Project:</label>
+                <select id="arpProjectSelect" class="block w-full max-w-sm rounded-md border-gray-300 shadow-sm p-2 border text-sm">
                     <option value="" disabled selected>-- Select a Project --</option>
                 </select>
             </div>
 
             <div class="info-grid">
                 <div class="info-item mortgage">
-                    <strong>Estimated Monthly Mortgage</strong>
+                    <strong class="text-sm">Estimated Monthly Mortgage</strong>
                     <span id="arpMonthlyMortgage">RM 0.00 /m</span>
                 </div>
                 <div class="info-item rebate">
-                    <strong>ECF 3% Rebate (One-Time)</strong>
+                    <strong class="text-sm">ECF 3% Rebate (One-Time)</strong>
                     <span id="arpEcfRebate">RM 0.00</span>
                 </div>
             </div>
 
-            <div class="projection-header text-center mb-8">
-                <h2 class="text-2xl font-extrabold text-gray-800">ARP Rental Projection</h2>
+            <div class="projection-header text-center mb-4">
+                <h2 class="text-lg font-extrabold text-gray-800">ARP Rental Projection</h2>
             </div>
 
             <div class="nett-price-display">
@@ -338,8 +427,8 @@
                     <div id="t20_gain" class="val-amount cashflow-positive">+RM 0.00</div>
                 </div>
 
-                <div class="projection-card highlight">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider">Premium</div>
+                <div class="projection-card highlight relative">
+                    <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Premium</div>
                     <h3>T1 Package: 6% ARP</h3>
                     <span class="basis-text" id="t1_basis">Based on nett price</span>
                     <hr>
@@ -352,8 +441,8 @@
                     <div id="t1_gain" class="val-amount cashflow-positive">+RM 0.00</div>
                 </div>
 
-                <div class="projection-card highlight">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider">Exclusive</div>
+                <div class="projection-card highlight relative">
+                    <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Exclusive</div>
                     <h3>ECF Package: 7% ARP</h3>
                     <span class="basis-text" id="ecf_basis">Based on nett price</span>
                     <hr>
@@ -385,22 +474,178 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // --- DATA ---
+        
+        // --- SAFE DATA STRUCTURE GENERATION ---
+        
+        // 1. Generate MARIE Units
+        const marieUnits = {};
+        for (let floor = 6; floor <= 35; floor++) {
+            let fStr = floor.toString().padStart(2, '0');
+            marieUnits[`HC-${fStr}-01`] = { spa: 629000, nett: 355300, valuation: 452200, rent: 2600 };
+            marieUnits[`HC-${fStr}-04`] = { spa: 629000, nett: 355300, valuation: 452200, rent: 2600 };
+            marieUnits[`HC-${fStr}-06`] = { spa: 810000, nett: 486750, valuation: 619500, rent: 3200 };
+            marieUnits[`HC-${fStr}-07`] = { spa: 810000, nett: 486750, valuation: 619500, rent: 3200 };
+        }
+
+        // 2. Generate FERRA Units
+        const ferraUnits = {};
+        for (let floor = 2; floor <= 32; floor++) {
+            let fStr = floor.toString();
+            if (floor === 4) fStr = '3A';
+            if (floor === 14) fStr = '13A';
+            if (floor === 24) fStr = '23A';
+
+            ferraUnits[`B-${fStr}-2`] = { spa: 886389, nett: 620472, valuation: 886389, rent: 3500 };
+            ferraUnits[`B-${fStr}-3`] = { spa: 883214, nett: 618250, valuation: 883214, rent: 3500 };
+            ferraUnits[`B-${fStr}-11`] = { spa: 1028644, nett: 720051, valuation: 1028644, rent: 4000 };
+            ferraUnits[`B-${fStr}-12`] = { spa: 1034692, nett: 724284, valuation: 1034692, rent: 4000 };
+            ferraUnits[`B-${fStr}-13`] = { spa: 1037716, nett: 726401, valuation: 1037716, rent: 4000 };
+        }
+
+        // 3. Generate SABRINA Units
+        const sabrinaUnits = {};
+        const sabrinaMap = {
+            '12B-03': {spa: 608950, nett:474981},
+            '10-02': {spa: 617500, nett: 481650},
+            '17-03': {spa:618450, nett: 482391},
+            '11-02': {spa:622250, nett: 485355},
+            '19-03': {spa:625100, nett: 487578},
+            '12A-02': {spa:627000, nett: 489060},
+            '12B-02': {spa:630800, nett:492024},
+            '18-03': {spa:630800, nett: 492024},
+            '15-02': {spa:633650, nett:494247},
+            '17-02': {spa:641250, nett:500175},
+            '18-02': {spa:651700, nett:508326},
+            '12A-3A': {spa:691600, nett:539448},
+            '16-3A': {spa:701100, nett:546858},
+            '12A-06': {spa:702050, nett:547599},
+            '12A-07': {spa:702050, nett:547599},
+            '12B-05': {spa:704900, nett:549822},
+        };
+        for (const fl in sabrinaMap) {
+            sabrinaUnits[`A-${fl}-05`] = { spa: sabrinaMap[fl].spa, nett: sabrinaMap[fl].nett, valuation: sabrinaMap[fl].spa, rent: 2700 };
+            sabrinaUnits[`A-${fl}-06`] = { spa: sabrinaMap[fl].spa, nett: sabrinaMap[fl].nett, valuation: sabrinaMap[fl].spa, rent: 2700 };
+        }
+
+        // 4. Generate RINN Units (Using explicit Map structure to allow easy editing)
+        const rinnUnits = {};
+        const rinnMap = {
+            'C-3A-2-D2A': {spa: 593800, nett: 463164},
+            'C5-6-D6': {spa: 608800, nett: 474864},
+            'C5-5-D5': {spa: 612800, nett: 477984},
+            'C3A-6-D4A': {spa:586800, nett:457704},
+            'C3A-5-D3A': {spa: 590800, nett:460824},
+        };
+        for (const unit in rinnMap) {
+            rinnUnits[unit] = { 
+                spa: rinnMap[unit].spa, 
+                nett: rinnMap[unit].nett, 
+                valuation: rinnMap[unit].spa, // Valuation naturally matches SPA here
+                rent: 2500 
+            };
+        }
+
+        // 5. Generate ABBY Units (Using explicit Map structure to allow easy editing)
+        const abbyUnits = {};
+        const abbyMap = {
+            'B-11-03': {spa: 1865800, nett: 1265145},
+            'B-11-07': {spa: 1823800, nett: 1263297},
+            'B-13-3A': {spa: 1917800, nett: 1299933},
+            'B-30-3A': {spa: 2031800, nett: 1344949},
+            'B-55-06': {spa: 2181800, nett: 1319057},
+            'B-30-3A': {spa: 2031800, nett: 1344949},
+            'B-23-06': {spa: 1864800, nett: 1285101},
+        };
+        for (const unit in abbyMap) {
+            abbyUnits[unit] = { 
+                spa: abbyMap[unit].spa, 
+                nett: abbyMap[unit].nett, 
+                valuation: abbyMap[unit].spa, // Valuation naturally matches SPA here
+                rent: 4000 // Placeholder rent, amend if needed
+            };
+        }
+
+        // 6. Generate DORA Units based on extracted image data
+        const doraUnits = {};
+        const doraMap = {
+            'D-11-16': {spa: 955000, nett: 551200},
+            'D-15-09': {spa: 961000, nett: 551200},
+            'D-16-12': {spa: 961000, nett: 551200},
+        };
+        for (const unit in doraMap) {
+            doraUnits[unit] = { 
+                spa: doraMap[unit].spa, 
+                nett: doraMap[unit].nett, 
+                valuation: doraMap[unit].spa, // Instruction: valuation matches SPA price
+                rent: 2800 // Placeholder rent, amend if needed
+            };
+        }
+
+        // Combine into main property array safely
         const propertyData = [
-            { name: 'EVA', loanRange: [200000, 400000], cashflow90: -200, cashflow70: 260, cashback90: 90000, cashback70: -25000, status: 'UC', nettPrice: 400000 },
-            { name: 'MARIE', loanRange: [200000, 400000], cashflow90: 130, cashflow70: 300, cashback90: 39000, cashback70: -30000, status: 'UC', nettPrice: 355000 },
-            { name: 'NEXA', loanRange: [400000, 600000], cashflow90: -120, cashflow70: 400, cashback90: 62000, cashback70: -62000, status: 'UC', nettPrice: 500000 },
-            { name: 'SORA', loanRange: [400000, 600000], cashflow90: 700, cashflow70: 1000, cashback90: 32000, cashback70: -100000, status: 'UC', nettPrice: 580000 },
-            { name: 'SOYA A', loanRange: [400000, 600000], cashflow90: 400, cashflow70: 1200, cashback90: 140000, cashback70: 0, status: 'UC', nettPrice: 488000 },
-            { name: 'DORA', loanRange: [400000, 600000], cashflow90: 250, cashflow70: 600, cashback90: 130000, cashback70: -20000, status: 'UC', nettPrice: 450000 },
-            { name: 'RINN', loanRange: [400000, 600000], cashflow90: 230, cashflow70: 330, cashback90: 70000, cashback70: -45000, status: 'UC', nettPrice: 460000 },
-            { name: 'SABRINA', loanRange: [400000, 600000], cashflow90: 0, cashflow70: 500, cashback90: 85000, cashback70: -48000, status: 'UC', nettPrice: 500000 },
-            { name: 'ESTEE', loanRange: [600000, 800000], cashflow90: -1200, cashflow70: -300, cashback90: 375000, cashback70: 154000, status: 'Completed', nettPrice: 618000 },
-            { name: 'WEI ZIAA', loanRange: [800000, 1000000], cashflow90: -200, cashflow70: 700, cashback90: 221000, cashback70: -35000, status: 'Completed', nettPrice: 950000 },
-            { name: 'FERRA', loanRange: [800000, 1000000], cashflow90: 300, cashflow70: 500, cashback90: 200000, cashback70: 0, status: 'Completed', nettPrice: 900000 },
-            { name: 'ABBY', loanRange: [1200000, 5000000], cashflow90: 0, cashflow70: 1400, cashback90: 470000, cashback70: 200000, status: 'Completed', nettPrice: 1350000 },
-            { name: 'DIMM', loanRange: [800000, 1000000], cashflow90: 350, cashflow70: 1500, cashback90: 210000, cashback70: -70000, status: 'Completed', nettPrice: 1050638 }
+            { 
+                name: 'MARIE (Meridin Medini)', 
+                loanRange: [0, 5000000],
+                baseSpaPrice: 629000, 
+                baseNettPrice: 355300,
+                baseValuation: 452200, 
+                expectedRental: 2600, 
+                status: 'Completed',
+                units: marieUnits
+            },
+            {
+                name: 'FERRA (Ferringhi Residence 2)',
+                loanRange: [0, 5000000],
+                baseSpaPrice: 883214,
+                baseNettPrice: 618250,
+                baseValuation: 883214, 
+                expectedRental: 4300, 
+                status: 'Completed',
+                units: ferraUnits
+            },
+            {
+                name: 'SABRINA (Senze Bumi Package)',
+                loanRange: [0, 5000000],
+                baseSpaPrice: 750500,
+                baseNettPrice: 585390,
+                baseValuation: 750500,
+                expectedRental: 2700,
+                status: 'UC',
+                units: sabrinaUnits
+            },
+            {
+                name: 'RINN',
+                loanRange: [0, 5000000],
+                baseSpaPrice: 500000,
+                baseNettPrice: 450000,
+                baseValuation: 500000,
+                expectedRental: 7000,
+                status: 'Completed',
+                units: rinnUnits
+            },
+            {
+                name: 'ABBY',
+                loanRange: [0, 5000000],
+                baseSpaPrice: 1350000,
+                baseNettPrice: 1200000,
+                baseValuation: 1350000,
+                expectedRental: 6600,
+                status: 'Completed',
+                units: abbyUnits
+            },
+            {
+                name: 'DORA (Sri Hartamas)',
+                loanRange: [0, 5000000],
+                baseSpaPrice: 955000,
+                baseNettPrice: 538119,
+                baseValuation: 597910,
+                expectedRental: 3200,
+                status: 'Completed',
+                units: doraUnits
+            }
         ];
+
+        // --- REMAINDER OF APPLICATION LOGIC ---
 
         const ageStages = [
             { range: [25, 35], displayText: '25-35', stage: 1, title: 'Stage 1: Foundation Building', icon: 'fa-rocket', milestones: 'Min <span class="highlight-value">1 mil</span> portfolio / Min <span class="highlight-value">RM50k</span> savings', actions: [{icon:'fa-wallet', title:'Consolidate debt', desc:'Clean profile'}, {icon:'fa-building', title:'Acquisition', desc:'Build assets'}] },
@@ -409,7 +654,9 @@
             { range: [56, 65], displayText: '56-65', stage: 4, title: 'Stage 4: Legacy', icon: 'fa-trophy', milestones: 'Retirement fund / legacy planning', actions: [{icon:'fa-crown', title:'Exit plan', desc:'Preserve wealth'}] }
         ];
 
-        // --- DOM ELEMENTS ---
+        let unitSelections = {};
+
+        // DOM ELEMENTS
         const ageSlider = document.getElementById('ageSlider');
         const ageValue = document.getElementById('ageValue');
         const timelineContainer = document.getElementById('timeline');
@@ -428,13 +675,11 @@
         const consultantLtvWrapper = document.getElementById('consultantLtvWrapper');
         const consultantLtvSelector = document.getElementById('consultantLtvSelector');
         const consultantRecommendationResult = document.getElementById('consultantRecommendationResult');
-
         const arpProjectSelect = document.getElementById('arpProjectSelect');
 
-        // --- CORE FUNCTIONS ---
         function formatCurrency(num, perMonth = true) {
             const prefix = num < 0 ? "-RM " : "RM ";
-            return `${prefix}${Math.abs(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}${perMonth ? '/m' : ''}`;
+            return `${prefix}${Math.abs(num).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}${perMonth ? '/m' : ''}`;
         }
 
         function calculateMonthlyInstallment(loanAmount, annualRate, tenureYears) {
@@ -466,31 +711,141 @@
             focusCard.ageDisplays.forEach(el => el.textContent = `${currentStageData.displayText}`); 
         }
 
-        function recommendProperties() {
-            const maxLoan = parseInt(loanEligibilityInput.value) || 0;
-            const ltv = document.querySelector('input[name="finderLtv"]:checked').value === '90' ? 0.9 : 0.7;
-            const filtered = propertyData.filter(p => p.loanRange[0] <= maxLoan);
-            recommendationsContainer.innerHTML = '';
-            filtered.forEach(p => {
-                const cashflow = ltv === 0.9 ? p.cashflow90 : p.cashflow70;
-                const cashback = ltv === 0.9 ? p.cashback90 : p.cashback70;
-                const inst = calculateMonthlyInstallment((p.nettPrice) * ltv, parseFloat(interestRateInput.value), parseInt(loanTenureInput.value));
-                recommendationsContainer.innerHTML += `
-                    <div class="bg-gray-50 p-4 rounded-lg border">
-                        <h4 class="font-bold text-xl main-title mb-2">${p.name}</h4>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between"><span>Est. Installment:</span><span class="font-bold text-gray-800">${formatCurrency(inst)}</span></div>
-                            <div class="flex justify-between"><span>Est. Net Cashflow:</span><span class="font-bold ${cashflow >= 0 ? 'text-green-600' : 'text-red-600'}">${formatCurrency(cashflow)}</span></div>
-                            <div class="flex justify-between"><span>Est. Cashback:</span><span class="font-bold text-blue-600">${formatCurrency(cashback, false)}</span></div>
-                        </div>
-                    </div>`;
-            });
+        function updateMaxTenure() {
+            const age = parseInt(clientAgeInput.value) || 30;
+            const maxTenureByAge = 70 - age;
+            const absoluteMaxTenure = 35;
+            const calculatedMaxTenure = Math.max(0, Math.min(absoluteMaxTenure, maxTenureByAge));
+            
+            loanTenureInput.max = calculatedMaxTenure;
+            
+            if (parseInt(loanTenureInput.value) > calculatedMaxTenure) {
+                loanTenureInput.value = calculatedMaxTenure;
+                const msg = document.getElementById('maxTenureMsg');
+                if(msg) {
+                    msg.classList.remove('hidden');
+                    setTimeout(() => msg.classList.add('hidden'), 3000);
+                }
+            }
         }
 
-        // --- NEW: Dynamic Government Strategy Template Generator ---
+        function recommendProperties() {
+            updateMaxTenure();
+
+            document.querySelectorAll('.unit-input').forEach(input => {
+                unitSelections[input.dataset.idx] = input.value;
+            });
+
+            const maxLoan = parseInt(loanEligibilityInput.value) || 0;
+            const margin = parseInt(document.querySelector('input[name="finderLtv"]:checked').value) / 100;
+            const interestRate = parseFloat(interestRateInput.value) || 3.7;
+            const loanTenure = parseInt(loanTenureInput.value) || 35;
+
+            recommendationsContainer.innerHTML = '';
+            
+            propertyData.forEach((p, index) => {
+                if ((p.baseValuation * margin) > maxLoan) return;
+
+                let dataListOptions = '';
+                if(p.units) {
+                    dataListOptions = Object.keys(p.units).map(u => `<option value="${u}"></option>`).join('');
+                }
+
+                const currentVal = unitSelections[index] || '';
+
+                const cardHTML = `
+                    <div class="bg-gray-50 p-4 rounded-lg border flex flex-col justify-between shadow-sm" id="card-${index}">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <h4 class="font-bold text-xl main-title">${p.name}</h4>
+                                <span class="status-badge bg-green-100 text-green-800">${p.status}</span>
+                            </div>
+                            
+                            <div class="mt-3 mb-4 ${p.units ? '' : 'hidden'}">
+                                <label class="block text-xs font-semibold text-gray-600 mb-1 uppercase tracking-wide">Key in Unit Number</label>
+                                <input type="text" class="form-input text-sm p-2 w-full border-gray-300 unit-input rounded" data-idx="${index}" value="${currentVal}" placeholder="Select Unit" list="units-${index}">
+                                <datalist id="units-${index}">
+                                    ${dataListOptions}
+                                </datalist>
+                            </div>
+
+                            <div class="flex justify-between text-[11px] text-gray-500 mb-4 font-medium px-1">
+                                <span>SPA: <br><span id="spa-${index}" class="text-gray-800 font-bold">${formatCurrency(p.baseSpaPrice, false)}</span></span>
+                                <span>Valuation: <br><span id="val-${index}" class="text-gray-800 font-bold">${formatCurrency(p.baseValuation, false)}</span></span>
+                                <span>Nett: <br><span id="nett-${index}" class="text-gray-800 font-bold">${formatCurrency(p.baseNettPrice, false)}</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3 text-sm bg-white p-4 rounded shadow-sm border border-gray-200">
+                            <div class="flex justify-between items-center border-b pb-2">
+                                <span class="text-gray-600 font-medium">Est. Installment (Nett):</span>
+                                <span class="font-bold text-gray-800 text-lg" id="inst-${index}">-</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b pb-2">
+                                <span class="text-gray-600 font-medium">Est. Net Cashflow:</span>
+                                <span class="font-bold text-lg" id="cf-${index}">-</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-1">
+                                <span class="text-gray-600 font-medium">Est. Cashback:</span>
+                                <span class="font-bold text-lg" id="cb-${index}">-</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                recommendationsContainer.insertAdjacentHTML('beforeend', cardHTML);
+                
+                if (p.units) {
+                    const inputEl = recommendationsContainer.querySelector(`.unit-input[data-idx="${index}"]`);
+                    inputEl.addEventListener('input', (e) => {
+                        handleUnitChange(index, e.target.value.trim().toUpperCase());
+                    });
+                }
+                
+                handleUnitChange(index, currentVal.toUpperCase());
+            });
+            
+            if (recommendationsContainer.innerHTML === '') {
+                recommendationsContainer.innerHTML = `<p class="col-span-full text-center text-gray-500 py-8">No properties match your current loan eligibility criteria.</p>`;
+            }
+        }
+
+        function handleUnitChange(idx, unitNo) {
+            const p = propertyData[idx];
+            const margin = parseInt(document.querySelector('input[name="finderLtv"]:checked').value) / 100;
+            const interestRate = parseFloat(interestRateInput.value) || 3.7;
+            const loanTenure = parseInt(loanTenureInput.value) || 35;
+            
+            const unitData = (p.units && p.units[unitNo]) ? p.units[unitNo] : null;
+            const spaPrice = unitData ? unitData.spa : p.baseSpaPrice;
+            const nettPrice = unitData ? unitData.nett : p.baseNettPrice;
+            const valuation = unitData ? unitData.valuation : p.baseValuation;
+            
+            const loanAmount = valuation * margin; 
+            const inst = calculateMonthlyInstallment(nettPrice, interestRate, loanTenure);
+            
+            let cashflow, cashback;
+            if (p.units) { 
+                const rent = unitData ? unitData.rent : p.expectedRental;
+                cashflow = rent - inst;
+                cashback = loanAmount - nettPrice;
+            }
+
+            document.getElementById(`spa-${idx}`).textContent = formatCurrency(spaPrice, false);
+            document.getElementById(`val-${idx}`).textContent = formatCurrency(valuation, false);
+            document.getElementById(`nett-${idx}`).textContent = formatCurrency(nettPrice, false);
+            document.getElementById(`inst-${idx}`).textContent = formatCurrency(inst);
+            
+            const cfEl = document.getElementById(`cf-${idx}`);
+            cfEl.textContent = (cashflow > 0 ? '+' : '') + formatCurrency(cashflow);
+            cfEl.className = `font-bold text-lg ${cashflow >= 0 ? 'text-green-600' : 'text-red-600'}`;
+
+            const cbEl = document.getElementById(`cb-${idx}`);
+            cbEl.textContent = (cashback > 0 ? '+' : '') + formatCurrency(cashback, false);
+            cbEl.className = `font-bold text-lg ${cashback >= 0 ? 'text-blue-600' : 'text-orange-500'}`;
+        }
+
         function generateGovStrategyHTML(loanEligibility) {
             if (loanEligibility >= 1000000) {
-                // Return >1 Million Template
                 return `
                 <div class="bg-white border-2 border-red-100 rounded-xl overflow-hidden mt-4 text-left">
                     <div class="bg-red-50 py-4 px-6 text-center border-b border-red-100">
@@ -499,7 +854,6 @@
                     </div>
                     <div class="flex flex-col lg:flex-row">
                         <div class="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <!-- Step 1 -->
                             <div class="text-center relative">
                                 <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">1</div>
                                 <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota Pertama<br><span class="text-xs font-normal text-gray-500">90%-100%</span></div>
@@ -511,7 +865,6 @@
                                     <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-red-400">-RM1,000</span></div>
                                 </div>
                             </div>
-                            <!-- Step 2 -->
                             <div class="text-center relative">
                                 <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow"><i class="fas fa-plus text-sm absolute -ml-8 text-gray-400"></i>1</div>
                                 <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">LPPSA<br><span class="text-xs font-normal text-gray-500">100%</span></div>
@@ -523,11 +876,10 @@
                                     <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-green-400">+RM2,500</span></div>
                                 </div>
                             </div>
-                            <!-- Step 3 -->
                             <div class="text-center relative">
                                 <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">2</div>
                                 <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota ke-2<br><span class="text-xs font-normal text-gray-500">90%</span></div>
-                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna Pinjaman bank<br><span class="text-[10px] font-normal text-gray-500">Rumah yang sudah siap / hampir siap</span></div>
+                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna Pinjaman bank<br><span class="text-[10px] font-normal text-gray-500">Rumah siap / hampir siap</span></div>
                                 <div class="bg-yellow-100 p-3 rounded font-bold text-yellow-800 mb-4 shadow-sm">FERRA<br><span class="text-xs font-normal text-yellow-600">Batu Ferringhi Penang</span></div>
                                 <div class="bg-slate-800 text-white text-[11px] p-3 rounded text-left space-y-1 shadow-inner">
                                     <div class="flex justify-between"><span class="text-slate-400">Cashout:</span> <span class="font-bold">RM0</span></div>
@@ -535,11 +887,10 @@
                                     <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-green-400">+RM1,200</span></div>
                                 </div>
                             </div>
-                            <!-- Step 4 -->
                             <div class="text-center relative">
                                 <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">3</div>
                                 <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota ke-3<br><span class="text-xs font-normal text-gray-500">70%</span></div>
-                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna Pinjaman bank<br><span class="text-[10px] font-normal text-gray-500">Hartanah yang bagi keuntungan modal</span></div>
+                                <div class="text-sm font-semibold text-gray-700 mb-4 h-10 leading-tight">Guna Pinjaman bank<br><span class="text-[10px] font-normal text-gray-500">Hartanah capital gain</span></div>
                                 <div class="bg-yellow-100 p-3 rounded font-bold text-yellow-800 mb-4 shadow-sm">KAAYAA<br><span class="text-xs font-normal text-yellow-600">Damansara</span></div>
                                 <div class="bg-slate-800 text-white text-[11px] p-3 rounded text-left space-y-1 shadow-inner">
                                     <div class="flex justify-between"><span class="text-slate-400">Cashout:</span> <span class="font-bold">RM50K</span></div>
@@ -548,7 +899,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Summary Sidebar -->
                         <div class="bg-slate-900 text-white p-6 lg:w-64 flex flex-col justify-center space-y-6 border-t lg:border-t-0 lg:border-l border-slate-700">
                             <div class="text-center pb-4 border-b border-slate-700">
                                 <h4 class="text-red-500 font-bold text-xs uppercase tracking-wider mb-1">Hasil Selepas Pembelian Hartanah</h4>
@@ -573,7 +923,6 @@
                     </div>
                 </div>`;
             } else {
-                // Return <1 Million Template (from older screenshot)
                 return `
                 <div class="bg-white border-2 border-red-100 rounded-xl overflow-hidden mt-4 text-left">
                     <div class="bg-red-50 py-4 px-6 text-center border-b border-red-100">
@@ -582,7 +931,6 @@
                     </div>
                     <div class="flex flex-col lg:flex-row">
                         <div class="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <!-- Step 1 -->
                             <div class="text-center relative">
                                 <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">1</div>
                                 <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota Pertama<br><span class="text-xs font-normal text-gray-500">90%-100%</span></div>
@@ -594,7 +942,6 @@
                                     <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-green-400">+RM100</span></div>
                                 </div>
                             </div>
-                            <!-- Step 2 -->
                             <div class="text-center relative">
                                 <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow"><i class="fas fa-plus text-sm absolute -ml-8 text-gray-400"></i>1</div>
                                 <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">LPPSA<br><span class="text-xs font-normal text-gray-500">100%</span></div>
@@ -606,7 +953,6 @@
                                     <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-green-400">+RM2,500</span></div>
                                 </div>
                             </div>
-                            <!-- Step 3 -->
                             <div class="text-center relative">
                                 <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">2</div>
                                 <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota ke-2<br><span class="text-xs font-normal text-gray-500">90%</span></div>
@@ -618,7 +964,6 @@
                                     <div class="flex justify-between"><span class="text-slate-400">Aliran tunai:</span> <span class="font-bold text-red-400">-RM500</span></div>
                                 </div>
                             </div>
-                            <!-- Step 4 -->
                             <div class="text-center relative">
                                 <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow">3</div>
                                 <div class="font-bold text-gray-800 border-b pb-2 mb-3 leading-tight">Kuota ke-3<br><span class="text-xs font-normal text-gray-500">70%</span></div>
@@ -631,7 +976,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Summary Sidebar -->
                         <div class="bg-slate-900 text-white p-6 lg:w-64 flex flex-col justify-center space-y-6 border-t lg:border-t-0 lg:border-l border-slate-700">
                             <div class="text-center pb-4 border-b border-slate-700">
                                 <h4 class="text-red-500 font-bold text-xs uppercase tracking-wider mb-1">Hasil Selepas Pembelian</h4>
@@ -674,7 +1018,6 @@
             if (nationality === 'malaysian') {
                 if (employment === 'gov') {
                     consultantLtvWrapper.style.display = 'none';
-                    // Pass the loanEligibility so it generates the right layout
                     recommendation.customHTML = generateGovStrategyHTML(loanEligibility);
                 } else {
                     consultantLtvWrapper.style.display = 'block';
@@ -685,14 +1028,13 @@
                         else if (loanEligibility >= 800000) recommendation = { text: "Recommended Unit (90%):", properties: ['Ferra'], type: 'single' };
                         else if (loanEligibility >= 600000) recommendation = { text: "Recommended Unit (90%):", properties: ['Dora'], type: 'single' };
                         else if (loanEligibility >= 500000) recommendation = { text: "Recommended Choice (90%):", properties: ['Sabrina', 'Dora'], type: 'or' };
-                        else if (loanEligibility >= 400000) recommendation = { text: "Recommended Unit (90%):", properties: ['Sabrina'], type: 'single' };
+                        else if (loanEligibility >= 450000) recommendation = { text: "Recommended Unit (90%):", properties: ['Sabrina'], type: 'single' };
                         else recommendation.textOnly = "Talk to your consultant how to increase LE";
                     } else { // 70%
                         if (loanEligibility >= 2000000) recommendation = { text: "Recommended Pairing (70%):", properties: ['Dimm', 'Marie', 'Kaaya'], type: 'and' };
                         else if (loanEligibility >= 1000000) recommendation = { text: "Recommended Choice (70%):", special: 'estee_laatinn_marie' };
                         else if (loanEligibility >= 500000) recommendation = { text: "Recommended Choice (70%):", properties: ['Estee', 'Laatinn', 'Marie'], type: 'or' };
-                        else if (loanEligibility >= 400000) recommendation = { text: "Recommended Choice (70%):", properties: ['Laatinn', 'Marie'], type: 'or' };
-                        else recommendation.textOnly = "Talk to your consultant how to increase LE";
+                        else recommendation = { text: "Recommended Choice (70%):", properties: ['Laatinn', 'Marie', 'Dora'], type: 'or' };
                     }
                 }
             } else { // Singaporean / Others
@@ -751,7 +1093,6 @@
         function updateARP() {
             const price = parseFloat(arpProjectSelect.value) || 0;
             const displayPrice = formatCurrency(price, false);
-            // Based on 100% Loan amount (price * 1.0)
             const mortgage = calculateMonthlyInstallment(price * 1.0, 3.7, 35);
             
             document.getElementById('arpDisplayPrice').textContent = displayPrice;
@@ -797,19 +1138,12 @@
 
         // --- INITIALIZATION ---
         const arpProjectsList = [
-            { name: 'EVA', price: 400000 },
-            { name: 'MARIE', price: 355000 },
-            { name: 'NEXA', price: 500000 },
-            { name: 'SORA', price: 580000 },
-            { name: 'SOYA A', price: 488000 },
-            { name: 'DORA', price: 450000 },
-            { name: 'RINN', price: 460000 },
-            { name: 'SABRINA', price: 500000 },
-            { name: 'ESTEE', price: 618000 },
-            { name: 'WEI ZIAA', price: 950000 },
-            { name: 'FERRA', price: 900000 },
-            { name: 'ABBY', price: 1350000 },
-            { name: 'DIMM', price: 1050638 }
+            { name: 'MARIE', price: 355300 },
+            { name: 'FERRA', price: 618250 },
+            { name: 'SABRINA', price: 585390 },
+            { name: 'RINN', price: 450000 },
+            { name: 'ABBY', price: 1200000 },
+            { name: 'DORA', price: 538119 }
         ];
 
         arpProjectsList.sort((a,b)=>a.name.localeCompare(b.name)).forEach(p => {
